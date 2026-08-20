@@ -6,6 +6,11 @@
   <meta name="description" content="Gian hàng điện tử Bảo tàng Lịch sử Quốc gia">
   <title>Gian hàng điện tử | Bảo tàng Lịch sử Quốc gia</title>
   <link rel="stylesheet" href="preview.css">
+  <style>
+    .category-section{padding:30px 4.6vw 32px;background:#fff}.category-heading{text-align:center;margin-bottom:25px}.category-heading span{font:400 22px Georgia;color:var(--wine)}.category-heading p{font-size:13px;color:#777;margin:8px 0 0}.categories{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid #ded7c9}.categories a{min-height:93px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;font-size:14px;font-weight:700;transition:.2s}.categories a+a{border-left:1px solid #ded7c9}.categories a:hover{background:var(--wine);color:#fff}.categories b{font:28px Georgia;color:var(--olive)}.categories a:hover b{color:#e6c86f}.monthly-theme{margin:0 4.6vw 18px;min-height:335px;display:grid;grid-template-columns:56% 44%;background:#f2ede3}.theme-image{position:relative;overflow:hidden}.theme-image img{width:100%;height:100%;object-fit:cover;object-position:center}.theme-image span{position:absolute;left:0;top:24px;background:var(--wine);color:#fff;padding:10px 20px;font-size:11px;letter-spacing:1.5px}.theme-copy{padding:43px 4vw}.theme-copy>p:first-child{font-size:12px;letter-spacing:2px;color:var(--olive);font-weight:700}.theme-copy h2{font:400 37px/1.22 Georgia;color:var(--wine);margin:12px 0}.gold-line{width:58px;height:2px;background:var(--gold);margin:18px 0}.theme-copy .theme-description{font-size:15px;line-height:1.65;color:#575149;max-width:480px}.theme-copy a{display:inline-block;color:var(--wine);font-weight:700;font-size:14px;margin-top:9px;border-bottom:1px solid var(--gold);padding-bottom:5px}.ribbon{position:absolute;z-index:2;left:0;top:0;background:var(--wine);color:#fff;padding:6px 10px;font-size:9px;letter-spacing:1px}.ribbon.new{background:var(--gold)}
+    @media(max-width:1100px){.categories{grid-template-columns:repeat(3,1fr)}.categories a:nth-child(4){border-left:0}.categories a:nth-child(n+4){border-top:1px solid #ded7c9}}
+    @media(max-width:700px){.category-section{padding:26px 16px}.category-heading span{font-size:18px}.categories{grid-template-columns:repeat(2,1fr)}.categories a:nth-child(odd){border-left:0}.categories a:nth-child(n+3){border-top:1px solid #ded7c9}.categories a:nth-child(4){border-left:1px solid #ded7c9}.monthly-theme{margin:0;display:flex;flex-direction:column;min-height:0}.theme-image{height:270px}.theme-copy{padding:30px 24px 35px}.theme-copy h2{font-size:32px}}
+  </style>
 </head>
 <body>
   <div class="topbar"><span>Gian hàng chính thức của Bảo tàng Lịch sử Quốc gia</span><div>Tra cứu đơn hàng <i></i> Hỗ trợ</div></div>
@@ -23,15 +28,26 @@
 
   <section class="benefits"><div><b>⌂</b><span>Chính thức từ Bảo tàng</span></div><div><b>▦</b><span>Truy xuất nguồn gốc</span></div><div><b>◇</b><span>Bảo chứng sản phẩm</span></div><div><b>▱</b><span>Giao hàng toàn quốc</span></div></section>
 
+  <section class="category-section" id="collection">
+    <div class="category-heading"><span>KHÁM PHÁ THEO DÒNG DI SẢN</span><p>Từ hiện vật bảo tàng đến sản phẩm trong đời sống</p></div>
+    <div class="categories"><a href="#products"><b>◉</b>Gốm sứ</a><a href="#products"><b>⌘</b>Mây tre</a><a href="#products"><b>✦</b>Trang sức</a><a href="#products"><b>▤</b>Văn phòng phẩm</a><a href="#products"><b>▣</b>Sách & ấn phẩm</a><a href="#products"><b>◇</b>Quà tặng</a></div>
+  </section>
+
+  <section class="monthly-theme">
+    <div class="theme-image"><img src="product-painted.jpg" alt="Nghệ nhân vẽ họa tiết trên sản phẩm gốm"><span>CHỦ ĐỀ THÁNG 08</span></div>
+    <div class="theme-copy"><p>BỘ SƯU TẬP THEO CHỦ ĐỀ</p><h2>Hoa văn Việt<br>trong đời sống mới</h2><div class="gold-line"></div><p class="theme-description">Mỗi sản phẩm bắt đầu từ một hiện vật, một kỹ nghệ và một câu chuyện. Họa tiết truyền thống được chuyển dịch tinh tế để trở thành vật dụng gần gũi hôm nay.</p><a href="#story">Tìm hiểu nguồn cảm hứng　→</a></div>
+  </section>
+
   <main id="products">
     <div class="section-title"><h2>SẢN PHẨM NỔI BẬT</h2><a href="#all">Xem tất cả sản phẩm　→</a></div>
     <div class="grid">
-      <article><img src="product-vase.jpg" alt="Bình gốm thủ công"><div class="info"><em>Có truy xuất</em><h3>Bình gốm<br>Hoa Lam</h3><strong>1.250.000₫</strong></div><button aria-label="Thêm Bình gốm Hoa Lam vào giỏ">🛒</button></article>
-      <article><img src="product-pottery.jpg" alt="Nghệ nhân làm gốm"><div class="info"><em>Có truy xuất</em><h3>Ấm gốm<br>Bát Tràng</h3><strong>690.000₫</strong></div><button aria-label="Thêm Ấm gốm Bát Tràng vào giỏ">🛒</button></article>
+      <article><span class="ribbon">BÁN CHẠY</span><img src="product-vase.jpg" alt="Bình gốm thủ công"><div class="info"><em>Có truy xuất</em><h3>Bình gốm<br>Hoa Lam</h3><strong>1.250.000₫</strong></div><button aria-label="Thêm Bình gốm Hoa Lam vào giỏ">🛒</button></article>
+      <article><span class="ribbon new">MỚI</span><img src="product-pottery.jpg" alt="Nghệ nhân làm gốm"><div class="info"><em>Có truy xuất</em><h3>Ấm gốm<br>Bát Tràng</h3><strong>690.000₫</strong></div><button aria-label="Thêm Ấm gốm Bát Tràng vào giỏ">🛒</button></article>
       <article><img src="product-weaving.jpg" alt="Sản phẩm mây tre đan"><div class="info"><em>Có truy xuất</em><h3>Giỏ mây tre<br>Thủ công</h3><strong>385.000₫</strong></div><button aria-label="Thêm Giỏ mây tre Thủ công vào giỏ">🛒</button></article>
-      <article><img src="product-painted.jpg" alt="Nghệ nhân vẽ gốm"><div class="info"><em>Có truy xuất</em><h3>Đĩa gốm<br>Họa tiết Việt</h3><strong>850.000₫</strong></div><button aria-label="Thêm Đĩa gốm Họa tiết Việt vào giỏ">🛒</button></article>
+      <article><span class="ribbon new">MỚI</span><img src="product-painted.jpg" alt="Nghệ nhân vẽ gốm"><div class="info"><em>Có truy xuất</em><h3>Đĩa gốm<br>Họa tiết Việt</h3><strong>850.000₫</strong></div><button aria-label="Thêm Đĩa gốm Họa tiết Việt vào giỏ">🛒</button></article>
     </div>
   </main>
   <section class="source-note" id="story"><p>Hình ảnh sản phẩm và nghệ nhân được tham khảo từ Cổng thông tin Thủ công mỹ nghệ Việt Nam.</p><a href="https://zz-web1.my.canva.site/thu-cong-my-nghe-viet-nam" target="_blank" rel="noreferrer">Xem nguồn tham khảo →</a></section>
 </body>
 </html>
+
