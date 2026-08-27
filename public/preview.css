@@ -29,3 +29,70 @@ body{font-size:16px}.topbar{font-size:14px}.brand-copy small{font-size:13px}.sea
 @media(max-width:900px){.actions button{width:40px;padding:0;justify-content:center}.action-label{display:none}.lead{font-size:18px}.info h3{font-size:23px}.topbar{font-size:12px}}
 @media(max-width:700px){body{font-size:16px}.eyebrow,.section-kicker,.section-title>div>span{font-size:11px}.benefits strong{font-size:13px}.category-heading p,.collection-row p,.principle p{font-size:16px}.page-hero p,.chapter-copy p{font-size:17px}.filters button,.sort-select{font-size:13px}.info h3{font-size:22px}}
 
+/* Responsive stability: prevent long labels and flexible content from overlapping */
+html,body{max-width:100%;overflow-x:hidden}img{max-width:100%}.brand,.brand-copy,.search,.hero-copy,.theme-copy,.category-heading,.section-title>div,.info,.chapter-copy{min-width:0}.brand-copy strong,.brand-copy small,.info h3,.section-title h2,.page-hero h1,.contact-band h2{overflow-wrap:anywhere}.grid>*,.categories>*,.principles>*,.benefits>*{min-width:0}
+
+@media(max-width:1100px){
+  header{grid-template-columns:minmax(0,1fr) auto}
+  .brand-copy strong{white-space:normal;line-height:1.15}
+  .info h3{white-space:normal}
+  .category-section{grid-template-columns:1fr 1fr;gap:28px 36px}
+  .category-section .section-kicker{grid-column:1/-1;padding:0}
+  .categories{align-self:stretch}
+}
+
+@media(max-width:800px){
+  .category-section{display:block}
+  .category-section .section-kicker{margin-bottom:15px}
+  .section-title{align-items:flex-start;gap:20px;flex-wrap:wrap}
+  .section-title>a{flex:0 0 auto}
+  .info>div{align-items:flex-start;gap:8px 16px;flex-wrap:wrap}
+  .collection-row>*{min-width:0}
+  .collection-row h2,.story-lead h2,.about-intro h2{overflow-wrap:anywhere}
+}
+
+@media(max-width:700px){
+  .topbar>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  header{grid-template-columns:minmax(0,1fr) auto;column-gap:4px}
+  .brand{min-width:0;gap:7px}
+  .mark{width:35px;height:55px}
+  .brand-copy strong{font-size:12px;line-height:1.15}
+  .brand-copy small{font-size:7px;letter-spacing:1.25px}
+  .actions{min-width:0}
+  .actions button{width:34px;height:36px;padding:0}
+  .hero-copy{min-height:0;padding-bottom:34px}
+  .hero h1{font-size:clamp(35px,11vw,43px)}
+  .lead br{display:none}
+  .cta a{max-width:100%}
+  .benefits>div{min-width:0;gap:9px}
+  .benefits span{min-width:0}
+  .benefits strong{line-height:1.25;overflow-wrap:anywhere}
+  .categories a{padding:15px 13px}
+  .categories span{font-size:18px;overflow-wrap:anywhere}
+  .theme-copy h2{overflow-wrap:anywhere}
+  .section-title{display:block}
+  .section-title>a{display:inline-block;margin-top:18px}
+  .product-image{height:min(365px,105vw)}
+  .info h3{line-height:1.25}
+  .manifesto blockquote{overflow-wrap:anywhere}
+  footer{min-width:0}
+  footer>a{justify-self:start}
+  footer::after{padding-right:70px;line-height:1.5;overflow-wrap:anywhere}
+  .page-hero h1{font-size:clamp(38px,12vw,46px)}
+  .filterbar,.filters{width:100%}
+  .sort-select{max-width:100%}
+  .chapter-copy h2{font-size:clamp(32px,10vw,42px);overflow-wrap:anywhere}
+  .contact-band a{max-width:100%;text-align:center}
+  .filter-empty{padding:45px 18px;font-size:21px}
+}
+
+@media(max-width:390px){
+  .actions button:first-child{display:none}
+  .hero-copy{padding-left:18px;padding-right:18px}
+  .benefits{grid-template-columns:1fr}
+  .benefits div:nth-child(even){border-left:0}
+  .benefits>div+div{border-top:1px solid var(--line)}
+  .categories{grid-template-columns:1fr}
+  .product-image{height:330px}
+}
+
