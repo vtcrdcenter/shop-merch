@@ -4554,3 +4554,823 @@ img {
     margin-top: 26px;
   }
 }
+
+/* =========================================================
+   COLLECTIONS PAGE
+   /collections
+   ========================================================= */
+
+.collections-page__breadcrumb {
+  padding-top: 28px;
+  padding-bottom: 22px;
+}
+
+/* =========================================================
+   COLLECTIONS HERO
+   ========================================================= */
+
+.collections-hero {
+  padding: clamp(64px, 9vw, 120px) 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--cream-soft) 0%,
+      var(--paper) 100%
+    );
+
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.collections-hero__inner {
+  max-width: 980px;
+
+  margin-inline: auto;
+
+  text-align: center;
+}
+
+.collections-hero__eyebrow {
+  margin: 0 0 18px;
+
+  color: var(--gold);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+.collections-hero__title {
+  margin: 0;
+
+  color: var(--wine);
+
+  font-family: var(--serif);
+
+  font-size: clamp(44px, 7vw, 78px);
+
+  font-weight: 500;
+
+  line-height: 1.05;
+}
+
+.collections-hero__description {
+  max-width: 760px;
+
+  margin: 28px auto 0;
+
+  color: var(--muted);
+
+  font-size: 15px;
+
+  line-height: 1.9;
+}
+
+.collections-hero__meta {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 26px;
+
+  color: var(--wine);
+
+  font-size: 11px;
+}
+
+/* =========================================================
+   FEATURED COLLECTIONS
+   ========================================================= */
+
+.collections-featured {
+  padding:
+    clamp(70px, 9vw, 120px)
+    0;
+
+  background: #fff;
+}
+
+.collections-featured__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 54px 24px;
+}
+
+/* =========================================================
+   ALL COLLECTIONS
+   ========================================================= */
+
+.collections-all {
+  padding:
+    clamp(70px, 9vw, 120px)
+    0;
+
+  background:
+    var(--cream-soft);
+}
+
+.collections-all__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 54px 24px;
+}
+
+/* =========================================================
+   COLLECTIONS METHOD
+   ========================================================= */
+
+.collections-method {
+  padding:
+    clamp(70px, 9vw, 120px)
+    0;
+
+  background:
+    var(--wine);
+
+  color:
+    var(--paper);
+}
+
+.collections-method__grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 0.8fr)
+    minmax(0, 1.2fr);
+
+  gap:
+    clamp(
+      50px,
+      8vw,
+      130px
+    );
+}
+
+.collections-method__eyebrow {
+  margin:
+    0 0 14px;
+
+  color:
+    var(--gold-light);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.collections-method__title {
+  margin: 0;
+
+  font-family:
+    var(--serif);
+
+  font-size:
+    clamp(
+      32px,
+      4vw,
+      50px
+    );
+
+  font-weight: 500;
+
+  line-height: 1.15;
+}
+
+.collections-method__content p {
+  margin: 0;
+
+  color:
+    rgba(
+      255,
+      250,
+      240,
+      0.82
+    );
+
+  font-size: 14px;
+
+  line-height: 1.9;
+}
+
+.collections-method__content p + p {
+  margin-top: 22px;
+}
+
+/* =========================================================
+   COLLECTION DETAIL
+   /collections/[slug]
+   ========================================================= */
+
+.collection-detail-page__breadcrumb {
+  padding-top: 28px;
+  padding-bottom: 22px;
+}
+
+/* =========================================================
+   COLLECTION DETAIL HERO
+   ========================================================= */
+
+.collection-detail-hero {
+  padding:
+    20px 0
+    clamp(
+      70px,
+      9vw,
+      110px
+    );
+}
+
+.collection-detail-hero__grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(360px, 0.9fr)
+    minmax(0, 1.1fr);
+
+  gap:
+    clamp(
+      48px,
+      7vw,
+      100px
+    );
+
+  align-items: center;
+}
+
+.collection-detail-hero__eyebrow {
+  margin:
+    0 0 14px;
+
+  color: var(--gold);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.collection-detail-hero__title {
+  margin: 0;
+
+  color: var(--wine);
+
+  font-family:
+    var(--serif);
+
+  font-size:
+    clamp(
+      42px,
+      5.8vw,
+      70px
+    );
+
+  font-weight: 500;
+
+  line-height: 1.03;
+}
+
+.collection-detail-hero__description {
+  margin:
+    26px 0 0;
+
+  color:
+    var(--muted);
+
+  font-size: 14px;
+
+  line-height: 1.9;
+}
+
+.collection-detail-hero__meta {
+  display: flex;
+
+  gap: 26px;
+
+  margin-top: 32px;
+
+  padding-top: 24px;
+
+  border-top:
+    1px solid var(--line);
+}
+
+.collection-detail-hero__meta > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.collection-detail-hero__meta strong {
+  color:
+    var(--wine);
+
+  font-family:
+    var(--serif);
+
+  font-size: 30px;
+
+  font-weight: 500;
+}
+
+.collection-detail-hero__meta span {
+  color:
+    var(--muted);
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+}
+
+.collection-detail-hero__image {
+  overflow: hidden;
+
+  aspect-ratio: 4 / 3;
+
+  background:
+    var(--cream-soft);
+}
+
+.collection-detail-hero__image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.collection-detail-hero__placeholder {
+  display: grid;
+
+  width: 100%;
+  height: 100%;
+
+  place-items: center;
+
+  padding: 32px;
+
+  color:
+    var(--muted);
+
+  text-align: center;
+}
+
+/* =========================================================
+   COLLECTION PRODUCTS
+   ========================================================= */
+
+.collection-detail-products {
+  padding:
+    clamp(
+      70px,
+      9vw,
+      120px
+    )
+    0;
+
+  background: #fff;
+}
+
+.collection-detail-products .product-grid {
+  display: grid;
+
+  gap:
+    40px 24px;
+}
+
+.collection-detail-products .product-card {
+  display: block;
+
+  height: auto;
+
+  border: 0;
+  border-radius: 0;
+
+  box-shadow: none;
+
+  background:
+    transparent;
+
+  overflow: visible;
+}
+
+/* =========================================================
+   COLLECTION HERITAGE
+   ========================================================= */
+
+.collection-detail-heritage {
+  padding:
+    clamp(
+      70px,
+      9vw,
+      120px
+    )
+    0;
+
+  background:
+    var(--cream-soft);
+}
+
+.collection-detail-heritage__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap:
+    48px 24px;
+}
+
+/* =========================================================
+   COLLECTION CONCEPT
+   ========================================================= */
+
+.collection-detail-concept {
+  padding:
+    clamp(
+      70px,
+      9vw,
+      120px
+    )
+    0;
+
+  background:
+    var(--deep);
+
+  color:
+    var(--paper);
+}
+
+.collection-detail-concept__grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 0.8fr)
+    minmax(0, 1.2fr);
+
+  gap:
+    clamp(
+      50px,
+      8vw,
+      130px
+    );
+}
+
+.collection-detail-concept__eyebrow {
+  margin:
+    0 0 14px;
+
+  color:
+    var(--gold-light);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing:
+    0.14em;
+
+  text-transform:
+    uppercase;
+}
+
+.collection-detail-concept__title {
+  margin: 0;
+
+  font-family:
+    var(--serif);
+
+  font-size:
+    clamp(
+      32px,
+      4vw,
+      50px
+    );
+
+  font-weight: 500;
+
+  line-height: 1.15;
+}
+
+.collection-detail-concept__content p {
+  margin: 0;
+
+  color:
+    rgba(
+      255,
+      250,
+      240,
+      0.8
+    );
+
+  font-size: 14px;
+
+  line-height: 1.9;
+}
+
+.collection-detail-concept__content p + p {
+  margin-top: 22px;
+}
+
+/* =========================================================
+   COLLECTION STORIES
+   ========================================================= */
+
+.collection-detail-stories {
+  padding:
+    clamp(
+      70px,
+      9vw,
+      120px
+    )
+    0;
+
+  background:
+    #fff;
+}
+
+.collection-detail-stories__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap:
+    44px 24px;
+}
+
+/* =========================================================
+   COLLECTION MORE
+   ========================================================= */
+
+.collection-detail-more {
+  padding:
+    60px 0;
+
+  background:
+    var(--wine);
+
+  color:
+    var(--paper);
+}
+
+.collection-detail-more__inner {
+  display: flex;
+
+  align-items:
+    flex-end;
+
+  justify-content:
+    space-between;
+
+  gap: 50px;
+}
+
+.collection-detail-more__eyebrow {
+  margin:
+    0 0 10px;
+
+  color:
+    var(--gold-light);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing:
+    0.14em;
+
+  text-transform:
+    uppercase;
+}
+
+.collection-detail-more h2 {
+  margin: 0;
+
+  font-family:
+    var(--serif);
+
+  font-size:
+    clamp(
+      28px,
+      4vw,
+      44px
+    );
+
+  font-weight: 500;
+}
+
+.collection-detail-more__link {
+  display:
+    inline-flex;
+
+  flex: 0 0 auto;
+
+  padding-bottom:
+    5px;
+
+  border-bottom:
+    1px solid
+    var(--gold-light);
+
+  color:
+    var(--paper);
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   COLLECTION HOVER DETAILS
+   ========================================================= */
+
+.collections-featured
+.collection-card__title a:hover,
+.collections-all
+.collection-card__title a:hover {
+  color:
+    var(--wine);
+}
+
+.collections-featured
+.collection-card__link:hover,
+.collections-all
+.collection-card__link:hover {
+  color:
+    var(--gold);
+}
+
+/* =========================================================
+   COLLECTION TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .collections-featured__grid,
+  .collections-all__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .collection-detail-hero__grid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 48px;
+  }
+
+  .collection-detail-heritage__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .collection-detail-stories__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+}
+
+/* =========================================================
+   COLLECTION MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .collections-hero {
+    padding:
+      58px 0;
+  }
+
+  .collections-hero__title {
+    font-size: 43px;
+  }
+
+  .collections-hero__description {
+    font-size: 14px;
+  }
+
+  .collections-hero__meta {
+    flex-direction:
+      column;
+
+    gap: 3px;
+  }
+
+  .collections-hero__meta
+    span:nth-child(2) {
+    display: none;
+  }
+
+  .collections-featured__grid,
+  .collections-all__grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 38px;
+  }
+
+  .collections-method__grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 34px;
+  }
+
+  .collection-detail-hero {
+    padding-bottom:
+      64px;
+  }
+
+  .collection-detail-hero__grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 36px;
+  }
+
+  .collection-detail-hero__content {
+    order: 2;
+  }
+
+  .collection-detail-hero__image {
+    order: 1;
+  }
+
+  .collection-detail-hero__title {
+    font-size: 42px;
+  }
+
+  .collection-detail-hero__meta {
+    gap: 20px;
+  }
+
+  .collection-detail-products
+    .product-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .collection-detail-heritage__grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .collection-detail-concept__grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 34px;
+  }
+
+  .collection-detail-stories__grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .collection-detail-more__inner {
+    display: block;
+  }
+
+  .collection-detail-more__link {
+    margin-top: 26px;
+  }
+}
