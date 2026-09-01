@@ -1,21 +1,15 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "vinext";
 
 const isGitHubPages =
   process.env.GITHUB_ACTIONS === "true";
-
-const basePath = isGitHubPages
-  ? "/shop-merch"
-  : "";
 
 const nextConfig: NextConfig = {
   output: "export",
 
   trailingSlash: true,
 
-  basePath,
-
-  assetPrefix: basePath
-    ? `${basePath}/`
+  basePath: isGitHubPages
+    ? "/shop-merch"
     : "",
 };
 
