@@ -1,0 +1,135 @@
+import type { ShopProduct } from "../../data/products";
+import { getCategoryById } from "../../data/categories";
+
+type ProductMetaProps = {
+  product: ShopProduct;
+
+  className?: string;
+};
+
+function formatPrice(
+  amount: number | null,
+  currency: "VND",
+) {
+  if (amount === null) {
+    return null;
+  }
+
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+function getAvailabilityLabel(
+  availability: ShopProduct["availability"],
+) {
+  switch (availability) {
+    case "available":
+      return "Có sẵn";
+
+    case "sold-out":
+      return "Tạm hết";
+
+    case "coming-soon":
+    default:
+      return "Sắp ra mắt";
+  }
+}
+
+export default function ProductMeta({
+  product,
+  className = "",
+}: ProductMetaProps) {
+  const category = getCategoryById(product.categoryId);
+
+  const formattedPrice = formatPrice(
+    product.price.amount,
+    product.price.currency,
+  );
+
+  return (
+    <div
+      className={[
+        "product-meta",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <div className="product-meta__heading">
+        {category && (
+          <p className="product-meta__category">
+            {category.shortName}
+          </p>
+        )}
+
+        <h1 className="product-meta__title">
+          {product.name}
+        </h1>
+
+        <p className="product-meta__type">
+          {product.productType}
+        </p>
+      </div>
+
+      <div className="product-meta__status-row">
+        <div className="product-meta__price">
+          {formattedPrice ? (
+            <strong>{formattedPrice}</strong>
+          ) : (
+            <strong>
+              {getAvailabilityLabel(product.availability)}
+            </strong>
+          )}
+        </div>
+
+        {product.traceability.enabled && (
+          <span className="product-meta__trace">
+            Có truy xuất
+          </span>
+        )}
+      </div>
+
+      <p className="product-meta__description">
+        {product.shortDescription}
+      </p>
+
+      <dl className="product-meta__details">
+        <div className="product-meta__detail">
+          <dt>Mã sản phẩm</dt>
+          <dd>{product.sku}</dd>
+        </div>
+
+        <div className="product-meta__detail">
+          <dt>Kích thước</dt>
+          <dd>{product.dimensions}</dd>
+        </div>
+
+        <div className="product-meta__detail">
+          <dt>Chất liệu dự kiến</dt>
+
+          <dd>
+            {product.materials.length > 0
+              ? product.materials.join(", ")
+              : "Đang cập nhật"}
+          </dd>
+        </div>
+
+        <div className="product-meta__detail">
+          <dt>Công năng</dt>
+          <dd>{product.function}</dd>
+        </div>
+      </dl>
+
+      <div className="product-meta__project-status">
+        <span>Trạng thái</span>
+
+        <strong>
+          {product.projectStatus}
+        </strong>
+      </div>
+    </div>
+  );
+}
