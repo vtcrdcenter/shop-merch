@@ -2,7 +2,8 @@ name: Deploy museum shop to GitHub Pages
 
 on:
   push:
-    branches: [feat/museum-shop-demo]
+    branches:
+      - feat/museum-shop-demo
   workflow_dispatch:
 
 permissions:
@@ -15,23 +16,48 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-      - name: Configure Pages
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Verify static export
+        run: |
+          test -f dist/client/index.html
+          echo "Static export found."
+          find dist/client -maxdepth 2 -type f | head -50
+
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Upload static site
+
+      - name: Upload built site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: dist/client
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
