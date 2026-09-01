@@ -3,17 +3,19 @@ import type { NextConfig } from "next";
 const isGitHubPages =
   process.env.GITHUB_ACTIONS === "true";
 
+const basePath = isGitHubPages
+  ? "/shop-merch"
+  : "";
+
 const nextConfig: NextConfig = {
   output: "export",
 
   trailingSlash: true,
 
-  basePath: isGitHubPages
-    ? "/shop-merch"
-    : "",
+  basePath,
 
-  assetPrefix: isGitHubPages
-    ? "/shop-merch/"
+  assetPrefix: basePath
+    ? `${basePath}/`
     : "",
 };
 
