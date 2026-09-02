@@ -1,37 +1,55 @@
 import Link from "next/link";
 
+/* =========================================================
+   TYPES
+   ========================================================= */
+
 export type BreadcrumbItem = {
   label: string;
 
   /**
-   * Không truyền href cho item cuối cùng.
+   * Không cần truyền href
+   * cho item hiện tại.
    */
   href?: string;
 };
 
 type BreadcrumbProps = {
-  items: BreadcrumbItem[];
+  items:
+    BreadcrumbItem[];
 
   /**
-   * Có tự thêm Trang chủ hay không.
+   * Có tự thêm
+   * Trang chủ hay không.
    */
-  includeHome?: boolean;
+  includeHome?:
+    boolean;
 
-  className?: string;
+  className?:
+    string;
 };
+
+/* =========================================================
+   COMPONENT
+   ========================================================= */
 
 export default function Breadcrumb({
   items,
   includeHome = true,
   className = "",
 }: BreadcrumbProps) {
-  const breadcrumbItems: BreadcrumbItem[] =
+  const breadcrumbItems:
+    BreadcrumbItem[] =
     includeHome
       ? [
           {
-            label: "Trang chủ",
-            href: "/",
+            label:
+              "Trang chủ",
+
+            href:
+              "/",
           },
+
           ...items,
         ]
       : items;
@@ -40,48 +58,70 @@ export default function Breadcrumb({
     <nav
       className={[
         "breadcrumb",
+
         className,
       ]
-        .filter(Boolean)
-        .join(" ")}
+        .filter(
+          Boolean,
+        )
+        .join(
+          " ",
+        )}
       aria-label="Đường dẫn trang"
     >
       <ol className="breadcrumb__list">
         {breadcrumbItems.map(
-          (item, index) => {
+          (
+            item,
+            index,
+          ) => {
             const isLast =
               index ===
-              breadcrumbItems.length - 1;
+              breadcrumbItems.length -
+                1;
 
             return (
               <li
                 key={`${item.label}-${index}`}
                 className={[
                   "breadcrumb__item",
+
                   isLast
                     ? "breadcrumb__item--current"
                     : "",
                 ]
-                  .filter(Boolean)
-                  .join(" ")}
+                  .filter(
+                    Boolean,
+                  )
+                  .join(
+                    " ",
+                  )}
               >
-                {!isLast && item.href ? (
-                  <Link
-                    href={item.href}
-                    className="breadcrumb__link"
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
+                {isLast ? (
                   <span
                     className="breadcrumb__current"
-                    aria-current={
-                      isLast
-                        ? "page"
-                        : undefined
-                    }
+                    aria-current="page"
                   >
-                    {item.label}
+                    {
+                      item.label
+                    }
+                  </span>
+                ) : item.href ? (
+                  <Link
+                    href={
+                      item.href
+                    }
+                    className="breadcrumb__link"
+                  >
+                    {
+                      item.label
+                    }
+                  </Link>
+                ) : (
+                  <span className="breadcrumb__label">
+                    {
+                      item.label
+                    }
                   </span>
                 )}
 
