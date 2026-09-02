@@ -10,7 +10,7 @@
     "prebuild": "node scripts/patch-vinext-static-export.mjs",
     "build": "vinext build && node scripts/fix-github-pages-output.mjs",
     "start": "vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "npm run build && node --test tests/static-routes.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
   },
