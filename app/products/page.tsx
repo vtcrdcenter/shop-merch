@@ -18,8 +18,14 @@ import {
   getProductsByCategory,
 } from "../../data/products";
 
+/* =========================================================
+   METADATA
+   ========================================================= */
+
 export const metadata: Metadata = {
-  title: "Sản phẩm | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+  title:
+    "Sản phẩm | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+
   description:
     "Khám phá các sản phẩm văn hóa sáng tạo được phát triển từ hiện vật, tư liệu và câu chuyện lịch sử của Bảo tàng Lịch sử Quốc gia.",
 };
@@ -29,6 +35,10 @@ type ProductsPageProps = {
     category?: string;
   }>;
 };
+
+/* =========================================================
+   PAGE
+   ========================================================= */
 
 export default async function ProductsPage({
   searchParams,
@@ -42,19 +52,25 @@ export default async function ProductsPage({
 
   const activeCategory =
     activeCategorySlug
-      ? getCategoryBySlug(activeCategorySlug)
+      ? getCategoryBySlug(
+          activeCategorySlug,
+        )
       : undefined;
 
-  const allProducts = getAllProducts();
+  const allProducts =
+    getAllProducts();
 
-  const visibleProducts = activeCategory
-    ? getProductsByCategory(activeCategory.id)
-    : allProducts;
+  const visibleProducts =
+    activeCategory
+      ? getProductsByCategory(
+          activeCategory.id,
+        )
+      : allProducts;
 
   return (
     <main className="products-page">
       {/* =====================================================
-          BREADCRUMB
+          01 — BREADCRUMB
       ====================================================== */}
 
       <div className="site-container products-page__breadcrumb">
@@ -68,30 +84,32 @@ export default async function ProductsPage({
       </div>
 
       {/* =====================================================
-          HERO
+          02 — HERO
       ====================================================== */}
 
       <section className="products-hero">
         <div className="site-container products-hero__inner">
           <p className="products-hero__eyebrow">
-            GIAN HÀNG ĐIỆN TỬ
+            SẢN PHẨM
           </p>
 
           <h1 className="products-hero__title">
-            Sản phẩm văn hóa sáng tạo
+            Những vật phẩm mang
+            câu chuyện lịch sử
           </h1>
 
           <p className="products-hero__description">
-            Khám phá các thiết kế được phát triển từ
-            hiện vật, tư liệu, hình tượng và câu chuyện
-            lịch sử. Mỗi sản phẩm là một cách tiếp cận
-            mới để đưa giá trị di sản vào đời sống
-            đương đại.
+            Từ chi tiết trên hiện vật
+            đến những hình thức sử dụng mới,
+            mỗi thiết kế mang một cách tiếp cận
+            riêng để đưa câu chuyện di sản
+            gần hơn với đời sống hôm nay.
           </p>
 
           <div className="products-hero__meta">
             <span>
-              {allProducts.length} thiết kế đang giới thiệu
+              {allProducts.length} sản phẩm
+              đang giới thiệu
             </span>
 
             <span aria-hidden="true">
@@ -99,14 +117,15 @@ export default async function ProductsPage({
             </span>
 
             <span>
-              8 nhóm sản phẩm
+              {productCategories.length} nhóm
+              sản phẩm
             </span>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          CATEGORY INTRO
+          03 — CATEGORY
       ====================================================== */}
 
       <section
@@ -115,9 +134,9 @@ export default async function ProductsPage({
       >
         <div className="site-container">
           <SectionHeading
-            eyebrow="DANH MỤC"
-            title="Khám phá theo nhóm sản phẩm"
-            description="Danh mục được tổ chức theo công năng và hình thức sản phẩm, giúp người dùng dễ dàng tìm kiếm theo nhu cầu."
+            eyebrow="KHÁM PHÁ THEO DANH MỤC"
+            title="Bạn đang tìm loại sản phẩm nào?"
+            description="Danh mục được tổ chức theo công năng sử dụng, từ vật phẩm lưu niệm nhỏ đến phụ kiện, sản phẩm trang trí và quà tặng."
           />
 
           <div className="products-categories__grid">
@@ -130,9 +149,15 @@ export default async function ProductsPage({
 
                 return (
                   <CategoryCard
-                    key={category.id}
-                    category={category}
-                    productCount={count}
+                    key={
+                      category.id
+                    }
+                    category={
+                      category
+                    }
+                    productCount={
+                      count
+                    }
                   />
                 );
               },
@@ -142,7 +167,7 @@ export default async function ProductsPage({
       </section>
 
       {/* =====================================================
-          PRODUCT LIST
+          04 — PRODUCT LIST
       ====================================================== */}
 
       <section
@@ -167,21 +192,23 @@ export default async function ProductsPage({
 
               {activeCategory ? (
                 <p className="products-list__description">
-                  {activeCategory.description}
+                  {
+                    activeCategory.description
+                  }
                 </p>
               ) : (
                 <p className="products-list__description">
-                  Các thiết kế hiện đang được giới thiệu
-                  trong giai đoạn phát triển và Pilot.
+                  Khám phá toàn bộ các thiết kế
+                  hiện có trong gian hàng và
+                  tìm hiểu câu chuyện phía sau
+                  từng sản phẩm.
                 </p>
               )}
             </div>
 
             <div className="products-list__count">
               {visibleProducts.length}{" "}
-              {visibleProducts.length === 1
-                ? "sản phẩm"
-                : "sản phẩm"}
+              sản phẩm
             </div>
           </div>
 
@@ -210,10 +237,13 @@ export default async function ProductsPage({
             {productCategories.map(
               (category) => (
                 <Link
-                  key={category.id}
+                  key={
+                    category.id
+                  }
                   href={`/products?category=${category.slug}`}
                   className={[
                     "products-filter__item",
+
                     activeCategory?.id ===
                     category.id
                       ? "products-filter__item--active"
@@ -222,7 +252,9 @@ export default async function ProductsPage({
                     .filter(Boolean)
                     .join(" ")}
                 >
-                  {category.shortName}
+                  {
+                    category.shortName
+                  }
                 </Link>
               ),
             )}
@@ -240,7 +272,9 @@ export default async function ProductsPage({
                 </span>
 
                 <strong>
-                  {activeCategory.shortName}
+                  {
+                    activeCategory.shortName
+                  }
                 </strong>
               </div>
 
@@ -248,7 +282,8 @@ export default async function ProductsPage({
                 href="/products"
                 className="products-active-filter__clear"
               >
-                Xóa bộ lọc
+                Xem tất cả
+
                 <span aria-hidden="true">
                   {" "}
                   ×
@@ -258,11 +293,13 @@ export default async function ProductsPage({
           )}
 
           {/* =================================================
-              GRID
+              PRODUCT GRID
           ================================================== */}
 
           <ProductGrid
-            products={visibleProducts}
+            products={
+              visibleProducts
+            }
             columns={3}
             showCategory
             showTraceability
@@ -272,26 +309,27 @@ export default async function ProductsPage({
       </section>
 
       {/* =====================================================
-          TRACEABILITY CALLOUT
+          05 — TRACEABILITY
       ====================================================== */}
 
       <section className="products-trace-callout">
         <div className="site-container products-trace-callout__inner">
           <div className="products-trace-callout__content">
             <p className="products-trace-callout__eyebrow">
-              BẢO CHỨNG & TRUY XUẤT
+              TRUY XUẤT SẢN PHẨM
             </p>
 
             <h2 className="products-trace-callout__title">
-              Tìm hiểu sâu hơn về sản phẩm
+              Tìm hiểu thêm về
+              sản phẩm bạn đang xem
             </h2>
 
             <p className="products-trace-callout__description">
               Với những sản phẩm hỗ trợ truy xuất,
-              người dùng có thể tiếp cận hồ sơ nguồn
-              di sản, quá trình phát triển thiết kế và
-              các thông tin liên quan được công bố trên
-              hệ thống.
+              người dùng có thể tiếp tục kiểm tra
+              nguồn cảm hứng, thông tin thiết kế,
+              mã nhận diện và các dữ liệu liên quan
+              được công bố trên hệ thống.
             </p>
           </div>
 
@@ -300,7 +338,8 @@ export default async function ProductsPage({
               href="/products/dau-an-thuong-trieu-nguyen"
               className="products-trace-callout__primary"
             >
-              Xem sản phẩm có truy xuất
+              Xem sản phẩm mẫu
+
               <span aria-hidden="true">
                 {" "}
                 →
@@ -311,7 +350,7 @@ export default async function ProductsPage({
               href="/stories/tu-san-pham-den-ho-so-truy-xuat"
               className="products-trace-callout__secondary"
             >
-              Tìm hiểu về truy xuất
+              Truy xuất hoạt động như thế nào?
             </Link>
           </div>
         </div>
