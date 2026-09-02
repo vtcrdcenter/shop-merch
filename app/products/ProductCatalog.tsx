@@ -1,15 +1,23 @@
+// app/products/ProductCatalog.tsx
+
 "use client";
 
 import {
+  useEffect,
   useMemo,
   useState,
 } from "react";
 
 import CategoryCard from "../components/CategoryCard";
 import ProductGrid from "../components/ProductGrid";
+import SectionHeading from "../components/SectionHeading";
 
 import {
   productCategories,
+} from "../../data/categories";
+
+import type {
+  ProductCategory,
 } from "../../data/categories";
 
 import type {
@@ -17,116 +25,299 @@ import type {
 } from "../../data/products";
 
 type ProductCatalogProps = {
-  products: ShopProduct[];
+  products:
+    ShopProduct[];
 };
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function getCategorySlugFromUrl() {
+  if (
+    typeof window ===
+    "undefined"
+  ) {
+    return null;
+  }
+
+  const params =
+    new URLSearchParams(
+      window.location.search,
+    );
+
+  const slug =
+    params.get(
+      "category",
+    );
+
+  if (!slug) {
+    return null;
+  }
+
+  const exists =
+    productCategories.some(
+      (category) =>
+        category.slug ===
+        slug,
+    );
+
+  return exists
+    ? slug
+    : null;
+}
+
+function updateCategoryInUrl(
+  categorySlug:
+    string | null,
+) {
+  if (
+    typeof window ===
+    "undefined"
+  ) {
+    return;
+  }
+
+  const url =
+    new URL(
+      window.location.href,
+    );
+
+  if (categorySlug) {
+    url.searchParams.set(
+      "category",
+      categorySlug,
+    );
+  } else {
+    url.searchParams.delete(
+      "category",
+    );
+  }
+
+  const nextUrl =
+    `${url.pathname}${url.search}${url.hash}`;
+
+  window.history.pushState(
+    {},
+    "",
+    nextUrl,
+  );
+}
+
+/* =========================================================
+   COMPONENT
+   ========================================================= */
 
 export default function ProductCatalog({
   products,
 }: ProductCatalogProps) {
   const [
-    activeCategory,
-    setActiveCategory,
-  ] = useState<string | null>(
-    null,
-  );
+    activeCategorySlug,
+    setActiveCategorySlug,
+  ] = useState<
+    string | null
+  >(null);
+
+  /* ========================================================
+     READ CATEGORY FROM URL
+     ======================================================== */
+
+  useEffect(() => {
+    const syncCategoryFromUrl =
+      () => {
+        setActiveCategorySlug(
+          getCategorySlugFromUrl(),
+        );
+      };
+
+    syncCategoryFromUrl();
+
+    window.addEventListener(
+      "popstate",
+      syncCategoryFromUrl,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "popstate",
+        syncCategoryFromUrl,
+      );
+    };
+  }, []);
+
+  /* ========================================================
+     CATEGORY
+     ======================================================== */
+
+  const activeCategory =
+    useMemo(
+      () =>
+        productCategories.find(
+          (category) =>
+            category.slug ===
+            activeCategorySlug,
+        ),
+      [
+        activeCategorySlug,
+      ],
+    );
+
+  /* ========================================================
+     PRODUCT COUNT BY CATEGORY
+     ======================================================== */
+
+  const productCounts =
+    useMemo(() => {
+      const counts =
+        new Map<
+          string,
+          number
+        >();
+
+      for (
+        const product
+        of products
+      ) {
+        const current =
+          counts.get(
+            product.categoryId,
+          ) ?? 0;
+
+        counts.set(
+          product.categoryId,
+          current + 1,
+        );
+      }
+
+      return counts;
+    }, [
+      products,
+    ]);
+
+  /* ========================================================
+     FILTER PRODUCTS
+     ======================================================== */
 
   const visibleProducts =
     useMemo(() => {
-      if (!activeCategory) {
+      if (
+        !activeCategory
+      ) {
         return products;
       }
 
       return products.filter(
         (product) =>
           product.categoryId ===
-          activeCategory,
+          activeCategory.id,
       );
     }, [
       activeCategory,
       products,
     ]);
 
-  const category =
-    productCategories.find(
-      (item) =>
-        item.id ===
-        activeCategory,
+  /* ========================================================
+     CHANGE CATEGORY
+     ======================================================== */
+
+  function selectCategory(
+    category:
+      ProductCategory | null,
+  ) {
+    const nextSlug =
+      category?.slug ??
+      null;
+
+    setActiveCategorySlug(
+      nextSlug,
     );
+
+    updateCategoryInUrl(
+      nextSlug,
+    );
+  }
 
   return (
     <>
-      <section className="products-categories">
+      {/* =====================================================
+          01 — CATEGORY
+      ====================================================== */}
+
+      <section
+        className="products-categories"
+        aria-labelledby="product-categories-title"
+      >
         <div className="site-container">
-          <div className="section-heading">
-            <div className="section-heading__main">
-              <p className="section-heading__eyebrow">
-                DANH MỤC
-              </p>
-
-              <h2 className="section-heading__title">
-                Khám phá theo loại
-                sản phẩm
-              </h2>
-
-              <p className="section-heading__description">
-                Chọn nhóm phù hợp
-                với nhu cầu sử dụng,
-                từ quà nhỏ đến phụ
-                kiện cá nhân.
-              </p>
-            </div>
-          </div>
+          <SectionHeading
+            eyebrow="KHÁM PHÁ THEO DANH MỤC"
+            title="Bạn đang tìm loại sản phẩm nào?"
+            description="Danh mục được tổ chức theo công năng sử dụng, từ vật phẩm lưu niệm nhỏ đến phụ kiện, sản phẩm trang trí và quà tặng."
+          />
 
           <div className="products-categories__grid">
             {productCategories.map(
-              (item) => (
-                <button
-                  type="button"
-                  key={item.id}
-                  className="products-category-button"
-                  onClick={() =>
-                    setActiveCategory(
-                      item.id,
-                    )
+              (
+                category,
+              ) => (
+                <CategoryCard
+                  key={
+                    category.id
                   }
-                >
-                  <CategoryCard
-                    category={item}
-                    productCount={
-                      products.filter(
-                        (
-                          product,
-                        ) =>
-                          product.categoryId ===
-                          item.id,
-                      ).length
-                    }
-                  />
-                </button>
+                  category={
+                    category
+                  }
+                  productCount={
+                    productCounts.get(
+                      category.id,
+                    ) ?? 0
+                  }
+                  active={
+                    activeCategory?.id ===
+                    category.id
+                  }
+                  onSelect={
+                    selectCategory
+                  }
+                />
               ),
             )}
           </div>
         </div>
       </section>
 
-      <section className="products-list">
+      {/* =====================================================
+          02 — PRODUCT LIST
+      ====================================================== */}
+
+      <section
+        id="products-list"
+        className="products-list"
+        aria-labelledby="products-list-title"
+      >
         <div className="site-container">
+          {/* =================================================
+              HEADER
+          ================================================== */}
+
           <div className="products-list__header">
             <div>
               <p className="products-list__eyebrow">
                 SẢN PHẨM
               </p>
 
-              <h2 className="products-list__title">
-                {category
-                  ? category.shortName
+              <h2
+                id="products-list-title"
+                className="products-list__title"
+              >
+                {activeCategory
+                  ? activeCategory.name
                   : "Tất cả sản phẩm"}
               </h2>
 
               <p className="products-list__description">
-                {category
-                  ? category.description
-                  : "Các sản phẩm văn hóa sáng tạo đang được giới thiệu trên gian hàng."}
+                {activeCategory
+                  ? activeCategory.description
+                  : "Khám phá toàn bộ các thiết kế hiện có trong gian hàng và tìm hiểu câu chuyện phía sau từng sản phẩm."}
               </p>
             </div>
 
@@ -138,47 +329,128 @@ export default function ProductCatalog({
             </span>
           </div>
 
-          <div className="products-filter">
+          {/* =================================================
+              FILTER BAR
+          ================================================== */}
+
+          <div
+            className="products-filter"
+            aria-label="Lọc sản phẩm theo nhóm"
+          >
             <button
               type="button"
-              className={
+              className={[
+                "products-filter__item",
+
                 !activeCategory
-                  ? "products-filter__item products-filter__item--active"
-                  : "products-filter__item"
-              }
+                  ? "products-filter__item--active"
+                  : "",
+              ]
+                .filter(
+                  Boolean,
+                )
+                .join(
+                  " ",
+                )}
               onClick={() =>
-                setActiveCategory(
+                selectCategory(
                   null,
                 )
+              }
+              aria-pressed={
+                !activeCategory
               }
             >
               Tất cả
             </button>
 
             {productCategories.map(
-              (item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={
-                    activeCategory ===
-                    item.id
-                      ? "products-filter__item products-filter__item--active"
-                      : "products-filter__item"
-                  }
-                  onClick={() =>
-                    setActiveCategory(
-                      item.id,
-                    )
-                  }
-                >
-                  {
-                    item.shortName
-                  }
-                </button>
-              ),
+              (
+                category,
+              ) => {
+                const active =
+                  activeCategory?.id ===
+                  category.id;
+
+                return (
+                  <button
+                    key={
+                      category.id
+                    }
+                    type="button"
+                    className={[
+                      "products-filter__item",
+
+                      active
+                        ? "products-filter__item--active"
+                        : "",
+                    ]
+                      .filter(
+                        Boolean,
+                      )
+                      .join(
+                        " ",
+                      )}
+                    onClick={() =>
+                      selectCategory(
+                        category,
+                      )
+                    }
+                    aria-pressed={
+                      active
+                    }
+                  >
+                    {
+                      category.shortName
+                    }
+                  </button>
+                );
+              },
             )}
           </div>
+
+          {/* =================================================
+              ACTIVE FILTER
+          ================================================== */}
+
+          {activeCategory && (
+            <div className="products-active-filter">
+              <div>
+                <span className="products-active-filter__label">
+                  Đang xem:
+                </span>
+
+                <strong>
+                  {
+                    activeCategory.shortName
+                  }
+                </strong>
+              </div>
+
+              <button
+                type="button"
+                className="products-active-filter__clear"
+                onClick={() =>
+                  selectCategory(
+                    null,
+                  )
+                }
+              >
+                Xem tất cả
+
+                <span
+                  aria-hidden="true"
+                >
+                  {" "}
+                  ×
+                </span>
+              </button>
+            </div>
+          )}
+
+          {/* =================================================
+              PRODUCT GRID
+          ================================================== */}
 
           <ProductGrid
             products={
