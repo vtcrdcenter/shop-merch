@@ -316,6 +316,10 @@ export default async function HeritageDetailPage({
                 heritage.description
               }
             </p>
+            <div className="demo-note">
+              <strong>Ghi chú hồ sơ:</strong>{" "}
+              {heritage.documentationNote}
+            </div>
           </div>
         </div>
       </section>

@@ -14,6 +14,7 @@ import {
 import {
   siteAssetPath,
 } from "../../lib/site-path";
+import { useCart } from "./CartProvider";
 
 /* =========================================================
    NAVIGATION
@@ -71,6 +72,7 @@ function isActiveRoute(
    ========================================================= */
 
 export default function ShopHeader() {
+  const { count } = useCart();
   const pathname =
     usePathname() ?? "/";
 
@@ -194,7 +196,7 @@ export default function ShopHeader() {
 
           <div className="shop-header__actions">
             <Link
-              href="/products"
+              href="/search"
               className="shop-header__search-link"
               onClick={closeMenu}
             >
@@ -206,8 +208,12 @@ export default function ShopHeader() {
               </span>
 
               <span>
-                Tìm sản phẩm
+                Tìm kiếm
               </span>
+            </Link>
+
+            <Link href="/cart" className="shop-header__cart-link" onClick={closeMenu} aria-label={`Giỏ hàng có ${count} sản phẩm`}>
+              Giỏ hàng <span>{count}</span>
             </Link>
 
             <button

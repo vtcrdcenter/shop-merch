@@ -106,12 +106,10 @@ export default function ShopFooter() {
             Thông tin
           </h3>
 
-          <p className="shop-footer__text">
-            Thông tin hướng dẫn mua hàng,
-            vận chuyển, đổi trả và các chính sách
-            sẽ được cập nhật khi gian hàng
-            chính thức mở bán.
-          </p>
+          <Link href="/policies/shipping">Giao hàng</Link>
+          <Link href="/policies/returns">Đổi trả</Link>
+          <Link href="/policies/privacy">Bảo mật</Link>
+          <p className="shop-footer__text">Quy trình và dữ liệu thương mại trên website hiện là bản demo.</p>
         </div>
       </div>
 

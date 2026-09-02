@@ -14,6 +14,7 @@ import ProductMeta from "../../components/ProductMeta";
 import TraceabilityPanel from "../../components/TraceabilityPanel";
 import RelatedProducts from "../../components/RelatedProducts";
 import SectionHeading from "../../components/SectionHeading";
+import AddToCart from "../../components/AddToCart";
 
 import {
   getAllProducts,
@@ -237,6 +238,8 @@ export default async function ProductDetailPage({
                 product
               }
             />
+
+            <AddToCart product={product} />
 
             {/* HERITAGE QUICK LINKS */}
 

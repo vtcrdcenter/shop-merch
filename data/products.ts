@@ -97,6 +97,9 @@ export type ShopProduct = {
    */
   price: ProductPrice;
 
+  /** Số lượng demo để mô phỏng tồn kho ở storefront. */
+  stock: number;
+
   availability: ProductAvailability;
 
   /**
@@ -175,11 +178,13 @@ export const products: ShopProduct[] = [
     ],
 
     price: {
-      amount: null,
+      amount: 185000,
       currency: "VND",
     },
 
-    availability: "coming-soon",
+    stock: 24,
+
+    availability: "available",
 
     projectStatus: "Phương án thiết kế / Pilot",
 
@@ -263,11 +268,13 @@ export const products: ShopProduct[] = [
     ],
 
     price: {
-      amount: null,
+      amount: 390000,
       currency: "VND",
     },
 
-    availability: "coming-soon",
+    stock: 12,
+
+    availability: "available",
 
     projectStatus: "Phương án thiết kế / Pilot",
 
@@ -350,11 +357,13 @@ export const products: ShopProduct[] = [
     ],
 
     price: {
-      amount: null,
+      amount: 245000,
       currency: "VND",
     },
 
-    availability: "coming-soon",
+    stock: 18,
+
+    availability: "available",
 
     projectStatus: "Phương án thiết kế / Pilot",
 
@@ -435,11 +444,13 @@ export const products: ShopProduct[] = [
     ],
 
     price: {
-      amount: null,
+      amount: 320000,
       currency: "VND",
     },
 
-    availability: "coming-soon",
+    stock: 8,
+
+    availability: "available",
 
     projectStatus: "Phương án thiết kế / Pilot",
 
@@ -522,11 +533,13 @@ export const products: ShopProduct[] = [
     ],
 
     price: {
-      amount: null,
+      amount: 465000,
       currency: "VND",
     },
 
-    availability: "coming-soon",
+    stock: 15,
+
+    availability: "available",
 
     projectStatus: "Phương án thiết kế / Pilot",
 
@@ -606,11 +619,13 @@ export const products: ShopProduct[] = [
     ],
 
     price: {
-      amount: null,
+      amount: 1290000,
       currency: "VND",
     },
 
-    availability: "coming-soon",
+    stock: 5,
+
+    availability: "available",
 
     projectStatus: "Phương án thiết kế / Pilot",
 
@@ -696,11 +711,13 @@ export const products: ShopProduct[] = [
     ],
 
     price: {
-      amount: null,
+      amount: 165000,
       currency: "VND",
     },
 
-    availability: "coming-soon",
+    stock: 30,
+
+    availability: "available",
 
     projectStatus: "Phương án thiết kế / Pilot",
 

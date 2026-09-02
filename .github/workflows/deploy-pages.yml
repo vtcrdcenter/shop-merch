@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - feat/museum-shop-demo
+  pull_request:
+    branches:
+      - feat/museum-shop-demo
 
   workflow_dispatch:
 
@@ -38,6 +41,9 @@ jobs:
 
       - name: Build static website
         run: npm run build
+
+      - name: Test exported routes
+        run: node --test tests/static-routes.test.mjs
 
       - name: Verify build output
         run: |
@@ -98,14 +104,17 @@ jobs:
         run: touch dist/client/.nojekyll
 
       - name: Configure GitHub Pages
+        if: github.event_name == 'push'
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
+        if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist/client
 
   deploy:
+    if: github.event_name == 'push'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

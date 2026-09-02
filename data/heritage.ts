@@ -38,6 +38,9 @@ export type HeritageSource = {
 
   description: string;
 
+  /** Ghi chú biên tập để người xem hiểu phạm vi tư liệu và mức xác minh. */
+  documentationNote: string;
+
   /**
    * Các yếu tố được sử dụng trong thiết kế.
    */
@@ -82,6 +85,9 @@ export const heritageSources: HeritageSource[] = [
 
     description:
       "Mũ thượng triều thời Nguyễn được sử dụng làm nguồn tạo hình chính cho sản phẩm Dấu Ấn Thượng Triều Nguyễn. Hồ sơ thiết kế xác định các dấu hiệu nhận diện được khai thác gồm cánh chuồn, trục đối xứng, rồng, mây, mặt trời và hệ hạt trang trí.",
+
+    documentationNote:
+      "Hồ sơ hiện ghi nhận tên gọi, niên đại tương đối, đơn vị quản lý và các chi tiết tạo hình được sử dụng. Ảnh tư liệu và mô tả kiểm kê cần được đối chiếu lại trước khi xuất bản chính thức.",
 
     designElements: [
       "Cánh chuồn",
@@ -135,6 +141,9 @@ export const heritageSources: HeritageSource[] = [
     description:
       "Ấn “Sắc mệnh chi bảo” là nguồn di sản được sử dụng trong nhiều phương án thiết kế. Hình tượng rồng, mặt triện và chức năng đóng dấu được khai thác ở các mức độ khác nhau tùy theo công năng sản phẩm.",
 
+    documentationNote:
+      "Mốc Minh Mệnh thứ 8 (1827) được dùng làm dữ liệu diễn giải trong bản demo. Thông tin hiện vật gốc, nơi lưu giữ và quyền sử dụng hình ảnh cần được cơ quan chuyên môn xác nhận.",
+
     designElements: [
       "Hình tượng rồng",
       "Mặt triện",
@@ -186,6 +195,9 @@ export const heritageSources: HeritageSource[] = [
 
     description:
       "Phượng bào và hệ họa tiết trên triều phục Hoàng hậu được sử dụng làm nguồn tham chiếu cho các sản phẩm thuộc hướng thiết kế Phượng Sắc. Các yếu tố chính gồm hình tượng phượng, mây ngũ sắc, hệ màu đỏ – vàng và một số mô-típ trang trí cung đình.",
+
+    documentationNote:
+      "Nguồn đang ở trạng thái cần thẩm định. Tên gọi, niên đại, chủ thể sử dụng và từng mô-típ phải được gắn với hồ sơ hiện vật cụ thể trước khi dùng cho truyền thông thương mại.",
 
     designElements: [
       "Hình tượng phượng",
@@ -239,6 +251,9 @@ export const heritageSources: HeritageSource[] = [
     description:
       "Nhóm tư liệu khảo cổ Óc Eo được sử dụng để xây dựng hệ charm dạng module. Phương án không lấy một hiện vật duy nhất mà khai thác nhiều dạng hạt, hình học và cấu trúc trang sức để phát triển thành sản phẩm có thể phối ghép.",
 
+    documentationNote:
+      "Đây là nhóm tham chiếu gồm nhiều hiện vật, không đại diện cho một sưu tập đơn lẻ. Mỗi mẫu charm cần có bảng đối chiếu riêng về địa điểm, chất liệu, niên đại và hồ sơ công bố.",
+
     designElements: [
       "Hoa sen",
       "Hạt cầu",
@@ -290,6 +305,9 @@ export const heritageSources: HeritageSource[] = [
 
     description:
       "Hình dáng lọ ngọc thời Nguyễn được sử dụng làm nguồn tạo hình chính cho vỏ son Sắc Mệnh Ngọc Son. Các đặc điểm được khai thác gồm thân đứng, đế vuông, quai cong và cảm giác vật liệu ngọc sáng.",
+
+    documentationNote:
+      "Tên gọi “lọ ngọc thời Nguyễn” hiện được dùng ở mức tham chiếu thiết kế. Bản chính thức cần bổ sung số kiểm kê, kích thước, chất liệu, niên đại và nguồn ảnh đã được cấp phép.",
 
     designElements: [
       "Thân lọ",
