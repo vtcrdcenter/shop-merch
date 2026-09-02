@@ -8,7 +8,7 @@ type SectionHeadingProps = {
   description?: string;
 
   /**
-   * Link bên phải heading.
+   * CTA của section.
    */
   actionLabel?: string;
 
@@ -16,24 +16,26 @@ type SectionHeadingProps = {
 
   /**
    * left:
-   *
-   * TITLE                    Action
+   * heading nằm trái,
+   * CTA ở phía còn lại.
    *
    * center:
-   *
-   *            TITLE
-   *         description
+   * heading căn giữa.
    */
-  align?: "left" | "center";
+  align?:
+    | "left"
+    | "center";
 
   /**
-   * cream:
+   * default:
    * dùng trên nền sáng.
    *
    * wine:
-   * dùng trên nền đỏ wine.
+   * dùng trên nền wine / tối.
    */
-  tone?: "default" | "wine";
+  tone?:
+    | "default"
+    | "wine";
 
   className?: string;
 };
@@ -49,49 +51,82 @@ export default function SectionHeading({
   className = "",
 }: SectionHeadingProps) {
   const hasAction =
-    Boolean(actionLabel) &&
-    Boolean(actionHref);
+    Boolean(
+      actionLabel,
+    ) &&
+    Boolean(
+      actionHref,
+    );
 
   return (
     <header
       className={[
         "section-heading",
+
         `section-heading--${align}`,
+
         `section-heading--${tone}`,
+
+        hasAction
+          ? "section-heading--with-action"
+          : "",
+
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
+      {/* =====================================================
+          MAIN
+      ====================================================== */}
+
       <div className="section-heading__main">
         {eyebrow && (
           <p className="section-heading__eyebrow">
-            {eyebrow}
+            {
+              eyebrow
+            }
           </p>
         )}
 
         <h2 className="section-heading__title">
-          {title}
+          {
+            title
+          }
         </h2>
 
         {description && (
           <p className="section-heading__description">
-            {description}
+            {
+              description
+            }
           </p>
         )}
       </div>
 
-      {hasAction && (
-        <Link
-          href={actionHref!}
-          className="section-heading__action"
-        >
-          {actionLabel}
+      {/* =====================================================
+          ACTION
+      ====================================================== */}
 
-          <span aria-hidden="true">
-            →
-          </span>
-        </Link>
+      {hasAction && (
+        <div className="section-heading__action-wrap">
+          <Link
+            href={
+              actionHref!
+            }
+            className="section-heading__action"
+          >
+            {
+              actionLabel
+            }
+
+            <span
+              aria-hidden="true"
+            >
+              →
+            </span>
+          </Link>
+        </div>
       )}
     </header>
   );
