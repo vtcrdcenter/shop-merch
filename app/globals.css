@@ -21958,3 +21958,352 @@ img {
     height: 360px;
   }
 }
+/* =========================================================
+   STORIES PAGE — FINAL DESKTOP GRID FIX
+   ========================================================= */
+
+/*
+ * Reset các rule cũ khiến card bị co ngang.
+ */
+.stories-group__grid {
+  width: 100% !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    ) !important;
+
+  gap: 28px !important;
+
+  align-items: stretch;
+}
+
+/*
+ * Card phải sử dụng toàn bộ chiều rộng grid column.
+ */
+.stories-group__grid
+.story-card {
+  width: 100% !important;
+
+  min-width: 0 !important;
+
+  max-width: none !important;
+
+  height: 100%;
+}
+
+/*
+ * QUAN TRỌNG:
+ * Xóa hành vi cũ:
+ *
+ * max-width:
+ * calc((100% - 48px) / 3)
+ *
+ * Nếu chỉ có 1 bài thì cho card có
+ * chiều rộng cố định hợp lý.
+ */
+.stories-group__grid
+.story-card:only-child {
+  width: min(
+    100%,
+    420px
+  ) !important;
+
+  max-width: 420px !important;
+
+  justify-self: start;
+}
+
+/* =========================================================
+   STORY CARD
+   ========================================================= */
+
+.story-card {
+  min-width: 0 !important;
+
+  overflow: hidden;
+}
+
+.story-card__image-link {
+  display: block;
+
+  width: 100%;
+}
+
+.story-card__image {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 10;
+
+  overflow: hidden;
+}
+
+.story-card__image img {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover;
+
+  object-position: center;
+}
+
+.story-card__body {
+  width: 100%;
+
+  min-width: 0;
+}
+
+/* =========================================================
+   STORY TITLE — KHÔNG BẺ TỪNG CHỮ
+   ========================================================= */
+
+.story-card__title {
+  width: 100%;
+
+  min-width: 0;
+
+  margin:
+    12px 0 10px;
+
+  font-size:
+    clamp(
+      24px,
+      1.8vw,
+      31px
+    ) !important;
+
+  line-height:
+    1.22 !important;
+
+  word-break:
+    normal !important;
+
+  overflow-wrap:
+    normal !important;
+
+  white-space:
+    normal !important;
+
+  hyphens:
+    none !important;
+}
+
+.story-card__title a {
+  display: block;
+
+  width: 100%;
+
+  word-break:
+    normal !important;
+
+  overflow-wrap:
+    normal !important;
+}
+
+.story-card__excerpt {
+  width: 100%;
+
+  word-break:
+    normal !important;
+
+  overflow-wrap:
+    normal !important;
+
+  line-height:
+    1.65 !important;
+}
+
+/* =========================================================
+   STORY GROUP HEADER
+   ========================================================= */
+
+.stories-group {
+  width: 100%;
+}
+
+.stories-group__header {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    72px
+    minmax(0, 1fr)
+    100px;
+
+  gap: 38px;
+
+  align-items: start;
+
+  margin-bottom: 34px;
+}
+
+.stories-group__heading {
+  min-width: 0;
+}
+
+.stories-group__title {
+  margin:
+    8px 0 10px;
+
+  font-size:
+    clamp(
+      36px,
+      3vw,
+      52px
+    );
+
+  line-height: 1.12;
+}
+
+.stories-group__description {
+  max-width: 760px;
+
+  line-height: 1.7;
+}
+
+.stories-group__count {
+  text-align: center;
+}
+
+.stories-group__count strong {
+  display: block;
+
+  font-size: 27px;
+}
+
+.stories-group__count span {
+  display: block;
+
+  margin-top: 3px;
+}
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+  .stories-groups
+  .site-container {
+    width:
+      min(
+        calc(
+          100% - 80px
+        ),
+        1360px
+      );
+  }
+
+  /*
+   * Nếu nhóm chỉ có 1 bài,
+   * card không bị kéo cả màn hình,
+   * nhưng cũng không còn siêu hẹp.
+   */
+  .stories-group__grid
+  .story-card:only-child {
+    width: 420px !important;
+
+    max-width:
+      420px !important;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (
+  min-width: 768px
+)
+and (
+  max-width: 1199px
+) {
+
+  .stories-group__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      ) !important;
+  }
+
+  .stories-group__grid
+  .story-card:only-child {
+    width: 100% !important;
+
+    max-width:
+      520px !important;
+  }
+
+  .stories-group__header {
+    grid-template-columns:
+      56px
+      minmax(0, 1fr)
+      80px;
+
+    gap: 24px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (
+  max-width: 767px
+) {
+
+  .stories-group__grid {
+    grid-template-columns:
+      1fr !important;
+
+    gap: 22px !important;
+  }
+
+  .stories-group__grid
+  .story-card,
+  .stories-group__grid
+  .story-card:only-child {
+    width: 100% !important;
+
+    max-width:
+      none !important;
+  }
+
+  .stories-group__header {
+    grid-template-columns:
+      1fr;
+
+    gap: 12px;
+  }
+
+  .stories-group__number {
+    display: none;
+  }
+
+  .stories-group__count {
+    text-align: left;
+  }
+
+  .stories-group__count strong,
+  .stories-group__count span {
+    display: inline;
+  }
+
+  .stories-group__count span {
+    margin-left: 5px;
+  }
+
+  .story-card__title {
+    font-size:
+      25px !important;
+  }
+}
