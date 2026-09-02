@@ -1,136 +1,72 @@
 "use client";
 
 import Link from "next/link";
+import { useRef, useState } from "react";
 
-import {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-
-import {
-  siteAssetPath,
-} from "../../lib/site-path";
-
-import type {
-  HeritageImage,
-} from "../../data/heritage";
+import { siteAssetPath } from "../../lib/site-path";
+import type { HeritageImage } from "../../data/heritage";
 
 type HeritageImageSliderProps = {
   images: HeritageImage[];
-
   href?: string;
-
   className?: string;
-
-  priority?: boolean;
-
-  showCounter?: boolean;
-
-  showArrows?: boolean;
-
-  showDots?: boolean;
 };
 
 export default function HeritageImageSlider({
   images,
   href,
   className = "",
-  priority = false,
-  showCounter = true,
-  showArrows = true,
-  showDots = true,
 }: HeritageImageSliderProps) {
-  const [activeIndex, setActiveIndex] =
-    useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const trackRef = useRef<HTMLDivElement | null>(null);
 
-  const sliderRef =
-    useRef<HTMLDivElement | null>(
-      null,
-    );
+  const safeImages = images.filter(
+    (image) => Boolean(image?.src),
+  );
 
-  const safeImages =
-    images.filter(
-      (image) =>
-        Boolean(image?.src),
-    );
+  const imageCount = safeImages.length;
+  const hasMultipleImages = imageCount > 1;
 
-  const imageCount =
-    safeImages.length;
-
-  const hasMultipleImages =
-    imageCount > 1;
-
-  useEffect(() => {
-    setActiveIndex(0);
-
-    sliderRef.current?.scrollTo({
-      left: 0,
-      behavior: "auto",
-    });
-  }, [imageCount]);
-
-  function goToImage(
-    index: number,
-  ) {
-    if (
-      !sliderRef.current ||
-      imageCount === 0
-    ) {
+  function goToImage(index: number) {
+    if (!trackRef.current || imageCount === 0) {
       return;
     }
 
     const normalizedIndex =
-      (index + imageCount) %
-      imageCount;
+      (index + imageCount) % imageCount;
 
-    const sliderWidth =
-      sliderRef.current
-        .clientWidth;
+    const width =
+      trackRef.current.clientWidth;
 
-    sliderRef.current.scrollTo({
-      left:
-        normalizedIndex *
-        sliderWidth,
-
+    trackRef.current.scrollTo({
+      left: normalizedIndex * width,
       behavior: "smooth",
     });
 
-    setActiveIndex(
-      normalizedIndex,
-    );
+    setActiveIndex(normalizedIndex);
   }
 
   function handleScroll() {
-    if (!sliderRef.current) {
+    if (!trackRef.current) {
       return;
     }
 
-    const sliderWidth =
-      sliderRef.current
-        .clientWidth;
+    const width =
+      trackRef.current.clientWidth;
 
-    if (!sliderWidth) {
+    if (!width) {
       return;
     }
 
-    const nextIndex =
-      Math.round(
-        sliderRef.current
-          .scrollLeft /
-          sliderWidth,
-      );
+    const index = Math.round(
+      trackRef.current.scrollLeft / width,
+    );
 
     if (
-      nextIndex >= 0 &&
-      nextIndex <
-        imageCount &&
-      nextIndex !==
-        activeIndex
+      index >= 0 &&
+      index < imageCount
     ) {
-      setActiveIndex(
-        nextIndex,
-      );
+      setActiveIndex(index);
     }
   }
 
@@ -139,15 +75,13 @@ export default function HeritageImageSlider({
       <div
         className={[
           "heritage-image-slider",
-          "heritage-image-slider--empty",
           className,
         ]
           .filter(Boolean)
           .join(" ")}
       >
         <div className="heritage-image-slider__placeholder">
-          Hình ảnh tư liệu đang
-          được cập nhật
+          Hình ảnh tư liệu đang được cập nhật
         </div>
       </div>
     );
@@ -157,50 +91,37 @@ export default function HeritageImageSlider({
     <div
       className={[
         "heritage-image-slider",
-
         hasMultipleImages
           ? "heritage-image-slider--multiple"
           : "heritage-image-slider--single",
-
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
       <div
-        ref={sliderRef}
+        ref={trackRef}
         className="heritage-image-slider__track"
-        onScroll={
-          handleScroll
-        }
+        onScroll={handleScroll}
       >
         {safeImages.map(
-          (
-            image,
-            index,
-          ) => {
-            const imageContent =
-              (
-                <div className="heritage-image-slider__slide-inner">
-                  <img
-                    src={siteAssetPath(
-                      image.src,
-                    )}
-                    alt={
-                      image.alt
-                    }
-                    loading={
-                      priority &&
-                      index === 0
-                        ? "eager"
-                        : "lazy"
-                    }
-                    draggable={
-                      false
-                    }
-                  />
-                </div>
-              );
+          (image, index) => {
+            const imageContent = (
+              <div className="heritage-image-slider__slide-inner">
+                <img
+                  src={siteAssetPath(
+                    image.src,
+                  )}
+                  alt={image.alt}
+                  loading={
+                    index === 0
+                      ? "eager"
+                      : "lazy"
+                  }
+                  draggable={false}
+                />
+              </div>
+            );
 
             return (
               <div
@@ -209,15 +130,11 @@ export default function HeritageImageSlider({
               >
                 {href ? (
                   <Link
-                    href={
-                      href
-                    }
+                    href={href}
                     className="heritage-image-slider__image-link"
                     aria-label={`Xem chi tiết ${image.alt}`}
                   >
-                    {
-                      imageContent
-                    }
+                    {imageContent}
                   </Link>
                 ) : (
                   imageContent
@@ -228,107 +145,39 @@ export default function HeritageImageSlider({
         )}
       </div>
 
-      {hasMultipleImages &&
-        showArrows && (
-          <>
-            <button
-              type="button"
-              className="heritage-image-slider__arrow heritage-image-slider__arrow--prev"
-              onClick={() =>
-                goToImage(
-                  activeIndex -
-                    1,
-                )
-              }
-              aria-label="Xem ảnh trước"
-            >
-              ‹
-            </button>
+      {hasMultipleImages && (
+        <>
+          <button
+            type="button"
+            className="heritage-image-slider__arrow heritage-image-slider__arrow--prev"
+            onClick={() =>
+              goToImage(
+                activeIndex - 1,
+              )
+            }
+            aria-label="Xem ảnh trước"
+          >
+            ‹
+          </button>
 
-            <button
-              type="button"
-              className="heritage-image-slider__arrow heritage-image-slider__arrow--next"
-              onClick={() =>
-                goToImage(
-                  activeIndex +
-                    1,
-                )
-              }
-              aria-label="Xem ảnh tiếp theo"
-            >
-              ›
-            </button>
-          </>
-        )}
+          <button
+            type="button"
+            className="heritage-image-slider__arrow heritage-image-slider__arrow--next"
+            onClick={() =>
+              goToImage(
+                activeIndex + 1,
+              )
+            }
+            aria-label="Xem ảnh tiếp theo"
+          >
+            ›
+          </button>
 
-      {hasMultipleImages &&
-        showCounter && (
           <div className="heritage-image-slider__counter">
-            <span>
-              {
-                activeIndex +
-                1
-              }
-            </span>
-
-            <span
-              aria-hidden="true"
-            >
-              /
-            </span>
-
-            <span>
-              {imageCount}
-            </span>
+            {activeIndex + 1}/{imageCount}
           </div>
-        )}
-
-      {hasMultipleImages &&
-        showDots && (
-          <div className="heritage-image-slider__dots">
-            {safeImages.map(
-              (
-                _,
-                index,
-              ) => (
-                <button
-                  key={
-                    index
-                  }
-                  type="button"
-                  onClick={() =>
-                    goToImage(
-                      index,
-                    )
-                  }
-                  className={[
-                    "heritage-image-slider__dot",
-
-                    index ===
-                    activeIndex
-                      ? "is-active"
-                      : "",
-                  ]
-                    .filter(
-                      Boolean,
-                    )
-                    .join(
-                      " ",
-                    )}
-                  aria-label={`Xem ảnh ${
-                    index + 1
-                  }`}
-                  aria-current={
-                    index ===
-                    activeIndex
-                      ? "true"
-                      : undefined
-                  }
-                />
-              ),
-            )}
-          </div>
-        )}
+        </>
+      )}
     </div>
   );
 }
