@@ -6,89 +6,136 @@ import Link from "next/link";
 import Breadcrumb from "../components/Breadcrumb";
 import SectionHeading from "../components/SectionHeading";
 
+/* =========================================================
+   METADATA
+   ========================================================= */
+
 export const metadata: Metadata = {
   title:
     "Giới thiệu | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
 
   description:
-    "Tìm hiểu về Gian hàng điện tử sản phẩm văn hóa sáng tạo của Bảo tàng Lịch sử Quốc gia, cách sản phẩm được phát triển từ nguồn di sản và hệ thống hỗ trợ truy xuất.",
+    "Tìm hiểu về Gian hàng điện tử sản phẩm văn hóa sáng tạo của Bảo tàng Lịch sử Quốc gia, cách sản phẩm được phát triển từ nguồn di sản và hệ thống truy xuất hỗ trợ.",
 };
+
+/* =========================================================
+   DEVELOPMENT STEPS
+   ========================================================= */
 
 const developmentSteps = [
   {
     number: "01",
-    title: "Xác định nguồn di sản",
+
+    title:
+      "Xác định nguồn cảm hứng",
+
     description:
-      "Sản phẩm được bắt đầu từ hiện vật, tư liệu, hình tượng, câu chuyện lịch sử hoặc nguồn văn hóa có liên quan.",
+      "Quá trình bắt đầu từ hiện vật, tư liệu, hình tượng hoặc câu chuyện lịch sử có liên quan.",
   },
+
   {
     number: "02",
-    title: "Phát triển phương án thiết kế",
+
+    title:
+      "Lựa chọn chi tiết",
+
     description:
-      "Các đặc điểm phù hợp được lựa chọn, giản lược, tổ chức lại hoặc chuyển hóa để thích ứng với công năng của sản phẩm mới.",
+      "Những đặc điểm phù hợp như hình khối, hoa văn, màu sắc hoặc bố cục được xác định để phát triển thiết kế.",
   },
+
   {
     number: "03",
-    title: "Đối chiếu và hoàn thiện hồ sơ",
+
+    title:
+      "Chuyển hóa thành thiết kế",
+
     description:
-      "Nguồn tham chiếu, phương án thiết kế và các thông tin liên quan được tập hợp để phục vụ quá trình rà soát và hoàn thiện sản phẩm.",
+      "Các chi tiết được giản lược, tổ chức lại và điều chỉnh để phù hợp với công năng của sản phẩm mới.",
   },
+
   {
     number: "04",
-    title: "Sản xuất và phát hành",
+
+    title:
+      "Hoàn thiện sản phẩm",
+
     description:
-      "Sau khi đáp ứng yêu cầu phát triển, sản phẩm có thể được đưa vào sản xuất, phân phối và giới thiệu trên gian hàng.",
+      "Thiết kế được tiếp tục hoàn thiện về cấu tạo, chất liệu và hình thức trước khi đưa vào giới thiệu hoặc sản xuất.",
   },
+
   {
     number: "05",
-    title: "Kết nối dữ liệu truy xuất",
+
+    title:
+      "Kết nối dữ liệu",
+
     description:
-      "Với sản phẩm hỗ trợ truy xuất, người dùng có thể tiếp tục từ sản phẩm vật lý đến hồ sơ dữ liệu tương ứng trên hệ thống.",
+      "Với sản phẩm hỗ trợ truy xuất, người dùng có thể tiếp tục từ vật phẩm đến hồ sơ dữ liệu tương ứng.",
   },
 ];
 
+/* =========================================================
+   SHOP CONTENT
+   ========================================================= */
+
 const ecosystemItems = [
   {
-    title: "Gian hàng điện tử",
+    title:
+      "Sản phẩm",
+
     description:
-      "Không gian giới thiệu, quảng bá và bán các sản phẩm văn hóa sáng tạo của Bảo tàng Lịch sử Quốc gia.",
+      "Các vật phẩm văn hóa sáng tạo được giới thiệu theo danh mục, bộ sưu tập và mục đích sử dụng.",
   },
+
   {
-    title: "Nguồn di sản",
+    title:
+      "Di sản",
+
     description:
-      "Lớp nội dung giúp người dùng nhận biết hiện vật, tư liệu và câu chuyện được sử dụng làm cơ sở phát triển sản phẩm.",
+      "Hiện vật, tư liệu và nguồn văn hóa đứng phía sau từng thiết kế.",
   },
+
   {
-    title: "Hồ sơ sản phẩm",
+    title:
+      "Câu chuyện",
+
     description:
-      "Tập hợp thông tin về sản phẩm, nguồn cảm hứng, quá trình chuyển hóa thiết kế và các dữ liệu liên quan.",
+      "Những nội dung giúp làm rõ cách nguồn cảm hứng được chuyển hóa thành sản phẩm.",
   },
+
   {
-    title: "Truy xuất sản phẩm",
+    title:
+      "Truy xuất",
+
     description:
-      "Kết nối sản phẩm với dữ liệu nhận diện, hồ sơ nguồn và các thông tin được công bố trên hệ thống truy xuất.",
+      "Lớp dữ liệu bổ sung cho những sản phẩm được kết nối với hồ sơ truy xuất.",
   },
 ];
+
+/* =========================================================
+   PAGE
+   ========================================================= */
 
 export default function AboutPage() {
   return (
     <main className="about-page">
       {/* =====================================================
-          BREADCRUMB
+          01 — BREADCRUMB
       ====================================================== */}
 
       <div className="site-container about-page__breadcrumb">
         <Breadcrumb
           items={[
             {
-              label: "Giới thiệu",
+              label:
+                "Giới thiệu",
             },
           ]}
         />
       </div>
 
       {/* =====================================================
-          HERO
+          02 — HERO
       ====================================================== */}
 
       <section className="about-hero">
@@ -99,14 +146,16 @@ export default function AboutPage() {
             </p>
 
             <h1 className="about-hero__title">
-              Gian hàng điện tử sản phẩm văn hóa sáng tạo
+              Gian hàng điện tử
+              sản phẩm văn hóa sáng tạo
             </h1>
 
             <p className="about-hero__lead">
-              Không gian trực tuyến giới thiệu và kết nối
-              các sản phẩm được phát triển từ hiện vật,
-              tư liệu và những câu chuyện lịch sử gắn với
-              Bảo tàng Lịch sử Quốc gia.
+              Không gian trực tuyến của
+              Bảo tàng Lịch sử Quốc gia,
+              nơi những sản phẩm được kết nối
+              với hiện vật, tư liệu và câu chuyện
+              đã tạo nên nguồn cảm hứng cho chúng.
             </p>
 
             <div className="about-hero__actions">
@@ -115,7 +164,10 @@ export default function AboutPage() {
                 className="about-hero__primary"
               >
                 Khám phá sản phẩm
-                <span aria-hidden="true">
+
+                <span
+                  aria-hidden="true"
+                >
                   {" "}
                   →
                 </span>
@@ -125,29 +177,38 @@ export default function AboutPage() {
                 href="/heritage"
                 className="about-hero__secondary"
               >
-                Khám phá nguồn di sản
+                Khám phá Di sản
               </Link>
             </div>
           </div>
 
           <div className="about-hero__identity">
             <div className="about-hero__identity-line">
-              <span>01</span>
+              <span>
+                01
+              </span>
 
               <div>
-                <small>ĐƠN VỊ</small>
+                <small>
+                  ĐƠN VỊ
+                </small>
 
                 <strong>
-                  Bảo tàng Lịch sử Quốc gia
+                  Bảo tàng
+                  Lịch sử Quốc gia
                 </strong>
               </div>
             </div>
 
             <div className="about-hero__identity-line">
-              <span>02</span>
+              <span>
+                02
+              </span>
 
               <div>
-                <small>KHÔNG GIAN</small>
+                <small>
+                  KHÔNG GIAN
+                </small>
 
                 <strong>
                   Gian hàng điện tử
@@ -156,10 +217,14 @@ export default function AboutPage() {
             </div>
 
             <div className="about-hero__identity-line">
-              <span>03</span>
+              <span>
+                03
+              </span>
 
               <div>
-                <small>PHẠM VI</small>
+                <small>
+                  NỘI DUNG
+                </small>
 
                 <strong>
                   Sản phẩm văn hóa sáng tạo
@@ -171,7 +236,7 @@ export default function AboutPage() {
       </section>
 
       {/* =====================================================
-          PURPOSE
+          03 — PURPOSE
       ====================================================== */}
 
       <section className="about-purpose">
@@ -182,61 +247,75 @@ export default function AboutPage() {
             </p>
 
             <h2 className="about-purpose__title">
-              Mở rộng trải nghiệm bảo tàng ra ngoài không gian trưng bày
+              Một điểm tiếp nối
+              của trải nghiệm bảo tàng
             </h2>
           </div>
 
           <div className="about-purpose__content">
             <p>
-              Gian hàng điện tử được tổ chức như một điểm
-              tiếp nối của trải nghiệm bảo tàng. Người dùng
-              có thể tiếp cận sản phẩm trước, trong hoặc sau
-              chuyến tham quan và từ sản phẩm tiếp tục tìm
-              hiểu nguồn văn hóa liên quan.
+              Người dùng có thể tiếp cận
+              sản phẩm trước, trong hoặc sau
+              chuyến tham quan và từ một vật phẩm
+              tiếp tục tìm hiểu nguồn văn hóa
+              liên quan.
             </p>
 
             <p>
-              Bên cạnh chức năng thương mại, gian hàng còn
-              đóng vai trò truyền thông và giáo dục, giúp
-              kết nối hiện vật, câu chuyện lịch sử và sản
-              phẩm sáng tạo trong cùng một hành trình nội dung.
+              Vì vậy, gian hàng không chỉ là
+              nơi giới thiệu sản phẩm mà còn
+              là một không gian nội dung,
+              giúp kết nối hiện vật, câu chuyện
+              lịch sử và thiết kế đương đại.
             </p>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          WHAT THE SHOP CONTAINS
+          04 — SHOP CONTENT
       ====================================================== */}
 
       <section className="about-scope">
         <div className="site-container">
           <SectionHeading
             eyebrow="TRONG GIAN HÀNG"
-            title="Không chỉ có danh mục sản phẩm"
-            description="Các lớp thông tin được tổ chức để người dùng có thể đi từ sản phẩm đến nguồn di sản và ngược lại."
+            title="Bốn cách để tiếp tục khám phá"
+            description="Người dùng có thể bắt đầu từ sản phẩm hoặc đi từ nguồn di sản, câu chuyện và dữ liệu liên quan."
           />
 
           <div className="about-scope__grid">
             {ecosystemItems.map(
-              (item, index) => (
+              (
+                item,
+                index,
+              ) => (
                 <article
-                  key={item.title}
+                  key={
+                    item.title
+                  }
                   className="about-scope__item"
                 >
                   <span className="about-scope__number">
-                    {String(index + 1).padStart(
+                    {String(
+                      index +
+                        1,
+                    ).padStart(
                       2,
                       "0",
                     )}
                   </span>
 
                   <h3>
-                    {item.title}
+                    {
+                      item.title
+                    }
                   </h3>
 
                   <p>
-                    {item.description}
+                    {
+                      item.description
+                    }
                   </p>
                 </article>
               ),
@@ -246,35 +325,45 @@ export default function AboutPage() {
       </section>
 
       {/* =====================================================
-          PRODUCT DEVELOPMENT
+          05 — PRODUCT DEVELOPMENT
       ====================================================== */}
 
       <section className="about-development">
         <div className="site-container">
           <SectionHeading
-            eyebrow="PHÁT TRIỂN SẢN PHẨM"
-            title="Từ nguồn di sản đến sản phẩm"
-            description="Một sản phẩm được xây dựng qua nhiều lớp công việc, thay vì chỉ lấy hình ảnh di sản để trang trí lên vật phẩm."
+            eyebrow="TỪ DI SẢN ĐẾN SẢN PHẨM"
+            title="Một thiết kế bắt đầu như thế nào?"
+            description="Sản phẩm được phát triển qua nhiều bước, từ việc xác định nguồn cảm hứng đến khi trở thành một vật phẩm có hình thức và công năng riêng."
             tone="wine"
           />
 
           <div className="about-development__list">
             {developmentSteps.map(
-              (step) => (
+              (
+                step,
+              ) => (
                 <article
-                  key={step.number}
+                  key={
+                    step.number
+                  }
                   className="about-development__item"
                 >
                   <span className="about-development__number">
-                    {step.number}
+                    {
+                      step.number
+                    }
                   </span>
 
                   <h3>
-                    {step.title}
+                    {
+                      step.title
+                    }
                   </h3>
 
                   <p>
-                    {step.description}
+                    {
+                      step.description
+                    }
                   </p>
                 </article>
               ),
@@ -284,7 +373,7 @@ export default function AboutPage() {
       </section>
 
       {/* =====================================================
-          HERITAGE / PRODUCT RELATIONSHIP
+          06 — RELATIONSHIP
       ====================================================== */}
 
       <section className="about-relationship">
@@ -320,7 +409,7 @@ export default function AboutPage() {
 
             <div className="about-relationship__node about-relationship__node--product">
               <small>
-                ĐẦU RA
+                VẬT PHẨM
               </small>
 
               <strong>
@@ -334,7 +423,7 @@ export default function AboutPage() {
 
             <div className="about-relationship__node about-relationship__node--trace">
               <small>
-                DỮ LIỆU
+                THÔNG TIN
               </small>
 
               <strong>
@@ -349,61 +438,62 @@ export default function AboutPage() {
             </p>
 
             <h2>
-              Người dùng có thể đi ngược từ sản phẩm về nguồn
+              Từ sản phẩm,
+              người dùng có thể
+              tìm lại câu chuyện ban đầu
             </h2>
 
             <p>
-              Cấu trúc của gian hàng được xây dựng để
-              tránh việc sản phẩm tồn tại tách rời khỏi
-              bối cảnh văn hóa của nó.
+              Mỗi trang sản phẩm được kết nối
+              với nguồn cảm hứng và các nội dung
+              liên quan để sản phẩm không tồn tại
+              tách rời khỏi bối cảnh văn hóa của nó.
             </p>
 
             <p>
-              Từ một trang sản phẩm, người dùng có thể
-              tiếp tục sang nguồn di sản, câu chuyện thiết
-              kế và hồ sơ truy xuất nếu sản phẩm đó được
-              hỗ trợ trên hệ thống.
+              Khi có hỗ trợ truy xuất,
+              hành trình này còn có thể tiếp tục
+              đến hồ sơ dữ liệu của từng sản phẩm.
             </p>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          TRACEABILITY
+          07 — TRACEABILITY
       ====================================================== */}
 
       <section className="about-traceability">
         <div className="site-container about-traceability__grid">
           <div className="about-traceability__heading">
             <p className="about-traceability__eyebrow">
-              TRUY XUẤT
+              TRUY XUẤT SẢN PHẨM
             </p>
 
             <h2 className="about-traceability__title">
-              Dữ liệu tiếp tục sau khi sản phẩm được phát hành
+              Thông tin không dừng
+              ở trang bán hàng
             </h2>
           </div>
 
           <div className="about-traceability__content">
             <p>
-              Với những sản phẩm có hỗ trợ truy xuất,
-              thông tin trên gian hàng có thể được kết
-              nối với hồ sơ nhận diện chi tiết của sản phẩm.
-            </p>
-
-            <p>
-              Người dùng có thể kiểm tra mã sản phẩm,
-              nguồn văn hóa, thông tin phát triển thiết kế
-              và những dữ liệu khác được công bố cho từng
-              trường hợp cụ thể.
+              Với sản phẩm có hỗ trợ truy xuất,
+              người dùng có thể tiếp tục kiểm tra
+              mã nhận diện, nguồn cảm hứng,
+              thông tin thiết kế và những dữ liệu
+              được công bố trên hệ thống.
             </p>
 
             <Link
               href="/products/dau-an-thuong-trieu-nguyen"
               className="about-traceability__link"
             >
-              Xem sản phẩm trình diễn truy xuất
-              <span aria-hidden="true">
+              Xem sản phẩm mẫu
+
+              <span
+                aria-hidden="true"
+              >
                 {" "}
                 →
               </span>
@@ -413,7 +503,7 @@ export default function AboutPage() {
       </section>
 
       {/* =====================================================
-          VTC MERCHANDISE ROLE
+          08 — VTC MERCHANDISE
       ====================================================== */}
 
       <section className="about-platform">
@@ -424,31 +514,32 @@ export default function AboutPage() {
             </p>
 
             <h2 className="about-platform__title">
-              VTC Merchandise trong hệ thống
+              VTC Merchandise
             </h2>
           </div>
 
           <div className="about-platform__content">
             <p>
-              VTC Merchandise đóng vai trò nền tảng hỗ trợ
-              quản lý dữ liệu và kết nối các chức năng liên
-              quan đến sản phẩm trong hệ sinh thái.
+              VTC Merchandise hỗ trợ
+              quản lý dữ liệu sản phẩm
+              và kết nối các chức năng
+              liên quan trong hệ sinh thái.
             </p>
 
             <p>
-              Trên giao diện dành cho người dùng, thương hiệu
-              chính vẫn là Bảo tàng Lịch sử Quốc gia và Gian
-              hàng điện tử sản phẩm văn hóa sáng tạo. Thông
-              tin về VTC Merchandise được thể hiện ở cấp độ
-              hệ thống hỗ trợ, không thay thế nhận diện của
-              gian hàng.
+              Trên gian hàng, nhận diện chính
+              vẫn là Bảo tàng Lịch sử Quốc gia.
+              VTC Merchandise được thể hiện
+              ở vai trò nền tảng hỗ trợ phía sau,
+              không thay thế thương hiệu
+              của Bảo tàng.
             </p>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          EXPLORE
+          09 — EXPLORE
       ====================================================== */}
 
       <section className="about-explore">
@@ -460,7 +551,8 @@ export default function AboutPage() {
               </p>
 
               <h2>
-                Đi vào gian hàng từ cách bạn quan tâm
+                Chọn cách bạn muốn
+                bắt đầu
               </h2>
             </div>
           </div>
@@ -479,8 +571,9 @@ export default function AboutPage() {
               </h3>
 
               <p>
-                Khám phá toàn bộ các thiết kế
-                đang được giới thiệu.
+                Khám phá các thiết kế
+                đang được giới thiệu
+                trong gian hàng.
               </p>
 
               <strong>
@@ -501,8 +594,9 @@ export default function AboutPage() {
               </h3>
 
               <p>
-                Bắt đầu từ hiện vật, tư liệu
-                và nguồn văn hóa.
+                Bắt đầu từ hiện vật,
+                tư liệu và nguồn
+                cảm hứng văn hóa.
               </p>
 
               <strong>
@@ -523,8 +617,9 @@ export default function AboutPage() {
               </h3>
 
               <p>
-                Xem các sản phẩm được tuyển
-                chọn theo cùng một chủ đề.
+                Xem các sản phẩm
+                được kết nối trong
+                cùng một mạch chủ đề.
               </p>
 
               <strong>
@@ -545,8 +640,9 @@ export default function AboutPage() {
               </h3>
 
               <p>
-                Tìm hiểu sâu hơn về nguồn
-                cảm hứng và quá trình thiết kế.
+                Đọc thêm về nguồn
+                cảm hứng và cách
+                thiết kế được hình thành.
               </p>
 
               <strong>
