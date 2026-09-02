@@ -1,9 +1,14 @@
 // app/page.tsx
 
-import type { Metadata } from "next";
+import type {
+  Metadata,
+} from "next";
+
 import Link from "next/link";
 
-import { siteAssetPath } from "../lib/site-path";
+import {
+  siteAssetPath,
+} from "../lib/site-path";
 
 import ProductGrid from "./components/ProductGrid";
 import HeritageCard from "./components/HeritageCard";
@@ -12,15 +17,18 @@ import StoryCard from "./components/StoryCard";
 import SectionHeading from "./components/SectionHeading";
 
 import {
+  getAllProducts,
   getFeaturedProducts,
   getProductBySlug,
 } from "../data/products";
 
 import {
+  getAllHeritageSources,
   getFeaturedHeritageSources,
 } from "../data/heritage";
 
 import {
+  getAllCollections,
   getFeaturedCollections,
 } from "../data/collections";
 
@@ -36,44 +44,113 @@ import {
    METADATA
    ========================================================= */
 
-export const metadata: Metadata = {
+export const metadata:
+  Metadata = {
   title:
-    "Gian hàng điện tử | Bảo tàng Lịch sử Quốc gia",
+    "Gian hàng điện tử",
 
   description:
     "Khám phá các sản phẩm văn hóa sáng tạo được phát triển từ hiện vật, tư liệu và câu chuyện lịch sử của Bảo tàng Lịch sử Quốc gia.",
 };
 
 /* =========================================================
+   HELPERS
+   ========================================================= */
+
+function formatCount(
+  value: number,
+) {
+  return String(
+    value,
+  ).padStart(
+    2,
+    "0",
+  );
+}
+
+/* =========================================================
    HOME PAGE
    ========================================================= */
 
 export default function HomePage() {
+  /* ========================================================
+     DATA COUNTS
+     ======================================================== */
+
+  const allProducts =
+    getAllProducts();
+
+  const allHeritage =
+    getAllHeritageSources();
+
+  const allCollections =
+    getAllCollections();
+
+  const productCount =
+    allProducts.length;
+
+  const heritageCount =
+    allHeritage.length;
+
+  const collectionCount =
+    allCollections.length;
+
+  /* ========================================================
+     FEATURED CONTENT
+     ======================================================== */
+
   const featuredProducts =
-    getFeaturedProducts().slice(0, 4);
+    getFeaturedProducts().slice(
+      0,
+      4,
+    );
 
   const featuredHeritage =
-    getFeaturedHeritageSources().slice(0, 4);
+    getFeaturedHeritageSources().slice(
+      0,
+      4,
+    );
 
   const featuredCollections =
-    getFeaturedCollections().slice(0, 3);
+    getFeaturedCollections().slice(
+      0,
+      3,
+    );
 
   const featuredStories =
     getFeaturedStories()
       .filter(
-        (story) =>
-          story.status === "published",
+        (
+          story,
+        ) =>
+          story.status ===
+          "published",
       )
-      .slice(0, 3);
+      .slice(
+        0,
+        3,
+      );
 
   const featuredGifts =
-    getFeaturedGiftGroups().slice(0, 3);
+    getFeaturedGiftGroups().slice(
+      0,
+      3,
+    );
+
+  /* ========================================================
+     TRACEABILITY DEMO PRODUCT
+     ======================================================== */
 
   /*
    * Dấu Ấn Thượng Triều Nguyễn hiện là case
    * có luồng dữ liệu đầy đủ nhất:
-   * sản phẩm → nguồn di sản → câu chuyện → truy xuất.
+   *
+   * sản phẩm
+   * → nguồn di sản
+   * → câu chuyện
+   * → truy xuất
    */
+
   const traceProduct =
     getProductBySlug(
       "dau-an-thuong-trieu-nguyen",
@@ -96,7 +173,9 @@ export default function HomePage() {
         <div className="home-hero__background" />
 
         <div className="site-container home-hero__grid">
-          {/* LEFT */}
+          {/* =================================================
+              LEFT
+          ================================================== */}
 
           <div className="home-hero__content">
             <p className="home-hero__eyebrow">
@@ -106,17 +185,15 @@ export default function HomePage() {
 
             <h1 className="home-hero__title">
               Mang câu chuyện lịch sử
-              <br />
               vào những vật phẩm
-              <br />
               của hôm nay
             </h1>
 
             <p className="home-hero__description">
-              Khám phá những sản phẩm được
-              phát triển từ hiện vật, hoa văn,
-              hình tượng và câu chuyện lịch sử
-              của Bảo tàng Lịch sử Quốc gia.
+              Khám phá các sản phẩm văn hóa sáng tạo
+              được phát triển từ hiện vật, tư liệu,
+              hoa văn và câu chuyện lịch sử của
+              Bảo tàng Lịch sử Quốc gia.
             </p>
 
             <div className="home-hero__actions">
@@ -126,7 +203,9 @@ export default function HomePage() {
               >
                 Xem sản phẩm
 
-                <span aria-hidden="true">
+                <span
+                  aria-hidden="true"
+                >
                   →
                 </span>
               </Link>
@@ -135,14 +214,20 @@ export default function HomePage() {
                 href="/heritage"
                 className="home-hero__secondary"
               >
-                Khám phá nguồn cảm hứng
+                Khám phá di sản
               </Link>
             </div>
+
+            {/* ===============================================
+                META
+            ================================================ */}
 
             <div className="home-hero__meta">
               <div>
                 <strong>
-                  07
+                  {formatCount(
+                    productCount,
+                  )}
                 </strong>
 
                 <span>
@@ -152,7 +237,9 @@ export default function HomePage() {
 
               <div>
                 <strong>
-                  05
+                  {formatCount(
+                    heritageCount,
+                  )}
                 </strong>
 
                 <span>
@@ -162,7 +249,9 @@ export default function HomePage() {
 
               <div>
                 <strong>
-                  04
+                  {formatCount(
+                    collectionCount,
+                  )}
                 </strong>
 
                 <span>
@@ -172,7 +261,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* RIGHT */}
+          {/* =================================================
+              RIGHT
+          ================================================== */}
 
           <div className="home-hero__visual">
             <div className="home-hero__product-image">
@@ -181,7 +272,9 @@ export default function HomePage() {
                   src={siteAssetPath(
                     heroImage.src,
                   )}
-                  alt={heroImage.alt}
+                  alt={
+                    heroImage.alt
+                  }
                 />
               ) : (
                 <div className="home-hero__placeholder">
@@ -189,7 +282,8 @@ export default function HomePage() {
                 </div>
               )}
 
-              {heroProduct?.traceability
+              {heroProduct
+                ?.traceability
                 .enabled && (
                 <span className="home-hero__trace-badge">
                   Có hồ sơ truy xuất
@@ -204,7 +298,9 @@ export default function HomePage() {
                 </p>
 
                 <h2>
-                  {heroProduct.name}
+                  {
+                    heroProduct.name
+                  }
                 </h2>
 
                 <span>
@@ -217,7 +313,10 @@ export default function HomePage() {
                   href={`/products/${heroProduct.slug}`}
                 >
                   Xem chi tiết
-                  <span aria-hidden="true">
+
+                  <span
+                    aria-hidden="true"
+                  >
                     {" "}
                     →
                   </span>
@@ -241,7 +340,7 @@ export default function HomePage() {
 
             <div>
               <strong>
-                Có nguồn cảm hứng rõ ràng
+                Bắt đầu từ di sản
               </strong>
 
               <p>
@@ -259,7 +358,7 @@ export default function HomePage() {
 
             <div>
               <strong>
-                Di sản được chuyển hóa
+                Được chuyển hóa thành thiết kế
               </strong>
 
               <p>
@@ -277,7 +376,7 @@ export default function HomePage() {
 
             <div>
               <strong>
-                Có câu chuyện đi cùng
+                Có câu chuyện để tiếp tục khám phá
               </strong>
 
               <p>
@@ -295,7 +394,7 @@ export default function HomePage() {
 
             <div>
               <strong>
-                Kết nối dữ liệu truy xuất
+                Có thể kết nối hồ sơ truy xuất
               </strong>
 
               <p>
@@ -323,7 +422,9 @@ export default function HomePage() {
           />
 
           <ProductGrid
-            products={featuredProducts}
+            products={
+              featuredProducts
+            }
             columns={4}
             showCategory
             showTraceability
@@ -347,10 +448,16 @@ export default function HomePage() {
 
           <div className="home-heritage__grid">
             {featuredHeritage.map(
-              (heritage) => (
+              (
+                heritage,
+              ) => (
                 <HeritageCard
-                  key={heritage.id}
-                  heritage={heritage}
+                  key={
+                    heritage.id
+                  }
+                  heritage={
+                    heritage
+                  }
                   showPeriod
                   showProductCount
                 />
@@ -390,7 +497,9 @@ export default function HomePage() {
             >
               Đọc câu chuyện thiết kế
 
-              <span aria-hidden="true">
+              <span
+                aria-hidden="true"
+              >
                 →
               </span>
             </Link>
@@ -500,10 +609,16 @@ export default function HomePage() {
 
           <div className="home-collections__grid">
             {featuredCollections.map(
-              (collection) => (
+              (
+                collection,
+              ) => (
                 <CollectionCard
-                  key={collection.id}
-                  collection={collection}
+                  key={
+                    collection.id
+                  }
+                  collection={
+                    collection
+                  }
                   showProductCount
                 />
               ),
@@ -541,7 +656,10 @@ export default function HomePage() {
               className="home-gifts__all"
             >
               Xem gợi ý quà tặng
-              <span aria-hidden="true">
+
+              <span
+                aria-hidden="true"
+              >
                 {" "}
                 →
               </span>
@@ -550,9 +668,14 @@ export default function HomePage() {
 
           <div className="home-gifts__grid">
             {featuredGifts.map(
-              (gift, index) => (
+              (
+                gift,
+                index,
+              ) => (
                 <Link
-                  key={gift.id}
+                  key={
+                    gift.id
+                  }
                   href={`/gifts#${gift.slug}`}
                   className="home-gift-card"
                 >
@@ -562,7 +685,9 @@ export default function HomePage() {
                         src={siteAssetPath(
                           gift.image,
                         )}
-                        alt={gift.name}
+                        alt={
+                          gift.name
+                        }
                         loading="lazy"
                       />
                     ) : (
@@ -573,7 +698,8 @@ export default function HomePage() {
 
                     <span className="home-gift-card__number">
                       {String(
-                        index + 1,
+                        index +
+                          1,
                       ).padStart(
                         2,
                         "0",
@@ -583,16 +709,23 @@ export default function HomePage() {
 
                   <div className="home-gift-card__body">
                     <h3>
-                      {gift.name}
+                      {
+                        gift.name
+                      }
                     </h3>
 
                     <p>
-                      {gift.description}
+                      {
+                        gift.description
+                      }
                     </p>
 
                     <strong>
                       Xem gợi ý
-                      <span aria-hidden="true">
+
+                      <span
+                        aria-hidden="true"
+                      >
                         {" "}
                         →
                       </span>
@@ -621,10 +754,16 @@ export default function HomePage() {
 
           <div className="home-stories__grid">
             {featuredStories.map(
-              (story) => (
+              (
+                story,
+              ) => (
                 <StoryCard
-                  key={story.id}
-                  story={story}
+                  key={
+                    story.id
+                  }
+                  story={
+                    story
+                  }
                   showCategory
                 />
               ),
@@ -638,7 +777,8 @@ export default function HomePage() {
       ====================================================== */}
 
       {traceProduct &&
-        traceProduct.traceability
+        traceProduct
+          .traceability
           .enabled && (
           <section className="home-trace">
             <div className="site-container home-trace__grid">
@@ -667,7 +807,9 @@ export default function HomePage() {
                   >
                     Xem sản phẩm mẫu
 
-                    <span aria-hidden="true">
+                    <span
+                      aria-hidden="true"
+                    >
                       →
                     </span>
                   </Link>
@@ -694,13 +836,18 @@ export default function HomePage() {
 
                 <div className="home-trace__product">
                   <div className="home-trace__product-image">
-                    {traceProduct.images[0] ? (
+                    {traceProduct
+                      .images[0] ? (
                       <img
                         src={siteAssetPath(
-                          traceProduct.images[0].src,
+                          traceProduct
+                            .images[0]
+                            .src,
                         )}
                         alt={
-                          traceProduct.images[0].alt
+                          traceProduct
+                            .images[0]
+                            .alt
                         }
                       />
                     ) : (
@@ -716,7 +863,9 @@ export default function HomePage() {
                     </small>
 
                     <h3>
-                      {traceProduct.name}
+                      {
+                        traceProduct.name
+                      }
                     </h3>
 
                     <dl>
@@ -726,7 +875,9 @@ export default function HomePage() {
                         </dt>
 
                         <dd>
-                          {traceProduct.sku}
+                          {
+                            traceProduct.sku
+                          }
                         </dd>
                       </div>
 
@@ -754,7 +905,9 @@ export default function HomePage() {
                     </strong>
                   </div>
 
-                  <i aria-hidden="true">
+                  <i
+                    aria-hidden="true"
+                  >
                     →
                   </i>
 
@@ -768,7 +921,9 @@ export default function HomePage() {
                     </strong>
                   </div>
 
-                  <i aria-hidden="true">
+                  <i
+                    aria-hidden="true"
+                  >
                     →
                   </i>
 
@@ -819,7 +974,9 @@ export default function HomePage() {
             >
               Tìm hiểu về gian hàng
 
-              <span aria-hidden="true">
+              <span
+                aria-hidden="true"
+              >
                 →
               </span>
             </Link>
