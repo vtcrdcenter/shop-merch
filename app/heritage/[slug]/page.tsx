@@ -67,15 +67,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: HeritageDetailPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } =
+    await params;
 
   const heritage =
-    getHeritageBySlug(slug);
+    getHeritageBySlug(
+      slug,
+    );
 
   if (!heritage) {
     return {
       title:
-        "Không tìm thấy nguồn di sản | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+        "Không tìm thấy nguồn di sản",
     };
   }
 
@@ -84,7 +87,7 @@ export async function generateMetadata({
 
   return {
     title:
-      `${heritage.name} | Di sản | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia`,
+      heritage.name,
 
     description:
       heritage.shortDescription,
