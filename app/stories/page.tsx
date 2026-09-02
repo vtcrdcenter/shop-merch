@@ -11,20 +11,39 @@ import {
   getFeaturedStories,
 } from "../../data/stories";
 
+/* =========================================================
+   METADATA
+   ========================================================= */
+
 export const metadata: Metadata = {
   title:
     "Câu chuyện | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
 
   description:
-    "Khám phá câu chuyện hiện vật, nguồn cảm hứng và quá trình chuyển hóa di sản thành các sản phẩm văn hóa sáng tạo.",
+    "Khám phá câu chuyện phía sau hiện vật, nguồn cảm hứng và cách các giá trị di sản được chuyển hóa thành những sản phẩm văn hóa sáng tạo.",
 };
 
+/* =========================================================
+   CATEGORY LABELS
+   ========================================================= */
+
 const categoryLabels = {
-  heritage: "Câu chuyện di sản",
-  design: "Từ di sản đến thiết kế",
-  craft: "Quá trình thực hiện",
-  traceability: "Bảo chứng & truy xuất",
+  heritage:
+    "Câu chuyện di sản",
+
+  design:
+    "Từ di sản đến thiết kế",
+
+  craft:
+    "Quá trình thực hiện",
+
+  traceability:
+    "Truy xuất & dữ liệu",
 } as const;
+
+/* =========================================================
+   PAGE
+   ========================================================= */
 
 export default function StoriesPage() {
   const stories =
@@ -33,25 +52,29 @@ export default function StoriesPage() {
   const featuredStories =
     getFeaturedStories().filter(
       (story) =>
-        story.status === "published",
+        story.status ===
+        "published",
     );
 
   const heritageStories =
     stories.filter(
       (story) =>
-        story.category === "heritage",
+        story.category ===
+        "heritage",
     );
 
   const designStories =
     stories.filter(
       (story) =>
-        story.category === "design",
+        story.category ===
+        "design",
     );
 
   const craftStories =
     stories.filter(
       (story) =>
-        story.category === "craft",
+        story.category ===
+        "craft",
     );
 
   const traceabilityStories =
@@ -63,50 +86,70 @@ export default function StoriesPage() {
 
   const storyGroups = [
     {
-      id: "heritage",
+      id:
+        "heritage",
+
       title:
         categoryLabels.heritage,
+
       description:
-        "Các nội dung giúp người đọc hiểu rõ hơn về hiện vật, tư liệu, hình tượng và bối cảnh văn hóa được sử dụng làm nguồn phát triển sản phẩm.",
+        "Tìm hiểu hiện vật, hình tượng, tư liệu và bối cảnh văn hóa đứng phía sau các sản phẩm trong gian hàng.",
+
       stories:
         heritageStories,
     },
+
     {
-      id: "design",
+      id:
+        "design",
+
       title:
         categoryLabels.design,
+
       description:
-        "Giải thích cách một đặc điểm của di sản được lựa chọn, giản lược, tổ chức lại và chuyển hóa thành ngôn ngữ thiết kế mới.",
+        "Theo dõi cách những đặc điểm của di sản được lựa chọn, giản lược và tổ chức lại để phù hợp với một sản phẩm mới.",
+
       stories:
         designStories,
     },
+
     {
-      id: "craft",
+      id:
+        "craft",
+
       title:
         categoryLabels.craft,
+
       description:
-        "Các nội dung về quá trình hiện thực hóa thiết kế, chất liệu, kỹ thuật và những đơn vị tham gia phát triển sản phẩm.",
+        "Những nội dung về chất liệu, kỹ thuật và quá trình đưa một ý tưởng thiết kế trở thành vật phẩm thực tế.",
+
       stories:
         craftStories,
     },
+
     {
-      id: "traceability",
+      id:
+        "traceability",
+
       title:
         categoryLabels.traceability,
+
       description:
-        "Giải thích cách sản phẩm được kết nối với hồ sơ dữ liệu, thông tin bảo chứng và hệ thống truy xuất.",
+        "Tìm hiểu cách sản phẩm được kết nối với dữ liệu nguồn, hồ sơ thiết kế và thông tin truy xuất.",
+
       stories:
         traceabilityStories,
     },
   ].filter(
     (group) =>
-      group.stories.length > 0,
+      group.stories.length >
+      0,
   );
 
   return (
     <main className="stories-page">
       {/* =====================================================
-          BREADCRUMB
+          01 — BREADCRUMB
       ====================================================== */}
 
       <div className="site-container stories-page__breadcrumb">
@@ -121,7 +164,7 @@ export default function StoriesPage() {
       </div>
 
       {/* =====================================================
-          HERO
+          02 — HERO
       ====================================================== */}
 
       <section className="stories-hero">
@@ -131,61 +174,76 @@ export default function StoriesPage() {
           </p>
 
           <h1 className="stories-hero__title">
-            Phía sau mỗi sản phẩm là một nguồn văn hóa
+            Đọc câu chuyện
+            phía sau mỗi thiết kế
           </h1>
 
           <p className="stories-hero__description">
-            Tìm hiểu câu chuyện của hiện vật,
-            quá trình chuyển hóa từ di sản
-            đến thiết kế và cách những sản
-            phẩm văn hóa sáng tạo được phát
-            triển trong gian hàng.
+            Từ một chi tiết trên hiện vật
+            đến cách nó được chuyển hóa
+            thành sản phẩm – đây là nơi
+            những câu chuyện đó được kể
+            rõ hơn.
           </p>
 
           <div className="stories-hero__meta">
             <span>
-              {stories.length} bài
-              viết
+              {
+                stories.length
+              }{" "}
+              bài viết
             </span>
 
-            <span aria-hidden="true">
+            <span
+              aria-hidden="true"
+            >
               ·
             </span>
 
             <span>
-              Di sản, thiết kế và
-              truy xuất
+              Di sản · Thiết kế ·
+              Truy xuất
             </span>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          CATEGORY NAV
+          03 — CATEGORY NAV
       ====================================================== */}
 
-      {storyGroups.length > 0 && (
+      {storyGroups.length >
+        0 && (
         <section className="stories-nav">
           <div className="site-container">
             <nav
               className="stories-nav__list"
               aria-label="Chủ đề câu chuyện"
             >
-              <a
-                href="#featured"
-                className="stories-nav__item"
-              >
-                Nổi bật
-              </a>
+              {featuredStories.length >
+                0 && (
+                <a
+                  href="#featured"
+                  className="stories-nav__item"
+                >
+                  Nổi bật
+                </a>
+              )}
 
               {storyGroups.map(
-                (group) => (
+                (
+                  group,
+                ) => (
                   <a
-                    key={group.id}
+                    key={
+                      group.id
+                    }
                     href={`#${group.id}`}
                     className="stories-nav__item"
                   >
-                    {group.title}
+                    {
+                      group.title
+                    }
                   </a>
                 ),
               )}
@@ -195,27 +253,34 @@ export default function StoriesPage() {
       )}
 
       {/* =====================================================
-          FEATURED STORIES
+          04 — FEATURED STORIES
       ====================================================== */}
 
-      {featuredStories.length > 0 && (
+      {featuredStories.length >
+        0 && (
         <section
           id="featured"
           className="stories-featured"
         >
           <div className="site-container">
             <SectionHeading
-              eyebrow="NỔI BẬT"
-              title="Những câu chuyện nên bắt đầu"
-              description="Các nội dung giúp người đọc hình dung nhanh mối liên hệ giữa nguồn di sản, quá trình phát triển thiết kế và sản phẩm."
+              eyebrow="NÊN ĐỌC TRƯỚC"
+              title="Những câu chuyện nổi bật"
+              description="Bắt đầu với những nội dung giúp thấy rõ nhất mối liên hệ giữa nguồn di sản, thiết kế và sản phẩm."
             />
 
             <div className="stories-featured__grid">
               {featuredStories.map(
-                (story) => (
+                (
+                  story,
+                ) => (
                   <StoryCard
-                    key={story.id}
-                    story={story}
+                    key={
+                      story.id
+                    }
+                    story={
+                      story
+                    }
                     showCategory
                   />
                 ),
@@ -226,7 +291,7 @@ export default function StoriesPage() {
       )}
 
       {/* =====================================================
-          STORY GROUPS
+          05 — STORY GROUPS
       ====================================================== */}
 
       <section className="stories-groups">
@@ -238,8 +303,12 @@ export default function StoriesPage() {
                 groupIndex,
               ) => (
                 <section
-                  key={group.id}
-                  id={group.id}
+                  key={
+                    group.id
+                  }
+                  id={
+                    group.id
+                  }
                   className="stories-group"
                 >
                   <div className="stories-group__header">
@@ -288,7 +357,9 @@ export default function StoriesPage() {
 
                   <div className="stories-group__grid">
                     {group.stories.map(
-                      (story) => (
+                      (
+                        story,
+                      ) => (
                         <StoryCard
                           key={
                             story.id
@@ -309,38 +380,36 @@ export default function StoriesPage() {
       </section>
 
       {/* =====================================================
-          EDITORIAL PRINCIPLE
+          06 — EDITORIAL PRINCIPLE
       ====================================================== */}
 
       <section className="stories-principle">
         <div className="site-container stories-principle__grid">
           <div className="stories-principle__heading">
             <p className="stories-principle__eyebrow">
-              KHÔNG CHỈ GIỚI THIỆU SẢN PHẨM
+              ĐỌC · XEM · KHÁM PHÁ
             </p>
 
             <h2 className="stories-principle__title">
-              Tiếp tục trải nghiệm bảo tàng sau chuyến tham quan
+              Một vật phẩm có thể
+              mở ra một câu chuyện
+              dài hơn
             </h2>
           </div>
 
           <div className="stories-principle__content">
             <p>
-              Gian hàng không chỉ cung cấp
-              thông tin để lựa chọn sản phẩm.
-              Câu chuyện đi kèm giúp người
-              dùng tiếp tục tìm hiểu về hiện
-              vật và bối cảnh văn hóa sau khi
-              rời không gian trưng bày.
+              Câu chuyện giúp người xem
+              nhận ra những chi tiết văn hóa
+              phía sau hình dáng, màu sắc
+              và họa tiết của sản phẩm.
             </p>
 
             <p>
-              Khi một sản phẩm có dữ liệu
-              truy xuất, câu chuyện cũng trở
-              thành một phần trong hành trình
-              kết nối giữa vật phẩm người dùng
-              sở hữu với nguồn văn hóa đã tạo
-              nên thiết kế.
+              Từ một bài viết, người dùng
+              có thể tiếp tục khám phá
+              nguồn di sản, sản phẩm hoặc
+              hồ sơ truy xuất liên quan.
             </p>
           </div>
         </div>
