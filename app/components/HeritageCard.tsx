@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 
-import {
-  siteAssetPath,
-} from "../../lib/site-path";
+import HeritageImageSlider from "./HeritageImageSlider";
 
 import type {
   HeritageSource,
@@ -64,9 +62,6 @@ export default function HeritageCard({
   const href =
     `/heritage/${heritage.slug}`;
 
-  const primaryImage =
-    heritage.images[0];
-
   const typeLabel =
     getHeritageTypeLabel(
       heritage.type,
@@ -88,40 +83,24 @@ export default function HeritageCard({
           IMAGE
       ====================================================== */}
 
-      <Link
-        href={href}
-        className="heritage-card__image-link"
-        aria-label={`Khám phá ${heritage.name}`}
-      >
-        <div className="heritage-card__image">
-          {primaryImage ? (
-            <img
-              src={siteAssetPath(
-                primaryImage.src,
-              )}
-              alt={
-                primaryImage.alt
-              }
-              loading="lazy"
-            />
-          ) : (
-            <div
-              className="heritage-card__placeholder"
-              aria-hidden="true"
-            >
-              <span>
-                Di sản
-              </span>
-            </div>
-          )}
+      <div className="heritage-card__image">
+        <HeritageImageSlider
+          images={
+            heritage.images
+          }
+          href={href}
+          showArrows
+          showCounter
+          showDots
+          className="heritage-card__slider"
+        />
 
-          {heritage.featured && (
-            <span className="heritage-card__badge">
-              Nổi bật
-            </span>
-          )}
-        </div>
-      </Link>
+        {heritage.featured && (
+          <span className="heritage-card__badge">
+            Nổi bật
+          </span>
+        )}
+      </div>
 
       {/* =====================================================
           BODY
@@ -163,9 +142,7 @@ export default function HeritageCard({
           {showProductCount && (
             <span className="heritage-card__count">
               {productCount}{" "}
-              {productCount === 1
-                ? "sản phẩm liên quan"
-                : "sản phẩm liên quan"}
+              sản phẩm liên quan
             </span>
           )}
 
