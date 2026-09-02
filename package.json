@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vinext dev",
     "prebuild": "node scripts/patch-vinext-static-export.mjs",
-    "build": "vinext build",
+    "build": "vinext build && node scripts/fix-github-pages-output.mjs",
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
