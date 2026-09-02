@@ -1,6 +1,8 @@
 // app/collections/page.tsx
 
-import type { Metadata } from "next";
+import type {
+  Metadata,
+} from "next";
 
 import Breadcrumb from "../components/Breadcrumb";
 import CollectionCard from "../components/CollectionCard";
@@ -15,9 +17,10 @@ import {
    METADATA
    ========================================================= */
 
-export const metadata: Metadata = {
+export const metadata:
+  Metadata = {
   title:
-    "Bộ sưu tập | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+    "Bộ sưu tập",
 
   description:
     "Khám phá các bộ sưu tập sản phẩm văn hóa sáng tạo được phát triển từ những nguồn cảm hứng, hiện vật và câu chuyện lịch sử khác nhau.",
@@ -32,7 +35,26 @@ export default function CollectionsPage() {
     getAllCollections();
 
   const featuredCollections =
-    getFeaturedCollections();
+    getFeaturedCollections().slice(
+      0,
+      2,
+    );
+
+  const featuredIds =
+    new Set(
+      featuredCollections.map(
+        (collection) =>
+          collection.id,
+      ),
+    );
+
+  const remainingCollections =
+    collections.filter(
+      (collection) =>
+        !featuredIds.has(
+          collection.id,
+        ),
+    );
 
   return (
     <main className="collections-page">
@@ -68,15 +90,23 @@ export default function CollectionsPage() {
 
           <p className="collections-hero__description">
             Những thiết kế có chung
-            nguồn cảm hứng được đặt
-            cạnh nhau để tạo thành
-            những bộ sưu tập mang
-            bản sắc và câu chuyện riêng.
+            nguồn cảm hứng được đặt cạnh nhau
+            để tạo thành các bộ sưu tập
+            có bản sắc và câu chuyện riêng.
+          </p>
+
+          <p className="collections-hero__description collections-hero__description--secondary">
+            Mỗi bộ sưu tập giúp người xem
+            nhận ra cách cùng một nguồn văn hóa
+            có thể được chuyển hóa thành
+            nhiều loại sản phẩm khác nhau.
           </p>
 
           <div className="collections-hero__meta">
             <span>
-              {collections.length}{" "}
+              {
+                collections.length
+              }{" "}
               bộ sưu tập
             </span>
 
@@ -87,8 +117,8 @@ export default function CollectionsPage() {
             </span>
 
             <span>
-              Nhiều loại sản phẩm
-              trong cùng một chủ đề
+              Kết nối sản phẩm
+              theo cùng chủ đề
             </span>
           </div>
         </div>
@@ -103,9 +133,9 @@ export default function CollectionsPage() {
         <section className="collections-featured">
           <div className="site-container">
             <SectionHeading
-              eyebrow="NỔI BẬT"
-              title="Những bộ sưu tập đang được giới thiệu"
-              description="Bắt đầu với những chủ đề hiện có nhiều thiết kế và thể hiện rõ nhất mối liên hệ giữa di sản và sản phẩm."
+              eyebrow="BỘ SƯU TẬP TIÊU BIỂU"
+              title="Bắt đầu từ những mạch thiết kế chính"
+              description="Hai bộ sưu tập hiện tập hợp nhiều sản phẩm và thể hiện rõ nhất mối liên hệ giữa nguồn di sản và thiết kế."
             />
 
             <div className="collections-featured__grid">
@@ -130,36 +160,39 @@ export default function CollectionsPage() {
       )}
 
       {/* =====================================================
-          04 — ALL COLLECTIONS
+          04 — MORE COLLECTIONS
       ====================================================== */}
 
-      <section className="collections-all">
-        <div className="site-container">
-          <SectionHeading
-            eyebrow="KHÁM PHÁ"
-            title="Tất cả bộ sưu tập"
-            description="Mỗi bộ sưu tập kết nối các sản phẩm thông qua cùng một nguồn cảm hứng, hình tượng hoặc câu chuyện văn hóa."
-          />
+      {remainingCollections.length >
+        0 && (
+        <section className="collections-all">
+          <div className="site-container">
+            <SectionHeading
+              eyebrow="KHÁM PHÁ THÊM"
+              title="Những bộ sưu tập khác"
+              description="Tiếp tục khám phá các nhóm sản phẩm được phát triển từ những hình tượng, hiện vật và mạch câu chuyện khác nhau."
+            />
 
-          <div className="collections-all__grid">
-            {collections.map(
-              (
-                collection,
-              ) => (
-                <CollectionCard
-                  key={
-                    collection.id
-                  }
-                  collection={
-                    collection
-                  }
-                  showProductCount
-                />
-              ),
-            )}
+            <div className="collections-all__grid">
+              {remainingCollections.map(
+                (
+                  collection,
+                ) => (
+                  <CollectionCard
+                    key={
+                      collection.id
+                    }
+                    collection={
+                      collection
+                    }
+                    showProductCount
+                  />
+                ),
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* =====================================================
           05 — COLLECTION EXPERIENCE
@@ -180,20 +213,20 @@ export default function CollectionsPage() {
 
           <div className="collections-method__content">
             <p>
-              Một nguồn cảm hứng có
-              thể xuất hiện trên nhiều
-              loại sản phẩm khác nhau,
-              từ vật phẩm lưu niệm nhỏ
-              đến phụ kiện, mỹ phẩm
-              hay quà tặng.
+              Một nguồn cảm hứng có thể
+              xuất hiện trên nhiều loại sản phẩm,
+              từ vật phẩm lưu niệm,
+              phụ kiện cá nhân đến mỹ phẩm
+              hoặc quà tặng.
             </p>
 
             <p>
               Khi được đặt trong cùng
-              một bộ sưu tập, các thiết kế
-              giúp người xem nhận ra
-              mạch câu chuyện chung phía
-              sau những hình thức khác nhau.
+              một bộ sưu tập,
+              các thiết kế giúp người xem
+              nhận ra mạch câu chuyện chung
+              phía sau những hình thức
+              và công năng khác nhau.
             </p>
           </div>
         </div>
