@@ -65,7 +65,7 @@ export async function generateMetadata({
   if (!product) {
     return {
       title:
-        "Không tìm thấy sản phẩm | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+        "Không tìm thấy sản phẩm",
     };
   }
 
@@ -73,7 +73,8 @@ export async function generateMetadata({
     product.images[0];
 
   return {
-    title: `${product.name} | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia`,
+    title:
+      product.name,
 
     description:
       product.shortDescription,
@@ -711,6 +712,7 @@ export default async function ProductDetailPage({
 
                     <strong>
                       Xem bộ sưu tập
+
                       <span
                         aria-hidden="true"
                       >
