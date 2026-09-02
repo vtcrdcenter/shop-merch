@@ -12282,3 +12282,42 @@ img {
       flex-start;
   }
 }
+/* =========================================================
+   PRODUCT DETAIL — PRICE STATE
+   ========================================================= */
+
+.product-meta__price-pending {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.product-meta__price-pending span {
+  color: var(--muted);
+
+  font-family: var(--sans);
+
+  font-size: 9px;
+
+  line-height: 1.2;
+
+  font-weight: 600;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.product-meta__price-pending strong {
+  color: var(--wine);
+
+  font-family: var(--serif);
+
+  font-size: 21px;
+
+  line-height: 1.25;
+
+  font-weight: 500;
+}
