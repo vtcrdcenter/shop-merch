@@ -1,5 +1,3 @@
-// app/components/HeritageCard.tsx
-
 import Link from "next/link";
 
 import HeritageImageSlider from "./HeritageImageSlider";
@@ -10,17 +8,10 @@ import type {
 
 type HeritageCardProps = {
   heritage: HeritageSource;
-
   showPeriod?: boolean;
-
   showProductCount?: boolean;
-
   className?: string;
 };
-
-/* =========================================================
-   TYPE LABEL
-   ========================================================= */
 
 function getHeritageTypeLabel(
   type: HeritageSource["type"],
@@ -49,10 +40,6 @@ function getHeritageTypeLabel(
   }
 }
 
-/* =========================================================
-   COMPONENT
-   ========================================================= */
-
 export default function HeritageCard({
   heritage,
   showPeriod = true,
@@ -79,19 +66,12 @@ export default function HeritageCard({
         .filter(Boolean)
         .join(" ")}
     >
-      {/* =====================================================
-          IMAGE
-      ====================================================== */}
-
       <div className="heritage-card__image">
         <HeritageImageSlider
           images={
             heritage.images
           }
           href={href}
-          showArrows
-          showCounter
-          showDots
           className="heritage-card__slider"
         />
 
@@ -101,10 +81,6 @@ export default function HeritageCard({
           </span>
         )}
       </div>
-
-      {/* =====================================================
-          BODY
-      ====================================================== */}
 
       <div className="heritage-card__body">
         <div className="heritage-card__meta">
@@ -134,29 +110,19 @@ export default function HeritageCard({
           }
         </p>
 
-        {/* ===================================================
-            FOOTER
-        ==================================================== */}
-
         <div className="heritage-card__footer">
           {showProductCount && (
             <span className="heritage-card__count">
-              {productCount}{" "}
-              sản phẩm liên quan
+              {productCount} sản phẩm liên quan
             </span>
           )}
 
           <Link
             href={href}
             className="heritage-card__link"
-            aria-label={`Tìm hiểu ${heritage.name}`}
           >
-            Tìm hiểu thêm
-
-            <span
-              aria-hidden="true"
-            >
-              {" "}
+            Tìm hiểu thêm{" "}
+            <span aria-hidden="true">
               →
             </span>
           </Link>
