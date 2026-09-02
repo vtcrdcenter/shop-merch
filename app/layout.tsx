@@ -1,60 +1,109 @@
-import type { Metadata } from "next";
+// app/layout.tsx
+
+import type {
+  Metadata,
+} from "next";
 
 import ShopHeader from "./components/ShopHeader";
 import ShopFooter from "./components/ShopFooter";
 
-import { siteAssetPath } from "../lib/site-path";
+import {
+  siteAssetPath,
+} from "../lib/site-path";
 
 import "./globals.css";
 
+/* =========================================================
+   SITE METADATA
+   ========================================================= */
+
+const siteName =
+  "Bảo tàng Lịch sử Quốc gia";
+
 const title =
-  "Gian hàng điện tử | Bảo tàng Lịch sử Quốc gia";
+  "Gian hàng điện tử";
 
 const description =
   "Khám phá các sản phẩm văn hóa sáng tạo được phát triển từ hiện vật, tư liệu và câu chuyện lịch sử của Bảo tàng Lịch sử Quốc gia.";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
-    "https://vtcrdcenter.github.io/shop-merch/",
-  ),
+export const metadata:
+  Metadata = {
+  /**
+   * Chỉ đặt origin tại đây.
+   *
+   * Không đặt /shop-merch/
+   * vì các asset đã được
+   * siteAssetPath() thêm basePath.
+   */
+  metadataBase:
+    new URL(
+      "https://vtcrdcenter.github.io/",
+    ),
 
   title: {
-    default: title,
+    default:
+      `${title} | ${siteName}`,
+
     template:
-      "%s | Bảo tàng Lịch sử Quốc gia",
+      `%s | ${siteName}`,
   },
 
   description,
 
   icons: {
-    icon: siteAssetPath("/favicon.svg"),
+    icon:
+      siteAssetPath(
+        "/favicon.svg",
+      ),
+
     shortcut:
-      siteAssetPath("/favicon.svg"),
+      siteAssetPath(
+        "/favicon.svg",
+      ),
   },
 
   openGraph: {
-    title,
+    title:
+      `${title} | ${siteName}`,
+
     description,
-    type: "website",
+
+    type:
+      "website",
+
     images: [
-      siteAssetPath("/og.png"),
+      siteAssetPath(
+        "/og.png",
+      ),
     ],
   },
 
   twitter: {
-    card: "summary_large_image",
-    title,
+    card:
+      "summary_large_image",
+
+    title:
+      `${title} | ${siteName}`,
+
     description,
+
     images: [
-      siteAssetPath("/og.png"),
+      siteAssetPath(
+        "/og.png",
+      ),
     ],
   },
 };
 
+/* =========================================================
+   ROOT LAYOUT
+   ========================================================= */
+
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children:
+    React.ReactNode;
 }>) {
   return (
     <html lang="vi">
