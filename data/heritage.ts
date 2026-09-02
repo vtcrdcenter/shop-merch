@@ -19,9 +19,6 @@ export type HeritageSource = {
 
   shortName: string;
 
-  /**
-   * Nhóm nguồn di sản hiển thị trên website.
-   */
   type:
     | "artifact"
     | "costume"
@@ -38,17 +35,10 @@ export type HeritageSource = {
 
   description: string;
 
-  /** Ghi chú biên tập để người xem hiểu phạm vi tư liệu và mức xác minh. */
   documentationNote: string;
 
-  /**
-   * Các yếu tố được sử dụng trong thiết kế.
-   */
   designElements: string[];
 
-  /**
-   * Slug sản phẩm liên quan.
-   */
   productSlugs: string[];
 
   images: HeritageImage[];
@@ -62,7 +52,7 @@ export type HeritageSource = {
 
 export const heritageSources: HeritageSource[] = [
   // =========================================================
-  // MŨ THƯỢNG TRIỀU
+  // 01 — MŨ THƯỢNG TRIỀU THỜI NGUYỄN
   // =========================================================
 
   {
@@ -78,16 +68,17 @@ export const heritageSources: HeritageSource[] = [
 
     period: "Thế kỷ XIX–XX",
 
-    managingInstitution: "Bảo tàng Lịch sử Quốc gia",
+    managingInstitution:
+      "Bảo tàng Lịch sử Quốc gia",
 
     shortDescription:
       "Nguồn tạo hình cho sản phẩm Dấu Ấn Thượng Triều Nguyễn.",
 
     description:
-      "Mũ thượng triều thời Nguyễn được sử dụng làm nguồn tạo hình chính cho sản phẩm Dấu Ấn Thượng Triều Nguyễn. Hồ sơ thiết kế xác định các dấu hiệu nhận diện được khai thác gồm cánh chuồn, trục đối xứng, rồng, mây, mặt trời và hệ hạt trang trí.",
+      "Mũ thượng triều thời Nguyễn được sử dụng làm nguồn tạo hình chính cho sản phẩm Dấu Ấn Thượng Triều Nguyễn. Trong quá trình phát triển thiết kế, các đặc điểm nhận diện như cánh chuồn, trục đối xứng, hình tượng rồng, mây, mặt trời và hệ hạt trang trí được lựa chọn để chuyển hóa sang cấu trúc của sản phẩm mới.",
 
     documentationNote:
-      "Hồ sơ hiện ghi nhận tên gọi, niên đại tương đối, đơn vị quản lý và các chi tiết tạo hình được sử dụng. Ảnh tư liệu và mô tả kiểm kê cần được đối chiếu lại trước khi xuất bản chính thức.",
+      "Hình ảnh được sử dụng để giới thiệu và đối chiếu nguồn di sản với phương án thiết kế. Thông tin kiểm kê, niên đại và phạm vi sử dụng hình ảnh cần được tiếp tục chuẩn hóa theo hồ sơ chính thức.",
 
     designElements: [
       "Cánh chuồn",
@@ -104,8 +95,12 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/product-magnet-lifestyle.jpg",
-        alt: "Mũ thượng triều thời Nguyễn",
+        src: "/heritage/mu-thuong-trieu-nguyen-1.png",
+        alt: "Mũ thượng triều thời Nguyễn – tư liệu nguồn 1",
+      },
+      {
+        src: "/heritage/mu-thuong-trieu-nguyen-2.png",
+        alt: "Mũ thượng triều thời Nguyễn – tư liệu nguồn 2",
       },
     ],
 
@@ -117,7 +112,7 @@ export const heritageSources: HeritageSource[] = [
   },
 
   // =========================================================
-  // ẤN SẮC MỆNH CHI BẢO
+  // 02 — ẤN SẮC MỆNH CHI BẢO
   // =========================================================
 
   {
@@ -139,10 +134,10 @@ export const heritageSources: HeritageSource[] = [
       "Bảo ấn được sử dụng làm nguồn cảm hứng cho Keycap, son và bánh đậu xanh.",
 
     description:
-      "Ấn “Sắc mệnh chi bảo” là nguồn di sản được sử dụng trong nhiều phương án thiết kế. Hình tượng rồng, mặt triện và chức năng đóng dấu được khai thác ở các mức độ khác nhau tùy theo công năng sản phẩm.",
+      "Ấn “Sắc mệnh chi bảo” là một trong những nguồn di sản được khai thác xuyên suốt trong hệ sản phẩm. Hình khối bảo ấn, hình tượng rồng, mặt triện và đặc trưng của thao tác đóng dấu được lựa chọn và chuyển hóa ở những mức độ khác nhau tùy theo công năng của từng sản phẩm.",
 
     documentationNote:
-      "Mốc Minh Mệnh thứ 8 (1827) được dùng làm dữ liệu diễn giải trong bản demo. Thông tin hiện vật gốc, nơi lưu giữ và quyền sử dụng hình ảnh cần được cơ quan chuyên môn xác nhận.",
+      "Hình ảnh trên trang được sử dụng làm tư liệu tham chiếu trong quá trình phát triển thiết kế. Thông tin hiện vật, nơi lưu giữ và quyền sử dụng hình ảnh cần được đối chiếu trong hồ sơ chính thức.",
 
     designElements: [
       "Hình tượng rồng",
@@ -159,8 +154,12 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/product-keycap-lifestyle.jpg",
-        alt: "Ấn Sắc mệnh chi bảo",
+        src: "/heritage/sac-menh-chi-bao-1.png",
+        alt: "Ấn Sắc mệnh chi bảo – tư liệu nguồn 1",
+      },
+      {
+        src: "/heritage/sac-menh-chi-bao-2.png",
+        alt: "Ấn Sắc mệnh chi bảo – tư liệu nguồn 2",
       },
     ],
 
@@ -172,7 +171,7 @@ export const heritageSources: HeritageSource[] = [
   },
 
   // =========================================================
-  // PHƯỢNG BÀO
+  // 03 — PHƯỢNG BÀO TRIỀU NGUYỄN
   // =========================================================
 
   {
@@ -191,20 +190,20 @@ export const heritageSources: HeritageSource[] = [
     managingInstitution: null,
 
     shortDescription:
-      "Nguồn hình tượng và hệ màu cho Phượng Sắc Kính và Phượng Sắc Triều Y.",
+      "Nguồn hình tượng, họa tiết và hệ màu cho các thiết kế thuộc dòng Phượng Sắc.",
 
     description:
-      "Phượng bào và hệ họa tiết trên triều phục Hoàng hậu được sử dụng làm nguồn tham chiếu cho các sản phẩm thuộc hướng thiết kế Phượng Sắc. Các yếu tố chính gồm hình tượng phượng, mây ngũ sắc, hệ màu đỏ – vàng và một số mô-típ trang trí cung đình.",
+      "Phượng bào của Hoàng hậu triều Nguyễn được sử dụng làm nguồn tham chiếu cho hướng thiết kế Phượng Sắc. Các yếu tố được nghiên cứu gồm hình tượng phượng, hệ họa tiết trang trí cung đình, mây ngũ sắc, bố cục triều phục và hệ màu đặc trưng. Những yếu tố này được chọn lọc và tổ chức lại để phù hợp với công năng của sản phẩm đương đại.",
 
     documentationNote:
-      "Nguồn đang ở trạng thái cần thẩm định. Tên gọi, niên đại, chủ thể sử dụng và từng mô-típ phải được gắn với hồ sơ hiện vật cụ thể trước khi dùng cho truyền thông thương mại.",
+      "Nguồn đang được tiếp tục chuẩn hóa theo hồ sơ hiện vật. Tên gọi, niên đại, chủ thể sử dụng và từng mô-típ được khai thác cần được đối chiếu với tư liệu chuyên môn trước khi xuất bản chính thức.",
 
     designElements: [
       "Hình tượng phượng",
       "Mây ngũ sắc",
       "Hệ màu đỏ – vàng",
-      "Mây",
-      "Thủy ba ở mức tham chiếu",
+      "Bố cục triều phục",
+      "Họa tiết cung đình",
     ],
 
     productSlugs: [
@@ -214,8 +213,12 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/product-lipstick.jpg",
-        alt: "Phượng bào triều Nguyễn",
+        src: "/heritage/phuong-bao-nguyen-1.jpg",
+        alt: "Phượng bào triều Nguyễn – tư liệu nguồn 1",
+      },
+      {
+        src: "/heritage/phuong-bao-nguyen-2.jpg",
+        alt: "Phượng bào triều Nguyễn – tư liệu nguồn 2",
       },
     ],
 
@@ -227,7 +230,7 @@ export const heritageSources: HeritageSource[] = [
   },
 
   // =========================================================
-  // VĂN HÓA ÓC EO
+  // 04 — VĂN HÓA ÓC EO
   // =========================================================
 
   {
@@ -235,7 +238,8 @@ export const heritageSources: HeritageSource[] = [
 
     slug: "van-hoa-oc-eo",
 
-    name: "Trang sức và hình khối khảo cổ Óc Eo",
+    name:
+      "Trang sức và hình khối khảo cổ Óc Eo",
 
     shortName: "Văn hóa Óc Eo",
 
@@ -246,13 +250,13 @@ export const heritageSources: HeritageSource[] = [
     managingInstitution: null,
 
     shortDescription:
-      "Nguồn hình khối cho hệ Charm Óc Eo.",
+      "Hệ hiện vật khảo cổ được sử dụng làm nguồn hình khối cho Charm Óc Eo.",
 
     description:
-      "Nhóm tư liệu khảo cổ Óc Eo được sử dụng để xây dựng hệ charm dạng module. Phương án không lấy một hiện vật duy nhất mà khai thác nhiều dạng hạt, hình học và cấu trúc trang sức để phát triển thành sản phẩm có thể phối ghép.",
+      "Nhóm tư liệu khảo cổ Óc Eo được sử dụng để nghiên cứu và phát triển hệ Charm Óc Eo. Phương án không sao chép một hiện vật duy nhất mà khảo sát nhiều dạng hạt, cấu trúc trang sức, hình học và bề mặt vật liệu khác nhau để hình thành hệ charm có khả năng phối ghép.",
 
     documentationNote:
-      "Đây là nhóm tham chiếu gồm nhiều hiện vật, không đại diện cho một sưu tập đơn lẻ. Mỗi mẫu charm cần có bảng đối chiếu riêng về địa điểm, chất liệu, niên đại và hồ sơ công bố.",
+      "Đây là nhóm tham chiếu gồm nhiều hiện vật khác nhau. Mỗi mẫu charm cần có bảng đối chiếu riêng về nguồn, địa điểm phát hiện, chất liệu, niên đại và tài liệu công bố trước khi hoàn thiện hồ sơ.",
 
     designElements: [
       "Hoa sen",
@@ -269,8 +273,28 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/product-bracelet-fixed.jpg",
-        alt: "Trang sức và hình khối khảo cổ Óc Eo",
+        src: "/heritage/oc-eo-trang-suc-1.jpg",
+        alt: "Trang sức và hình khối khảo cổ Óc Eo – tư liệu 1",
+      },
+      {
+        src: "/heritage/oc-eo-trang-suc-2.jpg",
+        alt: "Trang sức và hình khối khảo cổ Óc Eo – tư liệu 2",
+      },
+      {
+        src: "/heritage/oc-eo-trang-suc-3.jpg",
+        alt: "Trang sức và hình khối khảo cổ Óc Eo – tư liệu 3",
+      },
+      {
+        src: "/heritage/oc-eo-trang-suc-4.jpg",
+        alt: "Trang sức và hình khối khảo cổ Óc Eo – tư liệu 4",
+      },
+      {
+        src: "/heritage/oc-eo-trang-suc-5.jpg",
+        alt: "Trang sức và hình khối khảo cổ Óc Eo – tư liệu 5",
+      },
+      {
+        src: "/heritage/oc-eo-trang-suc-6.jpg",
+        alt: "Trang sức và hình khối khảo cổ Óc Eo – tư liệu 6",
       },
     ],
 
@@ -282,7 +306,7 @@ export const heritageSources: HeritageSource[] = [
   },
 
   // =========================================================
-  // LỌ NGỌC THỜI NGUYỄN
+  // 05 — LỌ NGỌC THỜI NGUYỄN
   // =========================================================
 
   {
@@ -301,18 +325,19 @@ export const heritageSources: HeritageSource[] = [
     managingInstitution: null,
 
     shortDescription:
-      "Nguồn tạo hình chính cho sản phẩm Sắc Mệnh Ngọc Son.",
+      "Nguồn tạo hình tham chiếu cho sản phẩm Sắc Mệnh Ngọc Son.",
 
     description:
-      "Hình dáng lọ ngọc thời Nguyễn được sử dụng làm nguồn tạo hình chính cho vỏ son Sắc Mệnh Ngọc Son. Các đặc điểm được khai thác gồm thân đứng, đế vuông, quai cong và cảm giác vật liệu ngọc sáng.",
+      "Hình dáng lọ ngọc thời Nguyễn được sử dụng làm nguồn tham chiếu trong quá trình phát triển hình khối vỏ son Sắc Mệnh Ngọc Son. Phương án nghiên cứu tỷ lệ thân lọ, cấu trúc phần đế, quai cong và cảm giác của vật liệu ngọc để chuyển hóa sang hình thức bao bì và vỏ son.",
 
     documentationNote:
-      "Tên gọi “lọ ngọc thời Nguyễn” hiện được dùng ở mức tham chiếu thiết kế. Bản chính thức cần bổ sung số kiểm kê, kích thước, chất liệu, niên đại và nguồn ảnh đã được cấp phép.",
+      "Tên gọi “lọ ngọc thời Nguyễn” hiện được sử dụng ở mức tham chiếu thiết kế. Hồ sơ chính thức cần tiếp tục bổ sung số kiểm kê, kích thước, chất liệu, niên đại và nguồn ảnh.",
 
     designElements: [
       "Thân lọ",
-      "Đế vuông",
+      "Phần đế",
       "Quai cong",
+      "Hình khối đứng",
       "Sắc ngọc sáng",
     ],
 
@@ -322,8 +347,8 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/product-vase.jpg",
-        alt: "Lọ ngọc thời Nguyễn",
+        src: "/heritage/lo-ngoc-nguyen.png",
+        alt: "Lọ ngọc thời Nguyễn – tư liệu tham chiếu",
       },
     ],
 
@@ -347,15 +372,21 @@ export function getAllHeritageSources(): HeritageSource[] {
 
 export function getFeaturedHeritageSources(): HeritageSource[] {
   return heritageSources
-    .filter((item) => item.featured)
-    .sort((a, b) => a.order - b.order);
+    .filter(
+      (item) => item.featured,
+    )
+    .sort(
+      (a, b) =>
+        a.order - b.order,
+    );
 }
 
 export function getHeritageBySlug(
   slug: string,
 ): HeritageSource | undefined {
   return heritageSources.find(
-    (item) => item.slug === slug,
+    (item) =>
+      item.slug === slug,
   );
 }
 
@@ -364,7 +395,12 @@ export function getHeritageByProductSlug(
 ): HeritageSource[] {
   return heritageSources
     .filter((item) =>
-      item.productSlugs.includes(productSlug),
+      item.productSlugs.includes(
+        productSlug,
+      ),
     )
-    .sort((a, b) => a.order - b.order);
+    .sort(
+      (a, b) =>
+        a.order - b.order,
+    );
 }
