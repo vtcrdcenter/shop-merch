@@ -2,8 +2,14 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { siteAssetPath } from "../../../lib/site-path";
+
+import {
+  notFound,
+} from "next/navigation";
+
+import {
+  siteAssetPath,
+} from "../../../lib/site-path";
 
 import Breadcrumb from "../../components/Breadcrumb";
 import ProductGrid from "../../components/ProductGrid";
@@ -30,11 +36,22 @@ type StoryDetailPageProps = {
   }>;
 };
 
+/* =========================================================
+   CATEGORY LABELS
+   ========================================================= */
+
 const categoryLabels = {
-  heritage: "Câu chuyện di sản",
-  design: "Từ di sản đến thiết kế",
-  craft: "Quá trình thực hiện",
-  traceability: "Bảo chứng & truy xuất",
+  heritage:
+    "Câu chuyện di sản",
+
+  design:
+    "Từ di sản đến thiết kế",
+
+  craft:
+    "Quá trình thực hiện",
+
+  traceability:
+    "Truy xuất & dữ liệu",
 } as const;
 
 /* =========================================================
@@ -43,8 +60,11 @@ const categoryLabels = {
 
 export async function generateStaticParams() {
   return getPublishedStories().map(
-    (story) => ({
-      slug: story.slug,
+    (
+      story,
+    ) => ({
+      slug:
+        story.slug,
     }),
   );
 }
@@ -56,14 +76,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: StoryDetailPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } =
+    await params;
 
   const story =
-    getStoryBySlug(slug);
+    getStoryBySlug(
+      slug,
+    );
 
   if (
     !story ||
-    story.status !== "published"
+    story.status !==
+      "published"
   ) {
     return {
       title:
@@ -71,31 +95,40 @@ export async function generateMetadata({
     };
   }
 
+  const primaryImage =
+    story.images[0];
+
   return {
-    title: `${story.title} | Câu chuyện | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia`,
+    title:
+      `${story.title} | Câu chuyện | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia`,
 
     description:
       story.excerpt,
 
     openGraph: {
-      title: story.title,
+      title:
+        story.title,
 
       description:
         story.excerpt,
 
-      type: "article",
+      type:
+        "article",
 
-      images: story.image
-        ? [
-            {
-              url:
-                story.image,
+      images:
+        primaryImage
+          ? [
+              {
+                url:
+                  siteAssetPath(
+                    primaryImage.src,
+                  ),
 
-              alt:
-                story.title,
-            },
-          ]
-        : undefined,
+                alt:
+                  primaryImage.alt,
+              },
+            ]
+          : undefined,
     },
   };
 }
@@ -107,24 +140,38 @@ export async function generateMetadata({
 export default async function StoryDetailPage({
   params,
 }: StoryDetailPageProps) {
-  const { slug } = await params;
+  const { slug } =
+    await params;
 
   const story =
-    getStoryBySlug(slug);
+    getStoryBySlug(
+      slug,
+    );
 
   if (
     !story ||
-    story.status !== "published"
+    story.status !==
+      "published"
   ) {
     notFound();
   }
 
+  const primaryImage =
+    story.images[0];
+
+  /* ========================================================
+     RELATED PRODUCTS
+     ======================================================== */
+
   const products =
     story.productSlugs
-      .map((productSlug) =>
-        getProductBySlug(
+      .map(
+        (
           productSlug,
-        ),
+        ) =>
+          getProductBySlug(
+            productSlug,
+          ),
       )
       .filter(
         (
@@ -133,15 +180,25 @@ export default async function StoryDetailPage({
           ReturnType<
             typeof getProductBySlug
           >
-        > => Boolean(product),
+        > =>
+          Boolean(
+            product,
+          ),
       );
+
+  /* ========================================================
+     RELATED HERITAGE
+     ======================================================== */
 
   const heritageSources =
     story.heritageSlugs
-      .map((heritageSlug) =>
-        getHeritageBySlug(
+      .map(
+        (
           heritageSlug,
-        ),
+        ) =>
+          getHeritageBySlug(
+            heritageSlug,
+          ),
       )
       .filter(
         (
@@ -150,66 +207,101 @@ export default async function StoryDetailPage({
           ReturnType<
             typeof getHeritageBySlug
           >
-        > => Boolean(heritage),
+        > =>
+          Boolean(
+            heritage,
+          ),
       );
+
+  /* ========================================================
+     RELATED STORIES
+     ======================================================== */
 
   const relatedStories =
     getPublishedStories()
       .filter(
-        (item) =>
+        (
+          item,
+        ) =>
           item.slug !==
           story.slug,
       )
-      .map((item) => {
-        let score = 0;
+      .map(
+        (
+          item,
+        ) => {
+          let score = 0;
 
-        if (
-          item.category ===
-          story.category
-        ) {
-          score += 3;
-        }
+          if (
+            item.category ===
+            story.category
+          ) {
+            score += 3;
+          }
 
-        const sharedProduct =
-          item.productSlugs.some(
-            (productSlug) =>
-              story.productSlugs.includes(
+          const sharedProduct =
+            item.productSlugs.some(
+              (
                 productSlug,
-              ),
-          );
+              ) =>
+                story.productSlugs.includes(
+                  productSlug,
+                ),
+            );
 
-        if (sharedProduct) {
-          score += 4;
-        }
+          if (
+            sharedProduct
+          ) {
+            score += 4;
+          }
 
-        const sharedHeritage =
-          item.heritageSlugs.some(
-            (heritageSlug) =>
-              story.heritageSlugs.includes(
+          const sharedHeritage =
+            item.heritageSlugs.some(
+              (
                 heritageSlug,
-              ),
-          );
+              ) =>
+                story.heritageSlugs.includes(
+                  heritageSlug,
+                ),
+            );
 
-        if (sharedHeritage) {
-          score += 5;
-        }
+          if (
+            sharedHeritage
+          ) {
+            score += 5;
+          }
 
-        return {
-          story: item,
-          score,
-        };
-      })
+          return {
+            story:
+              item,
+
+            score,
+          };
+        },
+      )
       .filter(
-        (item) =>
-          item.score > 0,
+        (
+          item,
+        ) =>
+          item.score >
+          0,
       )
       .sort(
-        (a, b) =>
-          b.score - a.score,
+        (
+          a,
+          b,
+        ) =>
+          b.score -
+          a.score,
       )
-      .slice(0, 3)
+      .slice(
+        0,
+        3,
+      )
       .map(
-        (item) =>
+        (
+          item,
+        ) =>
           item.story,
       );
 
@@ -218,10 +310,20 @@ export default async function StoryDetailPage({
       story.category
     ];
 
+  const traceableProduct =
+    products.find(
+      (
+        product,
+      ) =>
+        product
+          .traceability
+          .enabled,
+    );
+
   return (
     <main className="story-detail-page">
       {/* =====================================================
-          BREADCRUMB
+          01 — BREADCRUMB
       ====================================================== */}
 
       <div className="site-container story-detail-page__breadcrumb">
@@ -230,6 +332,7 @@ export default async function StoryDetailPage({
             {
               label:
                 "Câu chuyện",
+
               href:
                 "/stories",
             },
@@ -237,11 +340,14 @@ export default async function StoryDetailPage({
             {
               label:
                 categoryLabel,
-              href: `/stories#${story.category}`,
+
+              href:
+                `/stories#${story.category}`,
             },
 
             {
               label:
+                story.shortTitle ||
                 story.title,
             },
           ]}
@@ -249,52 +355,65 @@ export default async function StoryDetailPage({
       </div>
 
       {/* =====================================================
-          STORY HERO
+          02 — STORY HERO
       ====================================================== */}
 
       <header className="story-detail-hero">
         <div className="site-container story-detail-hero__content">
           <p className="story-detail-hero__category">
-            {categoryLabel}
+            {
+              categoryLabel
+            }
           </p>
 
           {story.eyebrow && (
             <p className="story-detail-hero__eyebrow">
-              {story.eyebrow}
+              {
+                story.eyebrow
+              }
             </p>
           )}
 
           <h1 className="story-detail-hero__title">
-            {story.title}
+            {
+              story.title
+            }
           </h1>
 
           <p className="story-detail-hero__lead">
-            {story.excerpt}
+            {
+              story.excerpt
+            }
           </p>
         </div>
       </header>
 
       {/* =====================================================
-          HERO IMAGE
+          03 — HERO IMAGE
       ====================================================== */}
 
       <div className="site-container">
         <div className="story-detail-image">
-          {story.image ? (
+          {primaryImage ? (
             <img
-              src={siteAssetPath(story.image)}
-              alt={story.title}
+              src={siteAssetPath(
+                primaryImage.src,
+              )}
+              alt={
+                primaryImage.alt
+              }
             />
           ) : (
             <div className="story-detail-image__placeholder">
-              Hình ảnh câu chuyện đang được cập nhật
+              Hình ảnh câu chuyện
+              đang được cập nhật
             </div>
           )}
         </div>
       </div>
 
       {/* =====================================================
-          STORY INTRODUCTION
+          04 — STORY CONTENT
       ====================================================== */}
 
       <section className="story-detail-intro">
@@ -305,56 +424,24 @@ export default async function StoryDetailPage({
             </p>
 
             <span>
-              {categoryLabel}
+              {
+                categoryLabel
+              }
             </span>
           </aside>
 
           <div className="story-detail-intro__content">
             <p className="story-detail-intro__lead">
-              {story.excerpt}
+              {
+                story.introduction
+              }
             </p>
-
-            {heritageSources.length >
-              0 && (
-              <p>
-                Nội dung này được
-                kết nối với{" "}
-                {heritageSources
-                  .map(
-                    (heritage) =>
-                      heritage.shortName,
-                  )
-                  .join(", ")}
-                , là nguồn văn hóa
-                được sử dụng trong
-                quá trình phát triển
-                các thiết kế liên
-                quan.
-              </p>
-            )}
-
-            {products.length >
-              0 && (
-              <p>
-                Câu chuyện hiện
-                được liên kết với{" "}
-                {products.length}{" "}
-                sản phẩm trong gian
-                hàng. Người đọc có
-                thể tiếp tục từ nội
-                dung này sang hồ sơ
-                từng sản phẩm để xem
-                cách nguồn cảm hứng
-                được chuyển hóa thành
-                vật phẩm cụ thể.
-              </p>
-            )}
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          HERITAGE SOURCES
+          05 — HERITAGE SOURCES
       ====================================================== */}
 
       {heritageSources.length >
@@ -362,16 +449,18 @@ export default async function StoryDetailPage({
         <section className="story-detail-heritage">
           <div className="site-container">
             <SectionHeading
-              eyebrow="NGUỒN DI SẢN"
-              title="Nguồn văn hóa liên quan"
-              description="Khám phá trực tiếp các nguồn di sản được liên kết với câu chuyện này."
-              actionLabel="Xem tất cả Di sản"
+              eyebrow="NGUỒN CẢM HỨNG"
+              title="Những nguồn văn hóa liên quan"
+              description="Khám phá các hiện vật, hình tượng và tư liệu được liên kết trực tiếp với câu chuyện này."
+              actionLabel="Xem tất cả nguồn di sản"
               actionHref="/heritage"
             />
 
             <div className="story-detail-heritage__grid">
               {heritageSources.map(
-                (heritage) => (
+                (
+                  heritage,
+                ) => (
                   <HeritageCard
                     key={
                       heritage.id
@@ -390,62 +479,25 @@ export default async function StoryDetailPage({
       )}
 
       {/* =====================================================
-          RELATIONSHIP
+          06 — RELATED PRODUCTS
       ====================================================== */}
 
-      <section className="story-detail-relationship">
-        <div className="site-container story-detail-relationship__grid">
-          <div className="story-detail-relationship__heading">
-            <p className="story-detail-relationship__eyebrow">
-              MỐI LIÊN HỆ
-            </p>
-
-            <h2 className="story-detail-relationship__title">
-              Từ câu chuyện đến sản phẩm
-            </h2>
-          </div>
-
-          <div className="story-detail-relationship__content">
-            <p>
-              Một sản phẩm văn hóa
-              sáng tạo không chỉ sử
-              dụng hình ảnh của di
-              sản như một yếu tố
-              trang trí. Nguồn văn
-              hóa còn tạo nên bối
-              cảnh và câu chuyện cho
-              thiết kế.
-            </p>
-
-            <p>
-              Vì vậy, gian hàng tổ
-              chức riêng lớp nội dung
-              Câu chuyện để người
-              dùng có thể tìm hiểu
-              sâu hơn trước hoặc sau
-              khi tiếp cận sản phẩm.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          RELATED PRODUCTS
-      ====================================================== */}
-
-      {products.length > 0 && (
+      {products.length >
+        0 && (
         <section className="story-detail-products">
           <div className="site-container">
             <SectionHeading
               eyebrow="SẢN PHẨM LIÊN QUAN"
               title="Khám phá câu chuyện qua sản phẩm"
-              description="Những thiết kế hiện được kết nối với nội dung này trong gian hàng."
+              description="Những thiết kế hiện được liên kết trực tiếp với câu chuyện này trong gian hàng."
               actionLabel="Xem tất cả sản phẩm"
               actionHref="/products"
             />
 
             <ProductGrid
-              products={products}
+              products={
+                products
+              }
               columns={3}
               showCategory
               showTraceability
@@ -455,14 +507,10 @@ export default async function StoryDetailPage({
       )}
 
       {/* =====================================================
-          TRACEABILITY LINK
+          07 — TRACEABILITY
       ====================================================== */}
 
-      {products.some(
-        (product) =>
-          product.traceability
-            .enabled,
-      ) && (
+      {traceableProduct && (
         <section className="story-detail-trace">
           <div className="site-container story-detail-trace__inner">
             <div className="story-detail-trace__content">
@@ -471,63 +519,50 @@ export default async function StoryDetailPage({
               </p>
 
               <h2>
-                Từ câu chuyện đến hồ sơ sản phẩm
+                Từ câu chuyện
+                đến hồ sơ sản phẩm
               </h2>
 
               <p>
-                Một hoặc nhiều sản
-                phẩm trong câu chuyện
-                này hỗ trợ truy xuất
-                dữ liệu. Khi sở hữu
-                sản phẩm, người dùng
-                có thể tiếp tục kiểm
-                tra hồ sơ tương ứng.
+                Sản phẩm liên quan
+                đến câu chuyện này
+                có hỗ trợ truy xuất.
+                Người dùng có thể
+                tiếp tục kiểm tra
+                thông tin được công bố
+                trong hồ sơ sản phẩm.
               </p>
             </div>
 
-            {products
-              .filter(
-                (product) =>
-                  product
-                    .traceability
-                    .enabled,
-              )
-              .slice(0, 1)
-              .map(
-                (product) => (
-                  <Link
-                    key={
-                      product.id
-                    }
-                    href={`/products/${product.slug}`}
-                    className="story-detail-trace__link"
-                  >
-                    Xem sản phẩm hỗ
-                    trợ truy xuất
-                    <span
-                      aria-hidden="true"
-                    >
-                      {" "}
-                      →
-                    </span>
-                  </Link>
-                ),
-              )}
+            <Link
+              href={`/products/${traceableProduct.slug}`}
+              className="story-detail-trace__link"
+            >
+              Xem sản phẩm có truy xuất
+
+              <span
+                aria-hidden="true"
+              >
+                {" "}
+                →
+              </span>
+            </Link>
           </div>
         </section>
       )}
 
       {/* =====================================================
-          RELATED STORIES
+          08 — RELATED STORIES
       ====================================================== */}
 
-      {relatedStories.length > 0 && (
+      {relatedStories.length >
+        0 && (
         <section className="story-detail-related">
           <div className="site-container">
             <SectionHeading
               eyebrow="ĐỌC TIẾP"
               title="Câu chuyện liên quan"
-              description="Tiếp tục khám phá các nội dung có chung nguồn di sản, sản phẩm hoặc chủ đề."
+              description="Tiếp tục khám phá những nội dung có chung nguồn cảm hứng, sản phẩm hoặc chủ đề."
               actionLabel="Tất cả câu chuyện"
               actionHref="/stories"
             />
@@ -554,7 +589,7 @@ export default async function StoryDetailPage({
       )}
 
       {/* =====================================================
-          BACK
+          09 — BACK
       ====================================================== */}
 
       <section className="story-detail-back">
@@ -565,7 +600,8 @@ export default async function StoryDetailPage({
             </p>
 
             <h2>
-              Những câu chuyện khác từ gian hàng
+              Những câu chuyện khác
+              từ gian hàng
             </h2>
           </div>
 
@@ -574,7 +610,10 @@ export default async function StoryDetailPage({
             className="story-detail-back__link"
           >
             Tất cả câu chuyện
-            <span aria-hidden="true">
+
+            <span
+              aria-hidden="true"
+            >
               {" "}
               →
             </span>
