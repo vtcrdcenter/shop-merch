@@ -3,6 +3,7 @@
 import {
   access,
   mkdir,
+  readdir,
   rename,
   rm,
 } from "node:fs/promises";
@@ -99,11 +100,20 @@ const hasRootNext =
     rootNextDir,
   );
 
+const hasNestedIndex =
+  await exists(
+    path.join(
+      nestedBaseDir,
+      "index.html",
+    ),
+  );
+
 /* =========================================================
    SAFETY
    ========================================================= */
 
 if (
+  !hasNestedIndex &&
   hasNestedNext &&
   hasRootNext
 ) {
@@ -116,7 +126,28 @@ if (
    FIX VINEXT OUTPUT
    ========================================================= */
 
-if (
+if (hasNestedIndex) {
+  /*
+   * Vinext beta.9 emits the complete static site below basePath. GitHub
+   * Pages serves dist/client as the repository root, so flatten that folder.
+   */
+  if (hasRootNext) {
+    await rm(rootNextDir, { recursive: true, force: true });
+  }
+
+  for (const entry of await readdir(nestedBaseDir)) {
+    await rename(
+      path.join(nestedBaseDir, entry),
+      path.join(clientDir, entry),
+    );
+  }
+
+  await rm(nestedBaseDir, { recursive: true, force: true });
+
+  console.log(
+    "Flattened Vinext basePath output for GitHub Pages.",
+  );
+} else if (
   hasNestedNext
 ) {
   await mkdir(

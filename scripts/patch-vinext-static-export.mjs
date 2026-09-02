@@ -20,24 +20,33 @@ const replacements = [
 ];
 
 let source = await readFile(target, "utf8");
-let changed = false;
 
-for (const [original, patched] of replacements) {
-  if (source.includes(patched)) {
-    continue;
+/* Vinext beta.9+ natively includes basePath when prerendering. */
+if (
+  source.includes("const requestPath = config.basePath") &&
+  source.includes("new Request(`http://localhost${requestPath}`")
+) {
+  console.log("Vinext already handles static-export basePath.");
+} else {
+  let changed = false;
+
+  for (const [original, patched] of replacements) {
+    if (source.includes(patched)) {
+      continue;
+    }
+
+    if (!source.includes(original)) {
+      throw new Error(
+        "Unsupported vinext prerender implementation; refusing to apply an unsafe patch.",
+      );
+    }
+
+    source = source.replace(original, patched);
+    changed = true;
   }
 
-  if (!source.includes(original)) {
-    throw new Error(
-      "Unsupported vinext prerender implementation; refusing to apply an unsafe patch.",
-    );
+  if (changed) {
+    await writeFile(target, source);
+    console.log("Applied vinext static-export basePath patch.");
   }
-
-  source = source.replace(original, patched);
-  changed = true;
-}
-
-if (changed) {
-  await writeFile(target, source);
-  console.log("Applied vinext static-export basePath patch.");
 }
