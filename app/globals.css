@@ -10406,3 +10406,759 @@ img {
       auto;
   }
 }
+/* =========================================================
+   MUSEUM SHOP — SHARED CARD SYSTEM
+   Product / Heritage / Collection / Story
+   ========================================================= */
+
+
+/* =========================================================
+   01. CARD BASE
+   ========================================================= */
+
+.product-card,
+.heritage-card,
+.collection-card,
+.story-card {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #fff;
+
+  border: 1px solid var(--line);
+
+  overflow: hidden;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.product-card:hover,
+.heritage-card:hover,
+.collection-card:hover,
+.story-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(195, 150, 74, 0.8);
+
+  box-shadow:
+    0 16px 36px
+    rgba(38, 13, 15, 0.08);
+}
+
+
+/* =========================================================
+   02. IMAGE LINKS
+   ========================================================= */
+
+.product-card__image-link,
+.heritage-card__image-link,
+.collection-card__image-link,
+.story-card__image-link {
+  display: block;
+}
+
+
+/* =========================================================
+   03. IMAGE WRAPPERS
+   ========================================================= */
+
+.product-card__image,
+.heritage-card__image,
+.collection-card__image,
+.story-card__image {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: var(--cream-soft);
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE
+   Không crop sản phẩm vật lý
+   ========================================================= */
+
+.product-card__image {
+  aspect-ratio: 4 / 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 22px;
+}
+
+.product-card__image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  transition:
+    transform 260ms ease;
+}
+
+.product-card:hover
+.product-card__image img {
+  transform: scale(1.025);
+}
+
+
+/* =========================================================
+   HERITAGE / COLLECTION / STORY IMAGE
+   Editorial image có thể crop
+   ========================================================= */
+
+.heritage-card__image,
+.collection-card__image,
+.story-card__image {
+  aspect-ratio: 4 / 3;
+}
+
+.heritage-card__image img,
+.collection-card__image img,
+.story-card__image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 280ms ease;
+}
+
+.heritage-card:hover
+.heritage-card__image img,
+.collection-card:hover
+.collection-card__image img,
+.story-card:hover
+.story-card__image img {
+  transform: scale(1.035);
+}
+
+
+/* =========================================================
+   04. PLACEHOLDER
+   ========================================================= */
+
+.product-card__image-placeholder,
+.heritage-card__placeholder,
+.collection-card__placeholder,
+.story-card__placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--cream-soft),
+      var(--cream)
+    );
+
+  color: var(--wine);
+
+  font-family: var(--serif);
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   05. BADGES
+   ========================================================= */
+
+.product-card__trace-badge,
+.product-card__featured-badge,
+.heritage-card__badge,
+.collection-card__featured,
+.collection-card__status,
+.story-card__featured {
+  position: absolute;
+
+  z-index: 2;
+
+  padding: 7px 10px;
+
+  font-size: 9px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+
+/* PRODUCT */
+
+.product-card__featured-badge {
+  top: 12px;
+  right: 12px;
+
+  background: var(--wine);
+  color: #fff;
+}
+
+.product-card__trace-badge {
+  left: 12px;
+  bottom: 12px;
+
+  background:
+    rgba(255, 250, 240, 0.96);
+
+  color: var(--wine);
+
+  border:
+    1px solid
+    rgba(103, 29, 34, 0.2);
+}
+
+
+/* HERITAGE */
+
+.heritage-card__badge {
+  top: 12px;
+  right: 12px;
+
+  background: var(--gold);
+  color: var(--deep);
+}
+
+
+/* COLLECTION */
+
+.collection-card__featured {
+  top: 12px;
+  left: 12px;
+
+  background: var(--wine);
+  color: #fff;
+}
+
+.collection-card__status {
+  right: 12px;
+  bottom: 12px;
+
+  background:
+    rgba(255, 250, 240, 0.96);
+
+  color: var(--wine);
+
+  border:
+    1px solid
+    rgba(103, 29, 34, 0.18);
+}
+
+
+/* STORY */
+
+.story-card__featured {
+  top: 12px;
+  right: 12px;
+
+  background: var(--wine);
+  color: #fff;
+}
+
+
+/* =========================================================
+   06. BODY
+   ========================================================= */
+
+.product-card__body,
+.heritage-card__body,
+.collection-card__body,
+.story-card__body {
+  flex: 1;
+
+  padding:
+    22px
+    22px
+    20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   07. META
+   ========================================================= */
+
+.product-card__category,
+.collection-card__eyebrow,
+.story-card__category,
+.story-card__eyebrow,
+.heritage-card__type {
+  margin: 0;
+
+  color: var(--wine);
+
+  font-size: 10px;
+  line-height: 1.35;
+
+  font-weight: 600;
+
+  letter-spacing: 0.09em;
+
+  text-transform: uppercase;
+}
+
+
+/* PRODUCT */
+
+.product-card__category {
+  margin-bottom: 9px;
+}
+
+
+/* COLLECTION */
+
+.collection-card__eyebrow {
+  margin-bottom: 9px;
+}
+
+
+/* STORY */
+
+.story-card__meta {
+  min-height: 18px;
+
+  margin-bottom: 9px;
+}
+
+
+/* HERITAGE */
+
+.heritage-card__meta {
+  min-height: 20px;
+
+  margin-bottom: 9px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.heritage-card__period {
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.35;
+
+  text-align: right;
+}
+
+
+/* =========================================================
+   08. TITLE
+   ========================================================= */
+
+.product-card__title,
+.heritage-card__title,
+.collection-card__title,
+.story-card__title {
+  margin: 0;
+
+  color: var(--ink);
+
+  font-family: var(--serif);
+
+  font-size:
+    clamp(
+      20px,
+      1.7vw,
+      25px
+    );
+
+  line-height: 1.28;
+
+  font-weight: 600;
+}
+
+.product-card__title a,
+.heritage-card__title a,
+.collection-card__title a,
+.story-card__title a {
+  transition:
+    color 160ms ease;
+}
+
+.product-card__title a:hover,
+.heritage-card__title a:hover,
+.collection-card__title a:hover,
+.story-card__title a:hover {
+  color: var(--wine);
+}
+
+
+/* =========================================================
+   09. DESCRIPTION
+   ========================================================= */
+
+.product-card__description,
+.heritage-card__description,
+.collection-card__description,
+.story-card__excerpt {
+  margin:
+    13px
+    0
+    0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.72;
+
+  display: -webkit-box;
+
+  overflow: hidden;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+
+/* =========================================================
+   10. CARD FOOTER
+   ========================================================= */
+
+.product-card__footer,
+.heritage-card__footer,
+.collection-card__footer,
+.story-card__footer {
+  margin-top: auto;
+
+  padding-top: 20px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+
+/* =========================================================
+   PRICE / SECONDARY META
+   ========================================================= */
+
+.product-card__price strong {
+  color: var(--wine);
+
+  font-size: 12px;
+  line-height: 1.3;
+
+  font-weight: 600;
+}
+
+.heritage-card__count,
+.collection-card__count,
+.story-card__relations {
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.product-card__link,
+.heritage-card__link,
+.collection-card__link,
+.story-card__link {
+  flex-shrink: 0;
+
+  color: var(--wine);
+
+  font-size: 11px;
+  line-height: 1.3;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  transition:
+    color 160ms ease;
+}
+
+.product-card__link:hover,
+.heritage-card__link:hover,
+.collection-card__link:hover,
+.story-card__link:hover {
+  color: var(--gold);
+}
+
+
+/* =========================================================
+   11. FEATURED
+   ========================================================= */
+
+.product-card--featured,
+.story-card--featured {
+  border-color:
+    rgba(195, 150, 74, 0.68);
+}
+
+
+/* =========================================================
+   12. PRODUCT GRID
+   ========================================================= */
+
+.product-grid {
+  width: 100%;
+
+  display: grid;
+
+  align-items: stretch;
+
+  gap:
+    34px
+    26px;
+}
+
+.product-grid--2 {
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+}
+
+.product-grid--3 {
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+}
+
+.product-grid--4 {
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+}
+
+.product-grid
+> .product-card {
+  height: 100%;
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   Override homepage legacy card rules
+   ========================================================= */
+
+.home-products
+.product-card {
+  display: flex;
+
+  height: 100%;
+
+  border:
+    1px solid
+    var(--line);
+
+  background: #fff;
+
+  overflow: hidden;
+
+  box-shadow: none;
+}
+
+.home-products
+.product-card:hover {
+  border-color:
+    rgba(195, 150, 74, 0.8);
+
+  box-shadow:
+    0 16px 36px
+    rgba(38, 13, 15, 0.08);
+}
+
+
+/* =========================================================
+   13. EMPTY STATE
+   ========================================================= */
+
+.product-grid-empty {
+  width: 100%;
+
+  min-height: 180px;
+
+  padding: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--cream-soft);
+
+  border: 1px solid var(--line);
+
+  text-align: center;
+}
+
+.product-grid-empty p {
+  max-width: 480px;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   14. CATEGORY ACTIVE
+   ========================================================= */
+
+.category-card--active {
+  border-color: var(--wine);
+
+  background: var(--cream-soft);
+}
+
+.category-card--active
+.category-card__index,
+.category-card--active
+.category-card__footer {
+  color: var(--wine);
+}
+
+
+/* =========================================================
+   15. TABLET
+   ========================================================= */
+
+@media (max-width: 1023px) {
+
+  .product-grid--3,
+  .product-grid--4 {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .product-card__body,
+  .heritage-card__body,
+  .collection-card__body,
+  .story-card__body {
+    padding:
+      20px
+      18px
+      18px;
+  }
+
+  .product-card__title,
+  .heritage-card__title,
+  .collection-card__title,
+  .story-card__title {
+    font-size: 21px;
+  }
+}
+
+
+/* =========================================================
+   16. MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .product-grid,
+  .product-grid--2,
+  .product-grid--3,
+  .product-grid--4 {
+    grid-template-columns: 1fr;
+
+    gap: 24px;
+  }
+
+  .product-card:hover,
+  .heritage-card:hover,
+  .collection-card:hover,
+  .story-card:hover {
+    transform: none;
+  }
+
+  .product-card__image {
+    aspect-ratio: 1 / 1;
+
+    padding: 24px;
+  }
+
+  .heritage-card__image,
+  .collection-card__image,
+  .story-card__image {
+    aspect-ratio: 16 / 11;
+  }
+
+  .product-card__body,
+  .heritage-card__body,
+  .collection-card__body,
+  .story-card__body {
+    padding:
+      19px
+      17px
+      18px;
+  }
+
+  .product-card__title,
+  .heritage-card__title,
+  .collection-card__title,
+  .story-card__title {
+    font-size: 21px;
+  }
+}
+
+
+/* =========================================================
+   17. SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .product-card__footer,
+  .heritage-card__footer,
+  .collection-card__footer,
+  .story-card__footer {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .product-card__link,
+  .heritage-card__link,
+  .collection-card__link,
+  .story-card__link {
+    white-space: normal;
+  }
+}
