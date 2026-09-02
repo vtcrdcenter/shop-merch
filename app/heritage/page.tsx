@@ -11,13 +11,21 @@ import {
   getFeaturedHeritageSources,
 } from "../../data/heritage";
 
+/* =========================================================
+   METADATA
+   ========================================================= */
+
 export const metadata: Metadata = {
   title:
     "Di sản | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
 
   description:
-    "Khám phá các hiện vật, tư liệu, hình tượng và nguồn di sản được sử dụng làm cơ sở phát triển sản phẩm văn hóa sáng tạo.",
+    "Khám phá các hiện vật, hình tượng và nguồn tư liệu đã trở thành điểm khởi đầu cho những sản phẩm văn hóa sáng tạo trong gian hàng.",
 };
+
+/* =========================================================
+   PAGE
+   ========================================================= */
 
 export default function HeritagePage() {
   const heritageSources =
@@ -28,9 +36,9 @@ export default function HeritagePage() {
 
   return (
     <main className="heritage-page">
-      {/* ===============================================
-          BREADCRUMB
-      ================================================ */}
+      {/* =====================================================
+          01 — BREADCRUMB
+      ====================================================== */}
 
       <div className="site-container heritage-page__breadcrumb">
         <Breadcrumb
@@ -42,9 +50,9 @@ export default function HeritagePage() {
         />
       </div>
 
-      {/* ===============================================
-          HERO
-      ================================================ */}
+      {/* =====================================================
+          02 — HERO
+      ====================================================== */}
 
       <section className="heritage-hero">
         <div className="site-container heritage-hero__inner">
@@ -53,22 +61,24 @@ export default function HeritagePage() {
           </p>
 
           <h1 className="heritage-hero__title">
-            Di sản trong từng thiết kế
+            Khám phá câu chuyện
+            phía sau mỗi thiết kế
           </h1>
 
           <p className="heritage-hero__description">
-            Mỗi sản phẩm được bắt đầu từ một
-            nguồn cụ thể: hiện vật, tư liệu,
-            hình tượng, triều phục hoặc dấu
-            tích khảo cổ. Khu vực này giúp
-            người dùng đi ngược từ sản phẩm
-            về nguồn văn hóa đã tạo nên thiết kế.
+            Mỗi sản phẩm bắt đầu từ
+            một nguồn cụ thể: hiện vật,
+            triều phục, bảo ấn, hình tượng
+            hoặc tư liệu khảo cổ. Từ đây,
+            người xem có thể đi ngược
+            từ sản phẩm về nguồn văn hóa
+            đã tạo nên thiết kế.
           </p>
 
           <div className="heritage-hero__meta">
             <span>
-              {heritageSources.length} nguồn
-              di sản đang giới thiệu
+              {heritageSources.length}{" "}
+              nguồn đang giới thiệu
             </span>
 
             <span aria-hidden="true">
@@ -76,23 +86,24 @@ export default function HeritagePage() {
             </span>
 
             <span>
-              Liên kết trực tiếp với sản phẩm
+              Kết nối trực tiếp
+              với sản phẩm
             </span>
           </div>
         </div>
       </section>
 
-      {/* ===============================================
-          FEATURED HERITAGE
-      ================================================ */}
+      {/* =====================================================
+          03 — FEATURED HERITAGE
+      ====================================================== */}
 
       {featuredHeritage.length > 0 && (
         <section className="heritage-featured">
           <div className="site-container">
             <SectionHeading
               eyebrow="NỔI BẬT"
-              title="Các nguồn di sản đang được khai thác"
-              description="Những nguồn hiện đang có sản phẩm hoặc phương án thiết kế được phát triển trong gian hàng."
+              title="Những nguồn cảm hứng chính"
+              description="Bắt đầu với những hiện vật và nguồn văn hóa hiện đang được sử dụng trong nhiều thiết kế của gian hàng."
             />
 
             <div className="heritage-featured__grid">
@@ -111,16 +122,16 @@ export default function HeritagePage() {
         </section>
       )}
 
-      {/* ===============================================
-          ALL HERITAGE
-      ================================================ */}
+      {/* =====================================================
+          04 — ALL HERITAGE
+      ====================================================== */}
 
       <section className="heritage-all">
         <div className="site-container">
           <SectionHeading
-            eyebrow="TẤT CẢ NGUỒN DI SẢN"
-            title="Khám phá theo nguồn"
-            description="Từ hiện vật cung đình Nguyễn đến tư liệu khảo cổ Óc Eo, mỗi nguồn được liên kết với những sản phẩm đã hoặc đang được phát triển."
+            eyebrow="KHÁM PHÁ"
+            title="Tất cả nguồn di sản"
+            description="Từ hiện vật cung đình triều Nguyễn đến tư liệu khảo cổ Óc Eo, mỗi nguồn được liên kết với những sản phẩm cụ thể trong gian hàng."
           />
 
           <div className="heritage-all__grid">
@@ -138,38 +149,37 @@ export default function HeritagePage() {
         </div>
       </section>
 
-      {/* ===============================================
-          EXPLANATION
-      ================================================ */}
+      {/* =====================================================
+          05 — FROM HERITAGE TO PRODUCT
+      ====================================================== */}
 
       <section className="heritage-method">
         <div className="site-container heritage-method__grid">
           <div className="heritage-method__heading">
             <p className="heritage-method__eyebrow">
-              TỪ NGUỒN ĐẾN SẢN PHẨM
+              TỪ DI SẢN ĐẾN SẢN PHẨM
             </p>
 
             <h2 className="heritage-method__title">
-              Không sao chép hiện vật nguyên trạng
+              Giữ dấu ấn nhận diện,
+              thay đổi hình thức thể hiện
             </h2>
           </div>
 
           <div className="heritage-method__content">
             <p>
-              Nguồn di sản đóng vai trò là căn cứ
-              cho quá trình phát triển thiết kế.
-              Tùy từng sản phẩm, các yếu tố như
-              hình khối, họa tiết, màu sắc, bố cục,
-              kỹ thuật hoặc câu chuyện được lựa
-              chọn và chuyển hóa để phù hợp với
-              công năng mới.
+              Những yếu tố như hình khối,
+              họa tiết, màu sắc, bố cục
+              hoặc câu chuyện được lựa chọn
+              theo từng sản phẩm cụ thể.
             </p>
 
             <p>
-              Việc tách riêng khu vực Di sản giúp
-              người dùng phân biệt rõ giữa nguồn
-              văn hóa ban đầu và sản phẩm sáng tạo
-              được phát triển từ nguồn đó.
+              Mục tiêu không phải sao chép
+              nguyên trạng hiện vật, mà là
+              giữ lại những đặc điểm có khả năng
+              nhận diện và chuyển chúng sang
+              một hình thức phù hợp với đời sống mới.
             </p>
           </div>
         </div>
