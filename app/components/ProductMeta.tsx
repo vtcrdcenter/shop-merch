@@ -87,15 +87,13 @@ export default function ProductMeta({
         .join(" ")}
     >
       {/* =====================================================
-          PRODUCT HEADING
+          01 — HEADING
       ====================================================== */}
 
       <div className="product-meta__heading">
         {category && (
           <p className="product-meta__category">
-            {
-              category.shortName
-            }
+            {category.shortName}
           </p>
         )}
 
@@ -107,14 +105,12 @@ export default function ProductMeta({
         </h1>
 
         <p className="product-meta__type">
-          {
-            product.productType
-          }
+          {product.productType}
         </p>
       </div>
 
       {/* =====================================================
-          PRICE / AVAILABILITY
+          02 — PRICE / TRACEABILITY
       ====================================================== */}
 
       <div className="product-meta__status-row">
@@ -124,11 +120,15 @@ export default function ProductMeta({
               {formattedPrice}
             </strong>
           ) : (
-            <strong>
-              {
-                availabilityLabel
-              }
-            </strong>
+            <div className="product-meta__price-pending">
+              <span>
+                Giá bán
+              </span>
+
+              <strong>
+                Đang cập nhật
+              </strong>
+            </div>
           )}
         </div>
 
@@ -141,17 +141,15 @@ export default function ProductMeta({
       </div>
 
       {/* =====================================================
-          SHORT DESCRIPTION
+          03 — SHORT DESCRIPTION
       ====================================================== */}
 
       <p className="product-meta__description">
-        {
-          product.shortDescription
-        }
+        {product.shortDescription}
       </p>
 
       {/* =====================================================
-          QUICK INFORMATION
+          04 — QUICK INFORMATION
       ====================================================== */}
 
       <dl className="product-meta__details">
@@ -171,9 +169,7 @@ export default function ProductMeta({
           </dt>
 
           <dd>
-            {
-              product.dimensions
-            }
+            {product.dimensions}
           </dd>
         </div>
 
@@ -183,8 +179,8 @@ export default function ProductMeta({
           </dt>
 
           <dd>
-            {product.materials
-              .length > 0
+            {product.materials.length >
+            0
               ? product.materials.join(
                   ", ",
                 )
@@ -198,15 +194,13 @@ export default function ProductMeta({
           </dt>
 
           <dd>
-            {
-              product.function
-            }
+            {product.function}
           </dd>
         </div>
       </dl>
 
       {/* =====================================================
-          AVAILABILITY
+          05 — AVAILABILITY
       ====================================================== */}
 
       <div className="product-meta__project-status">
@@ -215,9 +209,7 @@ export default function ProductMeta({
         </span>
 
         <strong>
-          {
-            availabilityLabel
-          }
+          {availabilityLabel}
         </strong>
       </div>
     </div>
