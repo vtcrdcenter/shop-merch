@@ -2,8 +2,13 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { siteAssetPath } from "../../../lib/site-path";
+import {
+  notFound,
+} from "next/navigation";
+
+import {
+  siteAssetPath,
+} from "../../../lib/site-path";
 
 import Breadcrumb from "../../components/Breadcrumb";
 import ProductGrid from "../../components/ProductGrid";
@@ -40,8 +45,11 @@ type CollectionDetailPageProps = {
 
 export async function generateStaticParams() {
   return getAllCollections().map(
-    (collection) => ({
-      slug: collection.slug,
+    (
+      collection,
+    ) => ({
+      slug:
+        collection.slug,
     }),
   );
 }
@@ -53,10 +61,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: CollectionDetailPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } =
+    await params;
 
   const collection =
-    getCollectionBySlug(slug);
+    getCollectionBySlug(
+      slug,
+    );
 
   if (!collection) {
     return {
@@ -66,7 +77,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${collection.name} | Bộ sưu tập | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia`,
+    title:
+      `${collection.name} | Bộ sưu tập | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia`,
 
     description:
       collection.shortDescription,
@@ -78,14 +90,17 @@ export async function generateMetadata({
       description:
         collection.shortDescription,
 
-      type: "website",
+      type:
+        "website",
 
       images:
         collection.heroImage
           ? [
               {
                 url:
-                  collection.heroImage,
+                  siteAssetPath(
+                    collection.heroImage,
+                  ),
 
                 alt:
                   `Bộ sưu tập ${collection.name}`,
@@ -103,21 +118,31 @@ export async function generateMetadata({
 export default async function CollectionDetailPage({
   params,
 }: CollectionDetailPageProps) {
-  const { slug } = await params;
+  const { slug } =
+    await params;
 
   const collection =
-    getCollectionBySlug(slug);
+    getCollectionBySlug(
+      slug,
+    );
 
   if (!collection) {
     notFound();
   }
 
+  /* ========================================================
+     PRODUCTS
+     ======================================================== */
+
   const products =
     collection.productSlugs
-      .map((productSlug) =>
-        getProductBySlug(
+      .map(
+        (
           productSlug,
-        ),
+        ) =>
+          getProductBySlug(
+            productSlug,
+          ),
       )
       .filter(
         (
@@ -126,15 +151,25 @@ export default async function CollectionDetailPage({
           ReturnType<
             typeof getProductBySlug
           >
-        > => Boolean(product),
+        > =>
+          Boolean(
+            product,
+          ),
       );
+
+  /* ========================================================
+     HERITAGE
+     ======================================================== */
 
   const heritageSources =
     collection.heritageSlugs
-      .map((heritageSlug) =>
-        getHeritageBySlug(
+      .map(
+        (
           heritageSlug,
-        ),
+        ) =>
+          getHeritageBySlug(
+            heritageSlug,
+          ),
       )
       .filter(
         (
@@ -143,37 +178,58 @@ export default async function CollectionDetailPage({
           ReturnType<
             typeof getHeritageBySlug
           >
-        > => Boolean(heritage),
+        > =>
+          Boolean(
+            heritage,
+          ),
       );
+
+  /* ========================================================
+     STORIES
+     ======================================================== */
 
   const relatedStories =
     getAllStories()
       .filter(
-        (story) =>
+        (
+          story,
+        ) =>
           story.status ===
           "published",
       )
-      .filter((story) =>
-        story.productSlugs.some(
-          (productSlug) =>
-            collection.productSlugs.includes(
+      .filter(
+        (
+          story,
+        ) =>
+          story.productSlugs.some(
+            (
               productSlug,
-            ),
-        ),
+            ) =>
+              collection.productSlugs.includes(
+                productSlug,
+              ),
+          ),
+      )
+      .slice(
+        0,
+        3,
       );
 
   return (
     <main className="collection-detail-page">
-      {/* ===============================================
-          BREADCRUMB
-      ================================================ */}
+      {/* =====================================================
+          01 — BREADCRUMB
+      ====================================================== */}
 
       <div className="site-container collection-detail-page__breadcrumb">
         <Breadcrumb
           items={[
             {
-              label: "Bộ sưu tập",
-              href: "/collections",
+              label:
+                "Bộ sưu tập",
+
+              href:
+                "/collections",
             },
 
             {
@@ -184,12 +240,14 @@ export default async function CollectionDetailPage({
         />
       </div>
 
-      {/* ===============================================
-          HERO
-      ================================================ */}
+      {/* =====================================================
+          02 — HERO
+      ====================================================== */}
 
       <section className="collection-detail-hero">
         <div className="site-container collection-detail-hero__grid">
+          {/* CONTENT */}
+
           <div className="collection-detail-hero__content">
             <p className="collection-detail-hero__eyebrow">
               {
@@ -198,7 +256,9 @@ export default async function CollectionDetailPage({
             </p>
 
             <h1 className="collection-detail-hero__title">
-              {collection.name}
+              {
+                collection.name
+              }
             </h1>
 
             <p className="collection-detail-hero__description">
@@ -228,11 +288,13 @@ export default async function CollectionDetailPage({
                 </strong>
 
                 <span>
-                  nguồn di sản
+                  nguồn cảm hứng
                 </span>
               </div>
             </div>
           </div>
+
+          {/* IMAGE */}
 
           <div className="collection-detail-hero__image">
             {collection.heroImage ? (
@@ -252,22 +314,63 @@ export default async function CollectionDetailPage({
         </div>
       </section>
 
-      {/* ===============================================
-          PRODUCTS
-      ================================================ */}
+      {/* =====================================================
+          03 — COLLECTION STORY
+      ====================================================== */}
+
+      <section className="collection-detail-concept">
+        <div className="site-container collection-detail-concept__grid">
+          <div className="collection-detail-concept__heading">
+            <p className="collection-detail-concept__eyebrow">
+              CÂU CHUYỆN BỘ SƯU TẬP
+            </p>
+
+            <h2 className="collection-detail-concept__title">
+              Một nguồn cảm hứng,
+              nhiều cách hiện diện
+            </h2>
+          </div>
+
+          <div className="collection-detail-concept__content">
+            <p>
+              Những thiết kế trong
+              bộ sưu tập cùng bắt đầu
+              từ một mạch văn hóa,
+              nhưng được phát triển
+              thành những vật phẩm
+              có hình thức và công năng
+              khác nhau.
+            </p>
+
+            <p>
+              Khi được đặt cạnh nhau,
+              các sản phẩm cho thấy
+              cách một câu chuyện di sản
+              có thể tiếp tục hiện diện
+              trong đời sống đương đại.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          04 — PRODUCTS
+      ====================================================== */}
 
       <section className="collection-detail-products">
         <div className="site-container">
           <SectionHeading
             eyebrow="SẢN PHẨM"
-            title={`Sản phẩm trong ${collection.name}`}
-            description="Các thiết kế được tuyển chọn vào cùng một chủ đề để người dùng có thể khám phá theo câu chuyện thay vì chỉ theo loại sản phẩm."
+            title={`Khám phá ${collection.name}`}
+            description="Những thiết kế cùng chia sẻ một nguồn cảm hứng hoặc mạch câu chuyện trong bộ sưu tập này."
             actionLabel="Xem tất cả sản phẩm"
             actionHref="/products"
           />
 
           <ProductGrid
-            products={products}
+            products={
+              products
+            }
             columns={3}
             showCategory
             showTraceability
@@ -276,25 +379,27 @@ export default async function CollectionDetailPage({
         </div>
       </section>
 
-      {/* ===============================================
-          HERITAGE SOURCES
-      ================================================ */}
+      {/* =====================================================
+          05 — HERITAGE SOURCES
+      ====================================================== */}
 
       {heritageSources.length >
         0 && (
         <section className="collection-detail-heritage">
           <div className="site-container">
             <SectionHeading
-              eyebrow="NGUỒN DI SẢN"
-              title="Những nguồn tạo nên bộ sưu tập"
-              description="Các hiện vật, tư liệu và hình tượng được sử dụng làm cơ sở cho những thiết kế trong bộ sưu tập."
-              actionLabel="Khám phá Di sản"
+              eyebrow="NGUỒN CẢM HỨNG"
+              title="Những câu chuyện phía sau bộ sưu tập"
+              description="Khám phá các hiện vật, hình tượng và nguồn tư liệu đã góp phần hình thành ngôn ngữ thiết kế của bộ sưu tập."
+              actionLabel="Xem tất cả nguồn di sản"
               actionHref="/heritage"
             />
 
             <div className="collection-detail-heritage__grid">
               {heritageSources.map(
-                (heritage) => (
+                (
+                  heritage,
+                ) => (
                   <HeritageCard
                     key={
                       heritage.id
@@ -312,62 +417,27 @@ export default async function CollectionDetailPage({
         </section>
       )}
 
-      {/* ===============================================
-          COLLECTION LOGIC
-      ================================================ */}
+      {/* =====================================================
+          06 — STORIES
+      ====================================================== */}
 
-      <section className="collection-detail-concept">
-        <div className="site-container collection-detail-concept__grid">
-          <div className="collection-detail-concept__heading">
-            <p className="collection-detail-concept__eyebrow">
-              CHỦ ĐỀ
-            </p>
-
-            <h2 className="collection-detail-concept__title">
-              Một chủ đề có thể đi qua nhiều loại sản phẩm
-            </h2>
-          </div>
-
-          <div className="collection-detail-concept__content">
-            <p>
-              Bộ sưu tập không yêu cầu
-              các sản phẩm phải giống nhau
-              về công năng. Điểm kết nối
-              nằm ở nguồn cảm hứng, bối
-              cảnh văn hóa hoặc ngôn ngữ
-              thiết kế.
-            </p>
-
-            <p>
-              Cách tổ chức này cho phép
-              một câu chuyện di sản được
-              phát triển trên nhiều định
-              dạng sản phẩm khác nhau mà
-              vẫn giữ được sự liên kết
-              giữa các thiết kế.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===============================================
-          STORIES
-      ================================================ */}
-
-      {relatedStories.length > 0 && (
+      {relatedStories.length >
+        0 && (
         <section className="collection-detail-stories">
           <div className="site-container">
             <SectionHeading
               eyebrow="CÂU CHUYỆN"
-              title="Đọc thêm về bộ sưu tập"
-              description="Những nội dung giúp làm rõ nguồn cảm hứng và quá trình phát triển các thiết kế."
+              title="Đọc thêm về nguồn cảm hứng"
+              description="Những bài viết giúp người xem hiểu rõ hơn về hiện vật, hình tượng và cách chúng được chuyển hóa thành thiết kế."
               actionLabel="Xem tất cả câu chuyện"
               actionHref="/stories"
             />
 
             <div className="collection-detail-stories__grid">
               {relatedStories.map(
-                (story) => (
+                (
+                  story,
+                ) => (
                   <StoryCard
                     key={
                       story.id
@@ -384,9 +454,9 @@ export default async function CollectionDetailPage({
         </section>
       )}
 
-      {/* ===============================================
-          MORE COLLECTIONS
-      ================================================ */}
+      {/* =====================================================
+          07 — MORE COLLECTIONS
+      ====================================================== */}
 
       <section className="collection-detail-more">
         <div className="site-container collection-detail-more__inner">
@@ -396,7 +466,8 @@ export default async function CollectionDetailPage({
             </p>
 
             <h2>
-              Xem các bộ sưu tập khác
+              Xem thêm các
+              bộ sưu tập khác
             </h2>
           </div>
 
@@ -405,7 +476,10 @@ export default async function CollectionDetailPage({
             className="collection-detail-more__link"
           >
             Tất cả bộ sưu tập
-            <span aria-hidden="true">
+
+            <span
+              aria-hidden="true"
+            >
               {" "}
               →
             </span>
