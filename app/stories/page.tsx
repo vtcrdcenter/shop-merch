@@ -1,6 +1,8 @@
 // app/stories/page.tsx
 
-import type { Metadata } from "next";
+import type {
+  Metadata,
+} from "next";
 
 import Breadcrumb from "../components/Breadcrumb";
 import SectionHeading from "../components/SectionHeading";
@@ -15,9 +17,10 @@ import {
    METADATA
    ========================================================= */
 
-export const metadata: Metadata = {
+export const metadata:
+  Metadata = {
   title:
-    "Câu chuyện | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+    "Câu chuyện",
 
   description:
     "Khám phá câu chuyện phía sau hiện vật, nguồn cảm hứng và cách các giá trị di sản được chuyển hóa thành những sản phẩm văn hóa sáng tạo.",
@@ -49,36 +52,49 @@ export default function StoriesPage() {
   const stories =
     getPublishedStories();
 
-  const featuredStories =
-    getFeaturedStories().filter(
-      (story) =>
-        story.status ===
-        "published",
-    );
+  /*
+   * Hiện dữ liệu chỉ có 5 bài.
+   *
+   * Không hiển thị 4 bài featured
+   * rồi lặp lại chúng ở nhóm chủ đề.
+   *
+   * Chỉ lấy 1 bài làm spotlight.
+   */
+  const spotlightStory =
+    getFeaturedStories()[0];
+
+  const groupedStories =
+    spotlightStory
+      ? stories.filter(
+          (story) =>
+            story.id !==
+            spotlightStory.id,
+        )
+      : stories;
 
   const heritageStories =
-    stories.filter(
+    groupedStories.filter(
       (story) =>
         story.category ===
         "heritage",
     );
 
   const designStories =
-    stories.filter(
+    groupedStories.filter(
       (story) =>
         story.category ===
         "design",
     );
 
   const craftStories =
-    stories.filter(
+    groupedStories.filter(
       (story) =>
         story.category ===
         "craft",
     );
 
   const traceabilityStories =
-    stories.filter(
+    groupedStories.filter(
       (story) =>
         story.category ===
         "traceability",
@@ -179,11 +195,19 @@ export default function StoriesPage() {
           </h1>
 
           <p className="stories-hero__description">
-            Từ một chi tiết trên hiện vật
-            đến cách nó được chuyển hóa
-            thành sản phẩm – đây là nơi
-            những câu chuyện đó được kể
-            rõ hơn.
+            Mỗi vật phẩm trong gian hàng
+            không chỉ bắt đầu từ một ý tưởng
+            tạo hình. Phía sau đó là hiện vật,
+            hình tượng, tư liệu và những
+            lựa chọn trong quá trình
+            phát triển thiết kế.
+          </p>
+
+          <p className="stories-hero__description stories-hero__description--secondary">
+            Từ một bài viết, người xem
+            có thể tiếp tục khám phá
+            nguồn di sản, sản phẩm
+            và hồ sơ truy xuất liên quan.
           </p>
 
           <div className="stories-hero__meta">
@@ -212,21 +236,21 @@ export default function StoriesPage() {
           03 — CATEGORY NAV
       ====================================================== */}
 
-      {storyGroups.length >
-        0 && (
+      {(spotlightStory ||
+        storyGroups.length >
+          0) && (
         <section className="stories-nav">
           <div className="site-container">
             <nav
               className="stories-nav__list"
               aria-label="Chủ đề câu chuyện"
             >
-              {featuredStories.length >
-                0 && (
+              {spotlightStory && (
                 <a
-                  href="#featured"
+                  href="#spotlight"
                   className="stories-nav__item"
                 >
-                  Nổi bật
+                  Nên đọc trước
                 </a>
               )}
 
@@ -253,38 +277,28 @@ export default function StoriesPage() {
       )}
 
       {/* =====================================================
-          04 — FEATURED STORIES
+          04 — SPOTLIGHT
       ====================================================== */}
 
-      {featuredStories.length >
-        0 && (
+      {spotlightStory && (
         <section
-          id="featured"
+          id="spotlight"
           className="stories-featured"
         >
           <div className="site-container">
             <SectionHeading
               eyebrow="NÊN ĐỌC TRƯỚC"
-              title="Những câu chuyện nổi bật"
-              description="Bắt đầu với những nội dung giúp thấy rõ nhất mối liên hệ giữa nguồn di sản, thiết kế và sản phẩm."
+              title="Một câu chuyện để bắt đầu"
+              description="Bài viết giúp hình dung rõ cách một nguồn di sản được lựa chọn, chuyển hóa và kết nối với sản phẩm trong gian hàng."
             />
 
-            <div className="stories-featured__grid">
-              {featuredStories.map(
-                (
-                  story,
-                ) => (
-                  <StoryCard
-                    key={
-                      story.id
-                    }
-                    story={
-                      story
-                    }
-                    showCategory
-                  />
-                ),
-              )}
+            <div className="stories-featured__grid stories-featured__grid--spotlight">
+              <StoryCard
+                story={
+                  spotlightStory
+                }
+                showCategory
+              />
             </div>
           </div>
         </section>
@@ -294,90 +308,93 @@ export default function StoriesPage() {
           05 — STORY GROUPS
       ====================================================== */}
 
-      <section className="stories-groups">
-        <div className="site-container">
-          <div className="stories-groups__list">
-            {storyGroups.map(
-              (
-                group,
-                groupIndex,
-              ) => (
-                <section
-                  key={
-                    group.id
-                  }
-                  id={
-                    group.id
-                  }
-                  className="stories-group"
-                >
-                  <div className="stories-group__header">
-                    <span className="stories-group__number">
-                      {String(
-                        groupIndex +
-                          1,
-                      ).padStart(
-                        2,
-                        "0",
-                      )}
-                    </span>
-
-                    <div className="stories-group__heading">
-                      <p className="stories-group__eyebrow">
-                        CHỦ ĐỀ
-                      </p>
-
-                      <h2 className="stories-group__title">
-                        {
-                          group.title
-                        }
-                      </h2>
-
-                      <p className="stories-group__description">
-                        {
-                          group.description
-                        }
-                      </p>
-                    </div>
-
-                    <div className="stories-group__count">
-                      <strong>
-                        {
-                          group
-                            .stories
-                            .length
-                        }
-                      </strong>
-
-                      <span>
-                        bài viết
+      {storyGroups.length >
+        0 && (
+        <section className="stories-groups">
+          <div className="site-container">
+            <div className="stories-groups__list">
+              {storyGroups.map(
+                (
+                  group,
+                  groupIndex,
+                ) => (
+                  <section
+                    key={
+                      group.id
+                    }
+                    id={
+                      group.id
+                    }
+                    className="stories-group"
+                  >
+                    <div className="stories-group__header">
+                      <span className="stories-group__number">
+                        {String(
+                          groupIndex +
+                            1,
+                        ).padStart(
+                          2,
+                          "0",
+                        )}
                       </span>
-                    </div>
-                  </div>
 
-                  <div className="stories-group__grid">
-                    {group.stories.map(
-                      (
-                        story,
-                      ) => (
-                        <StoryCard
-                          key={
-                            story.id
+                      <div className="stories-group__heading">
+                        <p className="stories-group__eyebrow">
+                          CHỦ ĐỀ
+                        </p>
+
+                        <h2 className="stories-group__title">
+                          {
+                            group.title
                           }
-                          story={
-                            story
+                        </h2>
+
+                        <p className="stories-group__description">
+                          {
+                            group.description
                           }
-                          showCategory
-                        />
-                      ),
-                    )}
-                  </div>
-                </section>
-              ),
-            )}
+                        </p>
+                      </div>
+
+                      <div className="stories-group__count">
+                        <strong>
+                          {
+                            group
+                              .stories
+                              .length
+                          }
+                        </strong>
+
+                        <span>
+                          bài viết
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="stories-group__grid">
+                      {group.stories.map(
+                        (
+                          story,
+                        ) => (
+                          <StoryCard
+                            key={
+                              story.id
+                            }
+                            story={
+                              story
+                            }
+                            showCategory
+                          />
+                        ),
+                      )}
+                    </div>
+                  </section>
+                ),
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* =====================================================
           06 — EDITORIAL PRINCIPLE
@@ -391,9 +408,8 @@ export default function StoriesPage() {
             </p>
 
             <h2 className="stories-principle__title">
-              Một vật phẩm có thể
-              mở ra một câu chuyện
-              dài hơn
+              Từ một vật phẩm
+              đến một câu chuyện dài hơn
             </h2>
           </div>
 
@@ -401,15 +417,17 @@ export default function StoriesPage() {
             <p>
               Câu chuyện giúp người xem
               nhận ra những chi tiết văn hóa
-              phía sau hình dáng, màu sắc
-              và họa tiết của sản phẩm.
+              phía sau hình dáng, màu sắc,
+              họa tiết và cấu trúc của
+              từng sản phẩm.
             </p>
 
             <p>
-              Từ một bài viết, người dùng
-              có thể tiếp tục khám phá
-              nguồn di sản, sản phẩm hoặc
-              hồ sơ truy xuất liên quan.
+              Nội dung không đứng riêng
+              như một chuyên mục tin tức.
+              Mỗi bài được liên kết trở lại
+              với nguồn di sản và sản phẩm
+              tương ứng trong gian hàng.
             </p>
           </div>
         </div>
