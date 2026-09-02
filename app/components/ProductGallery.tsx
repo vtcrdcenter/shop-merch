@@ -1,9 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { siteAssetPath } from "../../lib/site-path";
+import {
+  useMemo,
+  useState,
+} from "react";
 
-import type { ProductImage } from "../../data/products";
+import {
+  siteAssetPath,
+} from "../../lib/site-path";
+
+import type {
+  ProductImage,
+} from "../../data/products";
 
 type ProductGalleryProps = {
   images: ProductImage[];
@@ -18,24 +26,42 @@ export default function ProductGallery({
   productName,
   className = "",
 }: ProductGalleryProps) {
-  const normalizedImages = useMemo(() => {
-    if (images.length > 0) {
-      return images;
-    }
+  const normalizedImages =
+    useMemo(() => {
+      if (
+        images.length >
+        0
+      ) {
+        return images;
+      }
 
-    return [
-      {
-        src: "",
-        alt: productName,
-      },
-    ];
-  }, [images, productName]);
+      return [
+        {
+          src: "",
+          alt:
+            productName,
+        },
+      ];
+    }, [
+      images,
+      productName,
+    ]);
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [
+    activeIndex,
+    setActiveIndex,
+  ] = useState(0);
+
+  const safeActiveIndex =
+    Math.min(
+      activeIndex,
+      normalizedImages.length -
+        1,
+    );
 
   const activeImage =
     normalizedImages[
-      Math.min(activeIndex, normalizedImages.length - 1)
+      safeActiveIndex
     ];
 
   return (
@@ -48,64 +74,108 @@ export default function ProductGallery({
         .join(" ")}
       aria-label={`Hình ảnh sản phẩm ${productName}`}
     >
+      {/* =====================================================
+          MAIN IMAGE
+      ====================================================== */}
+
       <div className="product-gallery__main">
         {activeImage?.src ? (
           <img
-            src={siteAssetPath(activeImage.src)}
-            alt={activeImage.alt}
+            src={siteAssetPath(
+              activeImage.src,
+            )}
+            alt={
+              activeImage.alt ||
+              productName
+            }
             className="product-gallery__main-image"
           />
         ) : (
           <div
             className="product-gallery__placeholder"
-            aria-label={`Chưa có hình ảnh cho ${productName}`}
+            role="img"
+            aria-label={`Hình ảnh ${productName} đang được cập nhật`}
           >
-            <span>Hình ảnh đang được cập nhật</span>
+            <span>
+              Hình ảnh sản phẩm
+              đang được cập nhật
+            </span>
           </div>
         )}
       </div>
 
-      {normalizedImages.length > 1 && (
+      {/* =====================================================
+          THUMBNAILS
+      ====================================================== */}
+
+      {normalizedImages.length >
+        1 && (
         <div
           className="product-gallery__thumbnails"
           role="list"
-          aria-label="Danh sách hình ảnh sản phẩm"
+          aria-label={`Các hình ảnh của ${productName}`}
         >
-          {normalizedImages.map((image, index) => {
-            const isActive = index === activeIndex;
+          {normalizedImages.map(
+            (
+              image,
+              index,
+            ) => {
+              const isActive =
+                index ===
+                safeActiveIndex;
 
-            return (
-              <button
-                key={`${image.src}-${index}`}
-                type="button"
-                className={[
-                  "product-gallery__thumbnail",
-                  isActive
-                    ? "product-gallery__thumbnail--active"
-                    : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-                onClick={() => setActiveIndex(index)}
-                aria-label={`Xem hình ${index + 1} của ${productName}`}
-                aria-pressed={isActive}
-              >
-                {image.src ? (
-                  <img
-                    src={siteAssetPath(image.src)}
-                    alt=""
-                  />
-                ) : (
-                  <span
-                    className="product-gallery__thumbnail-placeholder"
-                    aria-hidden="true"
+              return (
+                <div
+                  key={`${image.src}-${index}`}
+                  role="listitem"
+                  className="product-gallery__thumbnail-item"
+                >
+                  <button
+                    type="button"
+                    className={[
+                      "product-gallery__thumbnail",
+
+                      isActive
+                        ? "product-gallery__thumbnail--active"
+                        : "",
+                    ]
+                      .filter(
+                        Boolean,
+                      )
+                      .join(
+                        " ",
+                      )}
+                    onClick={() =>
+                      setActiveIndex(
+                        index,
+                      )
+                    }
+                    aria-label={`Xem hình ${index + 1} của ${productName}`}
+                    aria-pressed={
+                      isActive
+                    }
                   >
-                    —
-                  </span>
-                )}
-              </button>
-            );
-          })}
+                    {image.src ? (
+                      <img
+                        src={siteAssetPath(
+                          image.src,
+                        )}
+                        alt=""
+                        loading="lazy"
+                      />
+                    ) : (
+                      <span
+                        className="product-gallery__thumbnail-placeholder"
+                        aria-hidden="true"
+                      >
+                        —
+                      </span>
+                    )}
+                  </button>
+                </div>
+              );
+            },
+          )}
         </div>
       )}
     </section>
