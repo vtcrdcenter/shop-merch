@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { siteAssetPath } from "../../../lib/site-path";
 
 import Breadcrumb from "../../components/Breadcrumb";
 import ProductGrid from "../../components/ProductGrid";
@@ -236,9 +237,9 @@ export default async function CollectionDetailPage({
           <div className="collection-detail-hero__image">
             {collection.heroImage ? (
               <img
-                src={
-                  collection.heroImage
-                }
+                src={siteAssetPath(
+                  collection.heroImage,
+                )}
                 alt={`Bộ sưu tập ${collection.name}`}
               />
             ) : (

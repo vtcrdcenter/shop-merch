@@ -1,6 +1,7 @@
 // app/gifts/page.tsx
 
 import type { Metadata } from "next";
+import { siteAssetPath } from "../../lib/site-path";
 
 import Breadcrumb from "../components/Breadcrumb";
 import ProductGrid from "../components/ProductGrid";
@@ -133,7 +134,7 @@ export default function GiftsPage() {
                     <div className="gift-feature-card__image">
                       {gift.image ? (
                         <img
-                          src={gift.image}
+                          src={siteAssetPath(gift.image)}
                           alt={gift.name}
                           loading="lazy"
                         />

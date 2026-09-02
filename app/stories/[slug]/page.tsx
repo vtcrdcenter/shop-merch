@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { siteAssetPath } from "../../../lib/site-path";
 
 import Breadcrumb from "../../components/Breadcrumb";
 import ProductGrid from "../../components/ProductGrid";
@@ -281,7 +282,7 @@ export default async function StoryDetailPage({
         <div className="story-detail-image">
           {story.image ? (
             <img
-              src={story.image}
+              src={siteAssetPath(story.image)}
               alt={story.title}
             />
           ) : (

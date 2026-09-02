@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { siteAssetPath } from "../../lib/site-path";
 
 import type { ProductImage } from "../../data/products";
 
@@ -50,7 +51,7 @@ export default function ProductGallery({
       <div className="product-gallery__main">
         {activeImage?.src ? (
           <img
-            src={activeImage.src}
+            src={siteAssetPath(activeImage.src)}
             alt={activeImage.alt}
             className="product-gallery__main-image"
           />
@@ -91,7 +92,7 @@ export default function ProductGallery({
               >
                 {image.src ? (
                   <img
-                    src={image.src}
+                    src={siteAssetPath(image.src)}
                     alt=""
                   />
                 ) : (

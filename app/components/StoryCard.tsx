@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteAssetPath } from "../../lib/site-path";
 
 import type {
   ShopStory,
@@ -66,7 +67,7 @@ export default function StoryCard({
         <div className="story-card__image">
           {primaryImage ? (
             <img
-              src={primaryImage.src}
+              src={siteAssetPath(primaryImage.src)}
               alt={primaryImage.alt}
               loading="lazy"
             />

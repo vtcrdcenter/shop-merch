@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { siteAssetPath } from "../../../lib/site-path";
 
 import Breadcrumb from "../../components/Breadcrumb";
 import ProductGallery from "../../components/ProductGallery";
@@ -315,7 +316,7 @@ export default async function ProductDetailPage({
                       <div className="product-detail-heritage__image">
                         {image ? (
                           <img
-                            src={image.src}
+                            src={siteAssetPath(image.src)}
                             alt={image.alt}
                             loading="lazy"
                           />

@@ -452,7 +452,7 @@ img {
       rgba(250, 246, 236, 0.12) 20%,
       transparent 34%
     ),
-    url("/reference-shop.png");
+    url("/shop-merch/reference-shop.png");
 
   background-size: auto 100%;
   background-repeat: no-repeat;
@@ -585,7 +585,7 @@ img {
 
 .product-image {
   background-image:
-    url("/reference-shop.png");
+    url("/shop-merch/reference-shop.png");
 
   background-repeat: no-repeat;
 

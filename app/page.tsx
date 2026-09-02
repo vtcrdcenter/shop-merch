@@ -2,6 +2,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
+import { siteAssetPath } from "../lib/site-path";
 
 import ProductGrid from "./components/ProductGrid";
 import HeritageCard from "./components/HeritageCard";
@@ -175,7 +176,7 @@ export default function HomePage() {
             <div className="home-hero__product-image">
               {heroImage ? (
                 <img
-                  src={heroImage.src}
+                  src={siteAssetPath(heroImage.src)}
                   alt={heroImage.alt}
                 />
               ) : (
@@ -553,7 +554,7 @@ export default function HomePage() {
                   <div className="home-gift-card__image">
                     {gift.image ? (
                       <img
-                        src={gift.image}
+                        src={siteAssetPath(gift.image)}
                         alt={gift.name}
                         loading="lazy"
                       />
@@ -693,11 +694,11 @@ export default function HomePage() {
                   <div className="home-trace__product-image">
                     {traceProduct.images[0] ? (
                       <img
-                        src={
+                        src={siteAssetPath(
                           traceProduct
                             .images[0]
-                            .src
-                        }
+                            .src,
+                        )}
                         alt={
                           traceProduct
                             .images[0]

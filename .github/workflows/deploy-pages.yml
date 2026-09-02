@@ -44,6 +44,9 @@ jobs:
           echo "Checking dist/client..."
           test -d dist/client
           test -f dist/client/index.html
+          test -f dist/client/products/dau-an-thuong-trieu-nguyen/index.html
+          test -f dist/client/collections/dau-an-cung-dinh-nguyen/index.html
+          test -f dist/client/stories/mu-thuong-trieu-va-dau-an-thuong-trieu/index.html
           echo "Build output OK"
 
       - name: Disable Jekyll

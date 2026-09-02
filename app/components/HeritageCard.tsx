@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteAssetPath } from "../../lib/site-path";
 
 import type { HeritageSource } from "../../data/heritage";
 
@@ -39,7 +40,7 @@ export default function HeritageCard({
         <div className="heritage-card__image">
           {primaryImage ? (
             <img
-              src={primaryImage.src}
+              src={siteAssetPath(primaryImage.src)}
               alt={primaryImage.alt}
               loading="lazy"
             />

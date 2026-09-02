@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteAssetPath } from "../../lib/site-path";
 
 import type { ShopProduct } from "../../data/products";
 import { getCategoryById } from "../../data/categories";
@@ -87,7 +88,7 @@ export default function ProductCard({
         <div className="product-card__image">
           {primaryImage ? (
             <img
-              src={primaryImage.src}
+              src={siteAssetPath(primaryImage.src)}
               alt={primaryImage.alt}
               loading="lazy"
             />

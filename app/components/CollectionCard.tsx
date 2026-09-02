@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteAssetPath } from "../../lib/site-path";
 
 import type { ShopCollection } from "../../data/collections";
 
@@ -54,7 +55,7 @@ export default function CollectionCard({
         <div className="collection-card__image">
           {collection.cardImage ? (
             <img
-              src={collection.cardImage}
+              src={siteAssetPath(collection.cardImage)}
               alt={`Bộ sưu tập ${collection.name}`}
               loading="lazy"
             />
