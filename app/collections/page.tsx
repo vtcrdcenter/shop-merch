@@ -11,13 +11,21 @@ import {
   getFeaturedCollections,
 } from "../../data/collections";
 
+/* =========================================================
+   METADATA
+   ========================================================= */
+
 export const metadata: Metadata = {
   title:
     "Bộ sưu tập | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
 
   description:
-    "Khám phá các bộ sưu tập sản phẩm văn hóa sáng tạo được tổ chức theo chủ đề, nguồn cảm hứng và ngôn ngữ thiết kế.",
+    "Khám phá các bộ sưu tập sản phẩm văn hóa sáng tạo được phát triển từ những nguồn cảm hứng, hiện vật và câu chuyện lịch sử khác nhau.",
 };
+
+/* =========================================================
+   PAGE
+   ========================================================= */
 
 export default function CollectionsPage() {
   const collections =
@@ -28,23 +36,24 @@ export default function CollectionsPage() {
 
   return (
     <main className="collections-page">
-      {/* ===============================================
-          BREADCRUMB
-      ================================================ */}
+      {/* =====================================================
+          01 — BREADCRUMB
+      ====================================================== */}
 
       <div className="site-container collections-page__breadcrumb">
         <Breadcrumb
           items={[
             {
-              label: "Bộ sưu tập",
+              label:
+                "Bộ sưu tập",
             },
           ]}
         />
       </div>
 
-      {/* ===============================================
-          HERO
-      ================================================ */}
+      {/* =====================================================
+          02 — HERO
+      ====================================================== */}
 
       <section className="collections-hero">
         <div className="site-container collections-hero__inner">
@@ -53,50 +62,64 @@ export default function CollectionsPage() {
           </p>
 
           <h1 className="collections-hero__title">
-            Những chủ đề được phát triển thành sản phẩm
+            Khám phá sản phẩm
+            theo từng mạch câu chuyện
           </h1>
 
           <p className="collections-hero__description">
-            Bộ sưu tập là lớp tuyển chọn giúp kết nối
-            những sản phẩm có chung bối cảnh văn hóa,
-            nguồn cảm hứng hoặc ngôn ngữ thiết kế.
+            Những thiết kế có chung
+            nguồn cảm hứng được đặt
+            cạnh nhau để tạo thành
+            những bộ sưu tập mang
+            bản sắc và câu chuyện riêng.
           </p>
 
           <div className="collections-hero__meta">
             <span>
-              {collections.length} bộ sưu tập
+              {collections.length}{" "}
+              bộ sưu tập
             </span>
 
-            <span aria-hidden="true">
+            <span
+              aria-hidden="true"
+            >
               ·
             </span>
 
             <span>
-              Kết nối nhiều nhóm sản phẩm
+              Nhiều loại sản phẩm
+              trong cùng một chủ đề
             </span>
           </div>
         </div>
       </section>
 
-      {/* ===============================================
-          FEATURED COLLECTIONS
-      ================================================ */}
+      {/* =====================================================
+          03 — FEATURED COLLECTIONS
+      ====================================================== */}
 
-      {featuredCollections.length > 0 && (
+      {featuredCollections.length >
+        0 && (
         <section className="collections-featured">
           <div className="site-container">
             <SectionHeading
               eyebrow="NỔI BẬT"
-              title="Các bộ sưu tập đang được giới thiệu"
-              description="Những chủ đề hiện có nhiều sản phẩm hoặc có vai trò rõ trong định hướng phát triển gian hàng."
+              title="Những bộ sưu tập đang được giới thiệu"
+              description="Bắt đầu với những chủ đề hiện có nhiều thiết kế và thể hiện rõ nhất mối liên hệ giữa di sản và sản phẩm."
             />
 
             <div className="collections-featured__grid">
               {featuredCollections.map(
-                (collection) => (
+                (
+                  collection,
+                ) => (
                   <CollectionCard
-                    key={collection.id}
-                    collection={collection}
+                    key={
+                      collection.id
+                    }
+                    collection={
+                      collection
+                    }
                     showProductCount
                   />
                 ),
@@ -106,24 +129,30 @@ export default function CollectionsPage() {
         </section>
       )}
 
-      {/* ===============================================
-          ALL COLLECTIONS
-      ================================================ */}
+      {/* =====================================================
+          04 — ALL COLLECTIONS
+      ====================================================== */}
 
       <section className="collections-all">
         <div className="site-container">
           <SectionHeading
-            eyebrow="TẤT CẢ BỘ SƯU TẬP"
-            title="Khám phá theo chủ đề"
-            description="Mỗi bộ sưu tập tập hợp các sản phẩm có cùng câu chuyện, bối cảnh hoặc nguồn cảm hứng."
+            eyebrow="KHÁM PHÁ"
+            title="Tất cả bộ sưu tập"
+            description="Mỗi bộ sưu tập kết nối các sản phẩm thông qua cùng một nguồn cảm hứng, hình tượng hoặc câu chuyện văn hóa."
           />
 
           <div className="collections-all__grid">
             {collections.map(
-              (collection) => (
+              (
+                collection,
+              ) => (
                 <CollectionCard
-                  key={collection.id}
-                  collection={collection}
+                  key={
+                    collection.id
+                  }
+                  collection={
+                    collection
+                  }
                   showProductCount
                 />
               ),
@@ -132,33 +161,39 @@ export default function CollectionsPage() {
         </div>
       </section>
 
-      {/* ===============================================
-          EXPLANATION
-      ================================================ */}
+      {/* =====================================================
+          05 — COLLECTION EXPERIENCE
+      ====================================================== */}
 
       <section className="collections-method">
         <div className="site-container collections-method__grid">
           <div className="collections-method__heading">
             <p className="collections-method__eyebrow">
-              CÁCH TỔ CHỨC
+              KHÁM PHÁ THEO CHỦ ĐỀ
             </p>
 
             <h2 className="collections-method__title">
-              Bộ sưu tập khác với nhóm sản phẩm
+              Một câu chuyện,
+              nhiều cách hiện diện
             </h2>
           </div>
 
           <div className="collections-method__content">
             <p>
-              Nhóm sản phẩm được tổ chức theo công năng
-              và hình thức sử dụng, còn bộ sưu tập được
-              xây dựng theo chủ đề và câu chuyện.
+              Một nguồn cảm hứng có
+              thể xuất hiện trên nhiều
+              loại sản phẩm khác nhau,
+              từ vật phẩm lưu niệm nhỏ
+              đến phụ kiện, mỹ phẩm
+              hay quà tặng.
             </p>
 
             <p>
-              Vì vậy, cùng một bộ sưu tập có thể bao gồm
-              nhiều loại sản phẩm khác nhau như nam châm,
-              keycap, gương, mỹ phẩm hoặc thực phẩm đóng gói.
+              Khi được đặt trong cùng
+              một bộ sưu tập, các thiết kế
+              giúp người xem nhận ra
+              mạch câu chuyện chung phía
+              sau những hình thức khác nhau.
             </p>
           </div>
         </div>
