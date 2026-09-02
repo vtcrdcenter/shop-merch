@@ -91,7 +91,7 @@ export async function generateMetadata({
   ) {
     return {
       title:
-        "Không tìm thấy câu chuyện | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+        "Không tìm thấy câu chuyện",
     };
   }
 
@@ -100,7 +100,7 @@ export async function generateMetadata({
 
   return {
     title:
-      `${story.title} | Câu chuyện | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia`,
+      story.title,
 
     description:
       story.excerpt,
