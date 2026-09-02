@@ -1,7 +1,10 @@
 // app/gifts/page.tsx
 
 import type { Metadata } from "next";
-import { siteAssetPath } from "../../lib/site-path";
+
+import {
+  siteAssetPath,
+} from "../../lib/site-path";
 
 import Breadcrumb from "../components/Breadcrumb";
 import ProductGrid from "../components/ProductGrid";
@@ -16,13 +19,21 @@ import {
   getProductBySlug,
 } from "../../data/products";
 
+/* =========================================================
+   METADATA
+   ========================================================= */
+
 export const metadata: Metadata = {
   title:
     "Quà tặng | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
 
   description:
-    "Khám phá các sản phẩm văn hóa sáng tạo theo mục đích quà tặng, từ quà lưu niệm, quà văn hóa đến sản phẩm sưu tầm và quà doanh nghiệp.",
+    "Khám phá các sản phẩm văn hóa sáng tạo theo nhu cầu quà tặng: quà lưu niệm, quà văn hóa, quà cá nhân, sản phẩm sưu tầm và quà dành cho đối tác.",
 };
+
+/* =========================================================
+   PAGE
+   ========================================================= */
 
 export default function GiftsPage() {
   const giftGroups =
@@ -34,21 +45,22 @@ export default function GiftsPage() {
   return (
     <main className="gifts-page">
       {/* =====================================================
-          BREADCRUMB
+          01 — BREADCRUMB
       ====================================================== */}
 
       <div className="site-container gifts-page__breadcrumb">
         <Breadcrumb
           items={[
             {
-              label: "Quà tặng",
+              label:
+                "Quà tặng",
             },
           ]}
         />
       </div>
 
       {/* =====================================================
-          HERO
+          02 — HERO
       ====================================================== */}
 
       <section className="gifts-hero">
@@ -58,84 +70,109 @@ export default function GiftsPage() {
           </p>
 
           <h1 className="gifts-hero__title">
-            Chọn một món quà mang câu chuyện văn hóa
+            Chọn một món quà
+            mang câu chuyện văn hóa
           </h1>
 
           <p className="gifts-hero__description">
-            Khám phá sản phẩm theo mục đích sử dụng:
-            một món quà nhỏ sau chuyến tham quan,
-            quà tặng văn hóa, sản phẩm cá nhân,
-            vật phẩm sưu tầm hoặc bộ quà dành cho
-            đối tác và sự kiện.
+            Tìm một món quà nhỏ sau
+            chuyến tham quan, một vật phẩm
+            mang dấu ấn văn hóa hay một
+            lựa chọn dành cho người thân,
+            đối tác và những dịp đặc biệt.
           </p>
 
           <div className="gifts-hero__meta">
             <span>
-              {giftGroups.length} nhóm gợi ý
+              {
+                giftGroups.length
+              }{" "}
+              nhóm gợi ý
             </span>
 
-            <span aria-hidden="true">
+            <span
+              aria-hidden="true"
+            >
               ·
             </span>
 
             <span>
-              Từ quà lưu niệm đến quà doanh nghiệp
+              Từ quà lưu niệm
+              đến quà tặng văn hóa
             </span>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          QUICK NAV
+          03 — QUICK NAV
       ====================================================== */}
 
-      <section className="gifts-nav">
-        <div className="site-container">
-          <div
-            className="gifts-nav__list"
-            aria-label="Các nhóm quà tặng"
-          >
-            {giftGroups.map(
-              (gift) => (
-                <a
-                  key={gift.id}
-                  href={`#${gift.slug}`}
-                  className="gifts-nav__item"
-                >
-                  {gift.shortName}
-                </a>
-              ),
-            )}
+      {giftGroups.length >
+        0 && (
+        <section className="gifts-nav">
+          <div className="site-container">
+            <nav
+              className="gifts-nav__list"
+              aria-label="Các nhóm quà tặng"
+            >
+              {giftGroups.map(
+                (
+                  gift,
+                ) => (
+                  <a
+                    key={
+                      gift.id
+                    }
+                    href={`#${gift.slug}`}
+                    className="gifts-nav__item"
+                  >
+                    {
+                      gift.shortName
+                    }
+                  </a>
+                ),
+              )}
+            </nav>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* =====================================================
-          FEATURED GIFT GROUPS
+          04 — FEATURED GIFT GROUPS
       ====================================================== */}
 
-      {featuredGiftGroups.length > 0 && (
+      {featuredGiftGroups.length >
+        0 && (
         <section className="gifts-featured">
           <div className="site-container">
             <SectionHeading
               eyebrow="GỢI Ý"
               title="Chọn quà theo nhu cầu"
-              description="Thay vì bắt đầu từ loại sản phẩm, bạn có thể lựa chọn theo mục đích tặng và người nhận."
+              description="Bắt đầu từ người nhận hoặc dịp tặng để tìm những sản phẩm phù hợp hơn."
             />
 
             <div className="gifts-featured__grid">
               {featuredGiftGroups.map(
-                (gift) => (
+                (
+                  gift,
+                ) => (
                   <a
-                    key={gift.id}
+                    key={
+                      gift.id
+                    }
                     href={`#${gift.slug}`}
                     className="gift-feature-card"
                   >
                     <div className="gift-feature-card__image">
                       {gift.image ? (
                         <img
-                          src={siteAssetPath(gift.image)}
-                          alt={gift.name}
+                          src={siteAssetPath(
+                            gift.image,
+                          )}
+                          alt={
+                            gift.name
+                          }
                           loading="lazy"
                         />
                       ) : (
@@ -151,16 +188,23 @@ export default function GiftsPage() {
                       </p>
 
                       <h2 className="gift-feature-card__title">
-                        {gift.name}
+                        {
+                          gift.name
+                        }
                       </h2>
 
                       <p className="gift-feature-card__description">
-                        {gift.description}
+                        {
+                          gift.description
+                        }
                       </p>
 
                       <span className="gift-feature-card__link">
-                        Khám phá
-                        <span aria-hidden="true">
+                        Xem gợi ý
+
+                        <span
+                          aria-hidden="true"
+                        >
                           {" "}
                           →
                         </span>
@@ -175,26 +219,32 @@ export default function GiftsPage() {
       )}
 
       {/* =====================================================
-          ALL GIFT GROUPS
+          05 — ALL GIFT GROUPS
       ====================================================== */}
 
       <section className="gifts-groups">
         <div className="site-container">
           <SectionHeading
-            eyebrow="TẤT CẢ GỢI Ý"
-            title="Khám phá sản phẩm theo mục đích tặng"
-            description="Mỗi nhóm dưới đây sử dụng các sản phẩm hiện có trong gian hàng và tổ chức lại theo nhu cầu mua."
+            eyebrow="KHÁM PHÁ"
+            title="Gợi ý quà tặng theo từng nhu cầu"
+            description="Mỗi nhóm tập hợp những sản phẩm phù hợp với một cách tặng, người nhận hoặc mục đích sử dụng khác nhau."
           />
 
           <div className="gifts-groups__list">
             {giftGroups.map(
-              (gift, index) => {
+              (
+                gift,
+                index,
+              ) => {
                 const giftProducts =
                   gift.productSlugs
-                    .map((slug) =>
-                      getProductBySlug(
+                    .map(
+                      (
                         slug,
-                      ),
+                      ) =>
+                        getProductBySlug(
+                          slug,
+                        ),
                     )
                     .filter(
                       (
@@ -211,14 +261,19 @@ export default function GiftsPage() {
 
                 return (
                   <section
-                    key={gift.id}
-                    id={gift.slug}
+                    key={
+                      gift.id
+                    }
+                    id={
+                      gift.slug
+                    }
                     className="gift-group"
                   >
                     <div className="gift-group__header">
                       <div className="gift-group__number">
                         {String(
-                          index + 1,
+                          index +
+                            1,
                         ).padStart(
                           2,
                           "0",
@@ -231,7 +286,9 @@ export default function GiftsPage() {
                         </p>
 
                         <h2 className="gift-group__title">
-                          {gift.name}
+                          {
+                            gift.name
+                          }
                         </h2>
 
                         <p className="gift-group__description">
@@ -267,7 +324,7 @@ export default function GiftsPage() {
                         }
                         showCategory
                         showTraceability
-                        emptyMessage="Nhóm quà tặng này hiện chưa có sản phẩm."
+                        emptyMessage="Hiện chưa có sản phẩm trong nhóm quà tặng này."
                       />
                     </div>
                   </section>
@@ -279,37 +336,37 @@ export default function GiftsPage() {
       </section>
 
       {/* =====================================================
-          GIFT PHILOSOPHY
+          06 — GIFT STORY
       ====================================================== */}
 
       <section className="gifts-philosophy">
         <div className="site-container gifts-philosophy__grid">
           <div className="gifts-philosophy__heading">
             <p className="gifts-philosophy__eyebrow">
-              MỘT MÓN QUÀ CÓ NGUỒN
+              MỘT MÓN QUÀ CÓ CÂU CHUYỆN
             </p>
 
             <h2 className="gifts-philosophy__title">
-              Không chỉ là một vật phẩm lưu niệm
+              Giá trị của món quà
+              không dừng ở hình thức
             </h2>
           </div>
 
           <div className="gifts-philosophy__content">
             <p>
-              Các sản phẩm trong gian hàng được
-              phát triển từ hiện vật, hình tượng,
-              tư liệu và câu chuyện lịch sử.
-              Vì vậy, việc lựa chọn quà tặng cũng
-              có thể bắt đầu từ chính câu chuyện
-              gắn với sản phẩm.
+              Những sản phẩm trong gian hàng
+              được phát triển từ hiện vật,
+              hình tượng, tư liệu và câu chuyện
+              lịch sử. Vì vậy, mỗi món quà
+              đều có một nguồn cảm hứng
+              có thể tiếp tục khám phá.
             </p>
 
             <p>
-              Với các sản phẩm hỗ trợ truy xuất,
-              người nhận có thể tiếp tục tìm hiểu
-              về nguồn di sản, quá trình phát triển
-              thiết kế và các thông tin liên quan
-              được công bố trên hệ thống.
+              Với sản phẩm có hỗ trợ truy xuất,
+              người nhận có thể xem thêm
+              thông tin về nguồn văn hóa,
+              thiết kế và hồ sơ dữ liệu liên quan.
             </p>
           </div>
         </div>
