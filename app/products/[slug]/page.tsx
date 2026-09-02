@@ -3,7 +3,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { siteAssetPath } from "../../../lib/site-path";
+
+import {
+  siteAssetPath,
+} from "../../../lib/site-path";
 
 import Breadcrumb from "../../components/Breadcrumb";
 import ProductGallery from "../../components/ProductGallery";
@@ -35,26 +38,29 @@ type ProductDetailPageProps = {
   }>;
 };
 
-// ============================================================
-// STATIC ROUTES
-// ============================================================
+/* =========================================================
+   STATIC PARAMS
+   ========================================================= */
 
 export async function generateStaticParams() {
-  return getAllProducts().map((product) => ({
-    slug: product.slug,
-  }));
+  return getAllProducts().map(
+    (product) => ({
+      slug: product.slug,
+    }),
+  );
 }
 
-// ============================================================
-// METADATA
-// ============================================================
+/* =========================================================
+   METADATA
+   ========================================================= */
 
 export async function generateMetadata({
   params,
 }: ProductDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
 
-  const product = getProductBySlug(slug);
+  const product =
+    getProductBySlug(slug);
 
   if (!product) {
     return {
@@ -63,139 +69,178 @@ export async function generateMetadata({
     };
   }
 
-  const primaryImage = product.images[0];
+  const primaryImage =
+    product.images[0];
 
   return {
     title: `${product.name} | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia`,
 
-    description: product.shortDescription,
+    description:
+      product.shortDescription,
 
     openGraph: {
-      title: product.name,
+      title:
+        product.name,
 
-      description: product.shortDescription,
+      description:
+        product.shortDescription,
 
-      type: "website",
+      type:
+        "website",
 
-      images: primaryImage
-        ? [
-            {
-              url: primaryImage.src,
-              alt: primaryImage.alt,
-            },
-          ]
-        : undefined,
+      images:
+        primaryImage
+          ? [
+              {
+                url:
+                  siteAssetPath(
+                    primaryImage.src,
+                  ),
+
+                alt:
+                  primaryImage.alt,
+              },
+            ]
+          : undefined,
     },
   };
 }
 
-// ============================================================
-// PAGE
-// ============================================================
+/* =========================================================
+   PAGE
+   ========================================================= */
 
 export default async function ProductDetailPage({
   params,
 }: ProductDetailPageProps) {
   const { slug } = await params;
 
-  const product = getProductBySlug(slug);
+  const product =
+    getProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
 
-  const allProducts = getAllProducts();
+  const allProducts =
+    getAllProducts();
 
-  const category = getCategoryById(
-    product.categoryId,
-  );
+  const category =
+    getCategoryById(
+      product.categoryId,
+    );
 
   const heritageSources =
     product.heritageSlugs
-      .map((heritageSlug) =>
-        getHeritageBySlug(heritageSlug),
+      .map(
+        (heritageSlug) =>
+          getHeritageBySlug(
+            heritageSlug,
+          ),
       )
       .filter(
         (
           heritage,
         ): heritage is NonNullable<
-          ReturnType<typeof getHeritageBySlug>
-        > => Boolean(heritage),
+          ReturnType<
+            typeof getHeritageBySlug
+          >
+        > =>
+          Boolean(
+            heritage,
+          ),
       );
 
   const productCollections =
     product.collectionSlugs
-      .map((collectionSlug) =>
-        getCollectionBySlug(collectionSlug),
+      .map(
+        (collectionSlug) =>
+          getCollectionBySlug(
+            collectionSlug,
+          ),
       )
       .filter(
         (
           collection,
         ): collection is NonNullable<
-          ReturnType<typeof getCollectionBySlug>
-        > => Boolean(collection),
+          ReturnType<
+            typeof getCollectionBySlug
+          >
+        > =>
+          Boolean(
+            collection,
+          ),
       );
 
   return (
     <main className="product-detail-page">
       {/* =====================================================
-          BREADCRUMB
+          01 — BREADCRUMB
       ====================================================== */}
 
       <div className="site-container product-detail-page__breadcrumb">
         <Breadcrumb
           items={[
             {
-              label: "Sản phẩm",
-              href: "/products",
+              label:
+                "Sản phẩm",
+
+              href:
+                "/products",
             },
 
             ...(category
               ? [
                   {
-                    label: category.shortName,
-                    href: `/products?category=${category.slug}`,
+                    label:
+                      category.shortName,
+
+                    href:
+                      `/products?category=${category.slug}`,
                   },
                 ]
               : []),
 
             {
-              label: product.name,
+              label:
+                product.name,
             },
           ]}
         />
       </div>
 
       {/* =====================================================
-          PRODUCT HERO
+          02 — PRODUCT HERO
       ====================================================== */}
 
-      <section
-        className="product-detail-hero"
-        aria-labelledby="product-title"
-      >
+      <section className="product-detail-hero">
         <div className="site-container product-detail-hero__grid">
-          {/* LEFT: GALLERY */}
+          {/* LEFT — GALLERY */}
 
           <div className="product-detail-hero__gallery">
             <ProductGallery
-              images={product.images}
-              productName={product.name}
+              images={
+                product.images
+              }
+              productName={
+                product.name
+              }
             />
           </div>
 
-          {/* RIGHT: PRODUCT INFO */}
+          {/* RIGHT — PRODUCT INFORMATION */}
 
           <div className="product-detail-hero__information">
             <ProductMeta
-              product={product}
+              product={
+                product
+              }
             />
 
-            {/* ===============================================
-                HERITAGE QUICK LINK
-            ================================================ */}
+            {/* HERITAGE QUICK LINKS */}
 
-            {heritageSources.length > 0 && (
+            {heritageSources.length >
+              0 && (
               <div className="product-detail-hero__heritage">
                 <p className="product-detail-hero__label">
                   NGUỒN CẢM HỨNG
@@ -203,13 +248,19 @@ export default async function ProductDetailPage({
 
                 <div className="product-detail-hero__heritage-links">
                   {heritageSources.map(
-                    (heritage) => (
+                    (
+                      heritage,
+                    ) => (
                       <Link
-                        key={heritage.id}
+                        key={
+                          heritage.id
+                        }
                         href={`/heritage/${heritage.slug}`}
                         className="product-detail-hero__heritage-link"
                       >
-                        {heritage.shortName}
+                        {
+                          heritage.shortName
+                        }
 
                         <span
                           aria-hidden="true"
@@ -224,9 +275,7 @@ export default async function ProductDetailPage({
               </div>
             )}
 
-            {/* ===============================================
-                COLLECTION QUICK LINK
-            ================================================ */}
+            {/* COLLECTION QUICK LINKS */}
 
             {productCollections.length >
               0 && (
@@ -237,13 +286,19 @@ export default async function ProductDetailPage({
 
                 <div className="product-detail-hero__collection-links">
                   {productCollections.map(
-                    (collection) => (
+                    (
+                      collection,
+                    ) => (
                       <Link
-                        key={collection.id}
+                        key={
+                          collection.id
+                        }
                         href={`/collections/${collection.slug}`}
                         className="product-detail-hero__collection-link"
                       >
-                        {collection.name}
+                        {
+                          collection.name
+                        }
 
                         <span
                           aria-hidden="true"
@@ -262,67 +317,78 @@ export default async function ProductDetailPage({
       </section>
 
       {/* =====================================================
-          PRODUCT INTRODUCTION
+          03 — PRODUCT STORY
       ====================================================== */}
 
       <section className="product-detail-intro">
         <div className="site-container product-detail-intro__grid">
           <div className="product-detail-intro__heading">
             <p className="product-detail-intro__eyebrow">
-              SẢN PHẨM
+              CÂU CHUYỆN SẢN PHẨM
             </p>
 
             <h2 className="product-detail-intro__title">
-              Một cách tiếp cận di sản trong đời
-              sống đương đại
+              Một cách đưa
+              câu chuyện di sản
+              vào đời sống hôm nay
             </h2>
           </div>
 
           <div className="product-detail-intro__content">
             <p>
-              {product.description}
+              {
+                product.description
+              }
             </p>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          HERITAGE SOURCE
+          04 — HERITAGE SOURCE
       ====================================================== */}
 
-      {heritageSources.length > 0 && (
-        <section
-          className="product-detail-heritage"
-          aria-labelledby="product-heritage-title"
-        >
+      {heritageSources.length >
+        0 && (
+        <section className="product-detail-heritage">
           <div className="site-container">
             <SectionHeading
-              eyebrow="NGUỒN DI SẢN"
-              title="Nguồn cảm hứng của thiết kế"
-              description="Các yếu tố văn hóa và tư liệu nguồn được sử dụng làm cơ sở cho quá trình phát triển sản phẩm."
+              eyebrow="NGUỒN CẢM HỨNG"
+              title="Câu chuyện bắt đầu từ đâu?"
+              description="Khám phá những hiện vật, hình tượng và tư liệu đã trở thành điểm khởi đầu cho thiết kế sản phẩm."
             />
 
             <div className="product-detail-heritage__grid">
               {heritageSources.map(
-                (heritage) => {
+                (
+                  heritage,
+                ) => {
                   const image =
-                    heritage.images[0];
+                    heritage
+                      .images[0];
 
                   return (
                     <article
-                      key={heritage.id}
+                      key={
+                        heritage.id
+                      }
                       className="product-detail-heritage__item"
                     >
                       <div className="product-detail-heritage__image">
                         {image ? (
                           <img
-                            src={siteAssetPath(image.src)}
-                            alt={image.alt}
+                            src={siteAssetPath(
+                              image.src,
+                            )}
+                            alt={
+                              image.alt
+                            }
                             loading="lazy"
                           />
                         ) : (
                           <div className="product-detail-heritage__placeholder">
-                            Hình ảnh tư liệu đang
+                            Hình ảnh
+                            tư liệu đang
                             được cập nhật
                           </div>
                         )}
@@ -334,12 +400,16 @@ export default async function ProductDetailPage({
                         </p>
 
                         <h3>
-                          {heritage.name}
+                          {
+                            heritage.name
+                          }
                         </h3>
 
                         {heritage.period && (
                           <p className="product-detail-heritage__period">
-                            {heritage.period}
+                            {
+                              heritage.period
+                            }
                           </p>
                         )}
 
@@ -349,12 +419,14 @@ export default async function ProductDetailPage({
                           }
                         </p>
 
-                        {heritage.designElements
-                          .length > 0 && (
+                        {heritage
+                          .designElements
+                          .length >
+                          0 && (
                           <div className="product-detail-heritage__elements">
                             <p>
-                              Các yếu tố được khai
-                              thác
+                              Chi tiết
+                              được khai thác
                             </p>
 
                             <ul>
@@ -381,7 +453,8 @@ export default async function ProductDetailPage({
                           href={`/heritage/${heritage.slug}`}
                           className="product-detail-heritage__link"
                         >
-                          Khám phá nguồn di sản
+                          Khám phá
+                          nguồn cảm hứng
 
                           <span
                             aria-hidden="true"
@@ -401,18 +474,15 @@ export default async function ProductDetailPage({
       )}
 
       {/* =====================================================
-          FROM HERITAGE TO DESIGN
+          05 — FROM HERITAGE TO DESIGN
       ====================================================== */}
 
-      <section
-        className="product-detail-design"
-        aria-labelledby="product-design-title"
-      >
+      <section className="product-detail-design">
         <div className="site-container">
           <SectionHeading
             eyebrow="TỪ DI SẢN ĐẾN THIẾT KẾ"
-            title="Cách các yếu tố di sản được chuyển hóa"
-            description="Thiết kế không sao chép nguyên trạng hiện vật mà lựa chọn, giản lược và tổ chức lại các yếu tố phù hợp với công năng của sản phẩm."
+            title="Những chi tiết được chuyển hóa như thế nào?"
+            description="Thiết kế lựa chọn những đặc điểm nhận diện phù hợp từ nguồn di sản và tổ chức lại để tạo nên hình thức mới cho sản phẩm."
           />
 
           <div className="product-detail-design__grid">
@@ -422,12 +492,13 @@ export default async function ProductDetailPage({
               </span>
 
               <p className="product-detail-design__label">
-                NGUYÊN TẮC CHUYỂN HÓA
+                NGUYÊN TẮC
               </p>
 
               <h3>
-                Từ đặc điểm nhận diện đến ngôn
-                ngữ sản phẩm
+                Giữ lại những
+                đặc điểm nhận diện
+                quan trọng
               </h3>
 
               <p>
@@ -443,15 +514,18 @@ export default async function ProductDetailPage({
               </span>
 
               <p className="product-detail-design__label">
-                PHƯƠNG ÁN THIẾT KẾ
+                THIẾT KẾ
               </p>
 
               <h3>
-                Tổ chức hình thức và chi tiết
+                Tổ chức lại
+                hình thức và chi tiết
               </h3>
 
               <p>
-                {product.designDescription}
+                {
+                  product.designDescription
+                }
               </p>
             </article>
           </div>
@@ -459,34 +533,29 @@ export default async function ProductDetailPage({
       </section>
 
       {/* =====================================================
-          PRODUCT SPECIFICATION
+          06 — PRODUCT SPECIFICATION
       ====================================================== */}
 
-      <section
-        className="product-detail-specification"
-        aria-labelledby="product-specification-title"
-      >
+      <section className="product-detail-specification">
         <div className="site-container">
           <SectionHeading
             eyebrow="THÔNG TIN SẢN PHẨM"
-            title="Thông số và cấu tạo dự kiến"
-            description="Các thông tin dưới đây phản ánh phương án thiết kế và trạng thái Pilot hiện tại."
+            title="Thông tin thiết kế"
+            description="Các thông tin chính về hình thức, kích thước, công năng và chất liệu của sản phẩm."
           />
 
-          <div className="product-detail-specification__grid">
-            {/* SKU */}
-
+          <dl className="product-detail-specification__grid">
             <div className="product-detail-specification__item">
               <dt>
                 Mã sản phẩm
               </dt>
 
               <dd>
-                {product.sku}
+                {
+                  product.sku
+                }
               </dd>
             </div>
-
-            {/* TYPE */}
 
             <div className="product-detail-specification__item">
               <dt>
@@ -494,11 +563,11 @@ export default async function ProductDetailPage({
               </dt>
 
               <dd>
-                {product.productType}
+                {
+                  product.productType
+                }
               </dd>
             </div>
-
-            {/* SIZE */}
 
             <div className="product-detail-specification__item">
               <dt>
@@ -506,11 +575,11 @@ export default async function ProductDetailPage({
               </dt>
 
               <dd>
-                {product.dimensions}
+                {
+                  product.dimensions
+                }
               </dd>
             </div>
-
-            {/* FUNCTION */}
 
             <div className="product-detail-specification__item">
               <dt>
@@ -518,103 +587,86 @@ export default async function ProductDetailPage({
               </dt>
 
               <dd>
-                {product.function}
+                {
+                  product.function
+                }
               </dd>
             </div>
-
-            {/* MATERIAL */}
 
             <div className="product-detail-specification__item product-detail-specification__item--wide">
               <dt>
-                Chất liệu dự kiến
+                Chất liệu
               </dt>
 
               <dd>
-                <ul>
-                  {product.materials.map(
-                    (material) => (
-                      <li key={material}>
-                        {material}
-                      </li>
-                    ),
-                  )}
-                </ul>
+                {product.materials
+                  .length >
+                0 ? (
+                  <ul>
+                    {product.materials.map(
+                      (
+                        material,
+                      ) => (
+                        <li
+                          key={
+                            material
+                          }
+                        >
+                          {
+                            material
+                          }
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                ) : (
+                  "Đang cập nhật"
+                )}
               </dd>
             </div>
-          </div>
+          </dl>
         </div>
       </section>
 
       {/* =====================================================
-          PILOT DEVELOPMENT
+          07 — TRACEABILITY
       ====================================================== */}
 
-      <section
-        className="product-detail-pilot"
-        aria-labelledby="product-pilot-title"
-      >
-        <div className="site-container product-detail-pilot__grid">
-          <div className="product-detail-pilot__heading">
-            <p className="product-detail-pilot__eyebrow">
-              PHÁT TRIỂN SẢN PHẨM
-            </p>
+      {product.traceability
+        .enabled && (
+        <section className="product-detail-traceability">
+          <div className="site-container">
+            <div className="product-detail-traceability__heading">
+              <p className="product-detail-traceability__eyebrow">
+                TRUY XUẤT SẢN PHẨM
+              </p>
 
-            <h2
-              id="product-pilot-title"
-              className="product-detail-pilot__title"
-            >
-              Giá trị kiểm thử trong giai đoạn
-              Pilot
-            </h2>
+              <h2 className="product-detail-traceability__title">
+                Tìm hiểu hồ sơ
+                phía sau sản phẩm
+              </h2>
+
+              <p className="product-detail-traceability__description">
+                Sản phẩm này hỗ trợ
+                truy xuất để người dùng
+                tiếp tục kiểm tra mã nhận diện,
+                nguồn cảm hứng và những
+                thông tin liên quan được
+                công bố trên hệ thống.
+              </p>
+            </div>
+
+            <TraceabilityPanel
+              product={
+                product
+              }
+            />
           </div>
-
-          <div className="product-detail-pilot__content">
-            <p className="product-detail-pilot__value">
-              {product.pilotValue}
-            </p>
-
-            {product
-              .requirementsBeforePrototype
-              .length > 0 && (
-              <div className="product-detail-pilot__requirements">
-                <h3>
-                  Nội dung cần hoàn thiện trước
-                  khi làm mẫu
-                </h3>
-
-                <ol>
-                  {product.requirementsBeforePrototype.map(
-                    (
-                      requirement,
-                      index,
-                    ) => (
-                      <li
-                        key={`${requirement}-${index}`}
-                      >
-                        <span>
-                          {String(
-                            index + 1,
-                          ).padStart(
-                            2,
-                            "0",
-                          )}
-                        </span>
-
-                        <p>
-                          {requirement}
-                        </p>
-                      </li>
-                    ),
-                  )}
-                </ol>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* =====================================================
-          COLLECTIONS
+          08 — COLLECTIONS
       ====================================================== */}
 
       {productCollections.length >
@@ -623,24 +675,32 @@ export default async function ProductDetailPage({
           <div className="site-container">
             <SectionHeading
               eyebrow="BỘ SƯU TẬP"
-              title="Khám phá trong cùng chủ đề"
-              description="Các bộ sưu tập giúp kết nối những sản phẩm có chung bối cảnh văn hóa, nguồn cảm hứng hoặc ngôn ngữ thiết kế."
+              title="Khám phá thêm trong cùng chủ đề"
+              description="Những sản phẩm có chung nguồn cảm hứng hoặc mạch câu chuyện được tập hợp trong cùng một bộ sưu tập."
             />
 
             <div className="product-detail-collections__grid">
               {productCollections.map(
-                (collection) => (
+                (
+                  collection,
+                ) => (
                   <Link
-                    key={collection.id}
+                    key={
+                      collection.id
+                    }
                     href={`/collections/${collection.slug}`}
                     className="product-detail-collections__item"
                   >
                     <p>
-                      {collection.eyebrow}
+                      {
+                        collection.eyebrow
+                      }
                     </p>
 
                     <h3>
-                      {collection.name}
+                      {
+                        collection.name
+                      }
                     </h3>
 
                     <span>
@@ -650,7 +710,13 @@ export default async function ProductDetailPage({
                     </span>
 
                     <strong>
-                      Xem bộ sưu tập →
+                      Xem bộ sưu tập
+                      <span
+                        aria-hidden="true"
+                      >
+                        {" "}
+                        →
+                      </span>
                     </strong>
                   </Link>
                 ),
@@ -661,30 +727,22 @@ export default async function ProductDetailPage({
       )}
 
       {/* =====================================================
-          TRACEABILITY
+          09 — RELATED PRODUCTS
       ====================================================== */}
 
-      {product.traceability.enabled && (
-        <section className="product-detail-traceability">
-          <div className="site-container">
-            <TraceabilityPanel
-              product={product}
-            />
-          </div>
-        </section>
-      )}
-
-      {/* =====================================================
-          RELATED PRODUCTS
-      ====================================================== */}
-
-      <div className="site-container product-detail-related">
-        <RelatedProducts
-          currentProduct={product}
-          products={allProducts}
-          limit={3}
-        />
-      </div>
+      <section className="product-detail-related">
+        <div className="site-container">
+          <RelatedProducts
+            currentProduct={
+              product
+            }
+            products={
+              allProducts
+            }
+            limit={3}
+          />
+        </div>
+      </section>
     </main>
   );
 }
