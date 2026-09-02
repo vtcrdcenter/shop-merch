@@ -1,37 +1,46 @@
-import type { ShopProduct } from "../../data/products";
+import type {
+  ShopProduct,
+} from "../../data/products";
 
 import ProductCard from "./ProductCard";
 
 type ProductGridProps = {
-  products: ShopProduct[];
+  products:
+    ShopProduct[];
 
   /**
-   * Số lượng column chỉ mang tính semantic.
-   * CSS sẽ quyết định responsive cuối cùng.
+   * Số cột mong muốn trên màn hình lớn.
+   * Responsive cuối cùng do CSS xử lý.
    */
-  columns?: 2 | 3 | 4;
+  columns?:
+    2 | 3 | 4;
 
   /**
-   * Có dùng card nổi bật hay không.
+   * Dùng kiểu ProductCard nổi bật.
    */
-  featuredCards?: boolean;
+  featuredCards?:
+    boolean;
 
   /**
-   * Hiển thị category trên card.
+   * Hiển thị nhóm sản phẩm.
    */
-  showCategory?: boolean;
+  showCategory?:
+    boolean;
 
   /**
-   * Hiển thị trạng thái truy xuất.
+   * Hiển thị thông tin truy xuất.
    */
-  showTraceability?: boolean;
+  showTraceability?:
+    boolean;
 
   /**
-   * Nội dung khi không có sản phẩm.
+   * Nội dung khi danh sách rỗng.
    */
-  emptyMessage?: string;
+  emptyMessage?:
+    string;
 
-  className?: string;
+  className?:
+    string;
 };
 
 export default function ProductGrid({
@@ -40,10 +49,14 @@ export default function ProductGrid({
   featuredCards = false,
   showCategory = true,
   showTraceability = true,
-  emptyMessage = "Chưa có sản phẩm trong nhóm này.",
+  emptyMessage =
+    "Hiện chưa có sản phẩm.",
   className = "",
 }: ProductGridProps) {
-  if (!products.length) {
+  if (
+    products.length ===
+    0
+  ) {
     return (
       <div
         className={[
@@ -52,8 +65,13 @@ export default function ProductGrid({
         ]
           .filter(Boolean)
           .join(" ")}
+        role="status"
       >
-        <p>{emptyMessage}</p>
+        <p>
+          {
+            emptyMessage
+          }
+        </p>
       </div>
     );
   }
@@ -62,21 +80,37 @@ export default function ProductGrid({
     <div
       className={[
         "product-grid",
+
         `product-grid--${columns}`,
+
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          featured={featuredCards}
-          showCategory={showCategory}
-          showTraceability={showTraceability}
-        />
-      ))}
+      {products.map(
+        (
+          product,
+        ) => (
+          <ProductCard
+            key={
+              product.id
+            }
+            product={
+              product
+            }
+            featured={
+              featuredCards
+            }
+            showCategory={
+              showCategory
+            }
+            showTraceability={
+              showTraceability
+            }
+          />
+        ),
+      )}
     </div>
   );
 }
