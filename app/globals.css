@@ -21108,3 +21108,347 @@ body {
       30px;
   }
 }
+/* =========================================================
+   MUSEUM SHOP — FINAL GLOBAL QA LOCK
+   PHẢI GIỮ Ở CUỐI globals.css
+
+   Mục tiêu:
+   - container tuyệt đối không vượt 1180px
+   - mỗi route tối thiểu 100vh
+   - không section nào bị ép height: 100vh
+   - ngăn horizontal overflow
+   - đồng nhất responsive toàn website
+   ========================================================= */
+
+
+/* =========================================================
+   01. GLOBAL WIDTH LOCK
+   ========================================================= */
+
+:root {
+  --container: 1180px;
+
+  --page-gutter-desktop: 24px;
+  --page-gutter-mobile: 16px;
+}
+
+
+/*
+  Đây là rule cuối cùng quyết định
+  chiều rộng toàn bộ nội dung website.
+*/
+.site-container {
+  width:
+    min(
+      calc(
+        100% -
+        48px
+      ),
+      1180px
+    );
+
+  max-width:
+    1180px;
+
+  margin-left:
+    auto;
+
+  margin-right:
+    auto;
+}
+
+
+/* =========================================================
+   02. DOCUMENT HEIGHT
+   ========================================================= */
+
+html {
+  width: 100%;
+  min-height: 100%;
+
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   03. MAIN CONTENT
+   ========================================================= */
+
+#main-content {
+  width: 100%;
+
+  min-width: 0;
+
+  min-height: 100vh;
+
+  flex:
+    1 0 auto;
+}
+
+
+/* =========================================================
+   04. ALL PAGE ROOTS
+   ========================================================= */
+
+.home-page,
+.products-page,
+.product-detail-page,
+.heritage-page,
+.heritage-detail-page,
+.collections-page,
+.collection-detail-page,
+.gifts-page,
+.stories-page,
+.story-detail-page,
+.about-page {
+  width: 100%;
+
+  min-width: 0;
+
+  min-height: 100vh;
+
+  overflow-x: clip;
+}
+
+
+/*
+  Không sử dụng:
+  height: 100vh;
+
+  Page dài phải được phép mở rộng
+  theo nội dung thực tế.
+*/
+
+
+/* =========================================================
+   05. SECTION WIDTH SAFETY
+   ========================================================= */
+
+.home-page section,
+.products-page section,
+.product-detail-page section,
+.heritage-page section,
+.heritage-detail-page section,
+.collections-page section,
+.collection-detail-page section,
+.gifts-page section,
+.stories-page section,
+.story-detail-page section,
+.about-page section {
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   06. GRID / FLEX OVERFLOW SAFETY
+   ========================================================= */
+
+.home-page *,
+.products-page *,
+.product-detail-page *,
+.heritage-page *,
+.heritage-detail-page *,
+.collections-page *,
+.collection-detail-page *,
+.gifts-page *,
+.stories-page *,
+.story-detail-page *,
+.about-page * {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   07. MEDIA SAFETY
+   ========================================================= */
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+
+/*
+  Các ảnh có height:100% ở card/hero
+  vẫn được rule component cụ thể
+  phía trên quyết định.
+*/
+
+
+/* =========================================================
+   08. HEADER / FOOTER WIDTH
+   ========================================================= */
+
+.shop-header,
+.shop-footer {
+  width: 100%;
+
+  max-width: none;
+}
+
+.shop-header
+.site-container,
+.shop-footer
+.site-container {
+  max-width: 1180px;
+}
+
+
+/* =========================================================
+   09. SHARED SECTION HEADING
+   ========================================================= */
+
+.section-heading {
+  width: 100%;
+
+  min-width: 0;
+}
+
+.section-heading__title {
+  max-width: 790px;
+}
+
+.section-heading__description {
+  max-width: 700px;
+}
+
+
+/* =========================================================
+   10. SHARED CARD SAFETY
+   ========================================================= */
+
+.product-card,
+.heritage-card,
+.collection-card,
+.story-card,
+.category-card,
+.about-scope__item,
+.about-explore__item {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   11. TEXT OVERFLOW
+   ========================================================= */
+
+.product-card__title,
+.heritage-card__title,
+.collection-card__title,
+.story-card__title,
+.about-scope__item h3,
+.about-explore__item h3 {
+  overflow-wrap: break-word;
+}
+
+
+/* =========================================================
+   12. DESKTOP
+   ========================================================= */
+
+@media (
+  min-width: 1200px
+) {
+
+  .site-container {
+    width: 1180px;
+
+    max-width: 1180px;
+  }
+}
+
+
+/* =========================================================
+   13. TABLET
+   ========================================================= */
+
+@media (
+  min-width: 768px
+) and (
+  max-width: 1199px
+) {
+
+  .site-container {
+    width:
+      calc(
+        100% -
+        48px
+      );
+
+    max-width:
+      1180px;
+  }
+}
+
+
+/* =========================================================
+   14. MOBILE
+   ========================================================= */
+
+@media (
+  max-width: 767px
+) {
+
+  .site-container {
+    width:
+      calc(
+        100% -
+        32px
+      );
+
+    max-width:
+      none;
+  }
+
+
+  /*
+    Tránh chữ dài / dữ liệu dài
+    đẩy toàn page rộng hơn viewport.
+  */
+  .product-meta__detail dd,
+  .product-detail-hero__heritage-link,
+  .product-detail-hero__collection-link,
+  .breadcrumb,
+  .breadcrumb * {
+    overflow-wrap: anywhere;
+  }
+}
+
+
+/* =========================================================
+   15. VERY SMALL MOBILE
+   ========================================================= */
+
+@media (
+  max-width: 420px
+) {
+
+  .site-container {
+    width:
+      calc(
+        100% -
+        28px
+      );
+  }
+}
