@@ -21612,3 +21612,349 @@ img {
       );
   }
 }
+/* =========================================================
+   HERITAGE SLIDER — FIX DISPLAY
+   ========================================================= */
+
+/*
+ * Khung slider:
+ * chỉ được nhìn thấy 1 ảnh tại một thời điểm.
+ */
+.heritage-image-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f4efe7;
+}
+
+/*
+ * Các ảnh vẫn nằm theo hàng ngang để lướt,
+ * nhưng viewport chỉ thấy đúng 1 slide.
+ */
+.heritage-image-slider__track {
+  display: flex !important;
+
+  width: 100%;
+  height: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  touch-action: pan-x;
+}
+
+.heritage-image-slider__track::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * QUAN TRỌNG:
+ * mỗi slide phải chiếm đúng 100% chiều rộng viewport.
+ * Không cho slide co lại, nếu không 2 ảnh sẽ xuất hiện cạnh nhau.
+ */
+.heritage-image-slider__slide {
+  position: relative;
+
+  flex: 0 0 100% !important;
+
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+
+  height: 100%;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/*
+ * Link và vùng giữ ảnh cũng phải chiếm toàn bộ slide.
+ */
+.heritage-image-slider__slide-inner,
+.heritage-image-slider__image-link {
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #f4efe7;
+}
+
+/*
+ * Không cho CSS img toàn site can thiệp.
+ */
+.heritage-image-slider img {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  max-width: 100%;
+
+  object-fit: contain !important;
+  object-position: center !important;
+
+  user-select: none;
+}
+
+/* =========================================================
+   CARD — ẢNH BÌA NHỎ LẠI
+   ========================================================= */
+
+/*
+ * Không để ảnh heritage chiếm quá nhiều chiều cao.
+ */
+.heritage-card__image {
+  position: relative;
+
+  width: 100%;
+
+  height: 420px !important;
+
+  overflow: hidden;
+
+  background: #f4efe7;
+}
+
+/*
+ * Slider phải theo kích thước card.
+ */
+.heritage-card__slider {
+  width: 100%;
+  height: 100%;
+}
+
+/*
+ * Tạo khoảng thở quanh hiện vật.
+ *
+ * Đây là phần làm ảnh nhỏ lại thay vì phóng kín card.
+ */
+.heritage-card__slider
+  .heritage-image-slider__slide-inner,
+.heritage-card__slider
+  .heritage-image-slider__image-link {
+  padding:
+    42px 36px 28px;
+}
+
+/*
+ * Giới hạn kích thước thật của ảnh.
+ */
+.heritage-card__slider
+  .heritage-image-slider img {
+  width: auto !important;
+  height: auto !important;
+
+  max-width: 88% !important;
+  max-height: 88% !important;
+
+  object-fit: contain !important;
+}
+
+/* =========================================================
+   FEATURED BADGE
+   ========================================================= */
+
+.heritage-card__badge {
+  position: absolute;
+
+  top: 18px;
+  left: 18px;
+  right: 18px;
+
+  z-index: 20;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   SLIDER ARROWS
+   ========================================================= */
+
+.heritage-image-slider__arrow {
+  position: absolute;
+
+  top: 50%;
+
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(83, 35, 27, 0.2);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 252, 246, 0.94);
+
+  color: #741d1d;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 30px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transform:
+    translateY(-50%);
+}
+
+.heritage-image-slider__arrow--prev {
+  left: 16px;
+}
+
+.heritage-image-slider__arrow--next {
+  right: 16px;
+}
+
+.heritage-image-slider__arrow:hover {
+  background: #ffffff;
+}
+
+/* =========================================================
+   SLIDER COUNTER
+   ========================================================= */
+
+.heritage-image-slider__counter {
+  position: absolute;
+
+  right: 16px;
+  bottom: 14px;
+
+  z-index: 30;
+
+  padding:
+    6px 10px;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(42, 29, 24, 0.72);
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  line-height: 1;
+}
+
+/* =========================================================
+   DETAIL PAGE
+   ========================================================= */
+
+/*
+ * Ở trang chi tiết ta cho ảnh lớn hơn card,
+ * nhưng vẫn không zoom/crop.
+ */
+.heritage-detail-hero__image {
+  position: relative;
+
+  width: 100%;
+
+  min-width: 0;
+
+  height: 580px;
+
+  overflow: hidden;
+
+  background: #f4efe7;
+}
+
+.heritage-detail-hero__slider {
+  width: 100%;
+  height: 100%;
+}
+
+.heritage-detail-hero__slider
+  .heritage-image-slider__slide-inner {
+  padding: 42px;
+}
+
+.heritage-detail-hero__slider
+  .heritage-image-slider img {
+  width: auto !important;
+  height: auto !important;
+
+  max-width: 90% !important;
+  max-height: 90% !important;
+
+  object-fit: contain !important;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .heritage-card__image {
+    height: 360px !important;
+  }
+
+  .heritage-card__slider
+    .heritage-image-slider__slide-inner,
+  .heritage-card__slider
+    .heritage-image-slider__image-link {
+    padding:
+      34px 26px 22px;
+  }
+
+  .heritage-detail-hero__image {
+    height: 460px;
+  }
+
+  .heritage-detail-hero__slider
+    .heritage-image-slider__slide-inner {
+    padding: 26px;
+  }
+}
+
+@media (max-width: 600px) {
+  .heritage-card__image {
+    height: 300px !important;
+  }
+
+  .heritage-image-slider__arrow {
+    width: 34px;
+    height: 34px;
+
+    font-size: 24px;
+  }
+
+  .heritage-image-slider__arrow--prev {
+    left: 9px;
+  }
+
+  .heritage-image-slider__arrow--next {
+    right: 9px;
+  }
+
+  .heritage-detail-hero__image {
+    height: 360px;
+  }
+}
