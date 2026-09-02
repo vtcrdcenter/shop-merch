@@ -20,7 +20,7 @@ import {
 
 export const metadata: Metadata = {
   title:
-    "Sản phẩm | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+    "Sản phẩm",
 
   description:
     "Khám phá các sản phẩm văn hóa sáng tạo được phát triển từ hiện vật, tư liệu và câu chuyện lịch sử của Bảo tàng Lịch sử Quốc gia.",
