@@ -11162,3 +11162,8 @@ img {
     white-space: normal;
   }
 }
+.home-products .product-card {
+  display: block;
+  border: 0;
+  background: transparent;
+}
