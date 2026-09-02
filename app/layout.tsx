@@ -6,6 +6,7 @@ import type {
 
 import ShopHeader from "./components/ShopHeader";
 import ShopFooter from "./components/ShopFooter";
+import StaticNavigation from "./components/StaticNavigation";
 import { CartProvider } from "./components/CartProvider";
 
 import {
@@ -109,6 +110,7 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body>
+        <StaticNavigation />
         <a
           href="#main-content"
           className="skip-link"

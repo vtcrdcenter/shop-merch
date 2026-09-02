@@ -86,7 +86,7 @@ export const stories: ShopStory[] = [
 
     images: [
       {
-        src: "/stories/mu-thuong-trieu.jpg",
+        src: "/product-magnet-lifestyle.jpg",
         alt: "Câu chuyện thiết kế Dấu Ấn Thượng Triều Nguyễn",
       },
     ],
@@ -135,7 +135,7 @@ export const stories: ShopStory[] = [
 
     images: [
       {
-        src: "/stories/sac-menh-chi-bao.jpg",
+        src: "/product-keycap-lifestyle.jpg",
         alt: "Ấn Sắc mệnh chi bảo và các thiết kế liên quan",
       },
     ],
@@ -183,7 +183,7 @@ export const stories: ShopStory[] = [
 
     images: [
       {
-        src: "/stories/phuong-bao-phuong-sac.jpg",
+        src: "/product-lipstick.jpg",
         alt: "Phượng bào và các thiết kế Phượng Sắc",
       },
     ],
@@ -230,7 +230,7 @@ export const stories: ShopStory[] = [
 
     images: [
       {
-        src: "/stories/charm-oc-eo.jpg",
+        src: "/product-bracelet-fixed.jpg",
         alt: "Từ hình khối Óc Eo đến hệ Charm Óc Eo",
       },
     ],
@@ -277,7 +277,7 @@ export const stories: ShopStory[] = [
 
     images: [
       {
-        src: "/stories/traceability.jpg",
+        src: "/hero-craft.jpg",
         alt: "Hành trình từ sản phẩm đến hồ sơ truy xuất",
       },
     ],

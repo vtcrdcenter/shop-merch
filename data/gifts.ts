@@ -54,7 +54,7 @@ export const giftGroups: GiftGroup[] = [
       "phuong-sac-kinh",
     ],
 
-    image: "/gifts/qua-luu-niem.jpg",
+    image: "/product-magnet-lifestyle.jpg",
 
     featured: true,
 
@@ -89,7 +89,7 @@ export const giftGroups: GiftGroup[] = [
       "sac-menh-kim-dau",
     ],
 
-    image: "/gifts/qua-tang-van-hoa.jpg",
+    image: "/product-keycap-lifestyle.jpg",
 
     featured: true,
 
@@ -122,7 +122,7 @@ export const giftGroups: GiftGroup[] = [
       "phuong-sac-trieu-y",
     ],
 
-    image: "/gifts/qua-tang-ca-nhan.jpg",
+    image: "/product-bracelet-fixed.jpg",
 
     featured: true,
 
@@ -154,7 +154,7 @@ export const giftGroups: GiftGroup[] = [
       "dau-an-thuong-trieu-nguyen",
     ],
 
-    image: "/gifts/qua-tang-suu-tam.jpg",
+    image: "/product-keycap-fixed.jpg",
 
     featured: false,
 
@@ -184,7 +184,7 @@ export const giftGroups: GiftGroup[] = [
       "sac-menh-kim-dau",
     ],
 
-    image: "/gifts/qua-tang-am-thuc.jpg",
+    image: "/product-cake-fixed.jpg",
 
     featured: false,
 
@@ -216,7 +216,7 @@ export const giftGroups: GiftGroup[] = [
       "sac-menh-kim-dau",
     ],
 
-    image: "/gifts/qua-tang-doanh-nghiep.jpg",
+    image: "/product-vase.jpg",
 
     featured: false,
 
