@@ -11,8 +11,7 @@ import SectionHeading from "../components/SectionHeading";
    ========================================================= */
 
 export const metadata: Metadata = {
-  title:
-    "Giới thiệu | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+  title: "Giới thiệu",
 
   description:
     "Tìm hiểu về Gian hàng điện tử sản phẩm văn hóa sáng tạo của Bảo tàng Lịch sử Quốc gia, cách sản phẩm được phát triển từ nguồn di sản và hệ thống truy xuất hỗ trợ.",
@@ -26,8 +25,7 @@ const developmentSteps = [
   {
     number: "01",
 
-    title:
-      "Xác định nguồn cảm hứng",
+    title: "Xác định nguồn cảm hứng",
 
     description:
       "Quá trình bắt đầu từ hiện vật, tư liệu, hình tượng hoặc câu chuyện lịch sử có liên quan.",
@@ -36,8 +34,7 @@ const developmentSteps = [
   {
     number: "02",
 
-    title:
-      "Lựa chọn chi tiết",
+    title: "Lựa chọn chi tiết",
 
     description:
       "Những đặc điểm phù hợp như hình khối, hoa văn, màu sắc hoặc bố cục được xác định để phát triển thiết kế.",
@@ -46,8 +43,7 @@ const developmentSteps = [
   {
     number: "03",
 
-    title:
-      "Chuyển hóa thành thiết kế",
+    title: "Chuyển hóa thành thiết kế",
 
     description:
       "Các chi tiết được giản lược, tổ chức lại và điều chỉnh để phù hợp với công năng của sản phẩm mới.",
@@ -56,8 +52,7 @@ const developmentSteps = [
   {
     number: "04",
 
-    title:
-      "Hoàn thiện sản phẩm",
+    title: "Hoàn thiện sản phẩm",
 
     description:
       "Thiết kế được tiếp tục hoàn thiện về cấu tạo, chất liệu và hình thức trước khi đưa vào giới thiệu hoặc sản xuất.",
@@ -66,8 +61,7 @@ const developmentSteps = [
   {
     number: "05",
 
-    title:
-      "Kết nối dữ liệu",
+    title: "Kết nối dữ liệu",
 
     description:
       "Với sản phẩm hỗ trợ truy xuất, người dùng có thể tiếp tục từ vật phẩm đến hồ sơ dữ liệu tương ứng.",
@@ -75,37 +69,59 @@ const developmentSteps = [
 ];
 
 /* =========================================================
-   SHOP CONTENT
+   SHOP ECOSYSTEM
    ========================================================= */
 
 const ecosystemItems = [
   {
-    title:
-      "Sản phẩm",
+    title: "Sản phẩm",
+
+    href: "/products",
 
     description:
       "Các vật phẩm văn hóa sáng tạo được giới thiệu theo danh mục, bộ sưu tập và mục đích sử dụng.",
   },
 
   {
-    title:
-      "Di sản",
+    title: "Di sản",
+
+    href: "/heritage",
 
     description:
       "Hiện vật, tư liệu và nguồn văn hóa đứng phía sau từng thiết kế.",
   },
 
   {
-    title:
-      "Câu chuyện",
+    title: "Bộ sưu tập",
+
+    href: "/collections",
+
+    description:
+      "Các sản phẩm có chung nguồn cảm hứng hoặc mạch văn hóa được đặt trong cùng một hệ chủ đề.",
+  },
+
+  {
+    title: "Câu chuyện",
+
+    href: "/stories",
 
     description:
       "Những nội dung giúp làm rõ cách nguồn cảm hứng được chuyển hóa thành sản phẩm.",
   },
 
   {
-    title:
-      "Truy xuất",
+    title: "Quà tặng",
+
+    href: "/gifts",
+
+    description:
+      "Các sản phẩm được gợi ý theo người nhận, mục đích sử dụng và nhu cầu quà tặng.",
+  },
+
+  {
+    title: "Truy xuất",
+
+    href: "/products/dau-an-thuong-trieu-nguyen",
 
     description:
       "Lớp dữ liệu bổ sung cho những sản phẩm được kết nối với hồ sơ truy xuất.",
@@ -127,8 +143,7 @@ export default function AboutPage() {
         <Breadcrumb
           items={[
             {
-              label:
-                "Giới thiệu",
+              label: "Giới thiệu",
             },
           ]}
         />
@@ -165,9 +180,7 @@ export default function AboutPage() {
               >
                 Khám phá sản phẩm
 
-                <span
-                  aria-hidden="true"
-                >
+                <span aria-hidden="true">
                   {" "}
                   →
                 </span>
@@ -280,8 +293,8 @@ export default function AboutPage() {
         <div className="site-container">
           <SectionHeading
             eyebrow="TRONG GIAN HÀNG"
-            title="Bốn cách để tiếp tục khám phá"
-            description="Người dùng có thể bắt đầu từ sản phẩm hoặc đi từ nguồn di sản, câu chuyện và dữ liệu liên quan."
+            title="Một hệ nội dung được kết nối"
+            description="Sản phẩm, nguồn di sản, bộ sưu tập, câu chuyện, quà tặng và dữ liệu truy xuất được liên kết để người dùng có thể tiếp tục khám phá theo nhiều hướng."
           />
 
           <div className="about-scope__grid">
@@ -290,16 +303,14 @@ export default function AboutPage() {
                 item,
                 index,
               ) => (
-                <article
-                  key={
-                    item.title
-                  }
+                <Link
+                  key={item.title}
+                  href={item.href}
                   className="about-scope__item"
                 >
                   <span className="about-scope__number">
                     {String(
-                      index +
-                        1,
+                      index + 1,
                     ).padStart(
                       2,
                       "0",
@@ -307,17 +318,22 @@ export default function AboutPage() {
                   </span>
 
                   <h3>
-                    {
-                      item.title
-                    }
+                    {item.title}
                   </h3>
 
                   <p>
-                    {
-                      item.description
-                    }
+                    {item.description}
                   </p>
-                </article>
+
+                  <strong className="about-scope__link">
+                    Khám phá
+
+                    <span aria-hidden="true">
+                      {" "}
+                      →
+                    </span>
+                  </strong>
+                </Link>
               ),
             )}
           </div>
@@ -343,27 +359,19 @@ export default function AboutPage() {
                 step,
               ) => (
                 <article
-                  key={
-                    step.number
-                  }
+                  key={step.number}
                   className="about-development__item"
                 >
                   <span className="about-development__number">
-                    {
-                      step.number
-                    }
+                    {step.number}
                   </span>
 
                   <h3>
-                    {
-                      step.title
-                    }
+                    {step.title}
                   </h3>
 
                   <p>
-                    {
-                      step.description
-                    }
+                    {step.description}
                   </p>
                 </article>
               ),
@@ -389,7 +397,10 @@ export default function AboutPage() {
               </strong>
             </div>
 
-            <span className="about-relationship__arrow">
+            <span
+              className="about-relationship__arrow"
+              aria-hidden="true"
+            >
               →
             </span>
 
@@ -403,7 +414,10 @@ export default function AboutPage() {
               </strong>
             </div>
 
-            <span className="about-relationship__arrow">
+            <span
+              className="about-relationship__arrow"
+              aria-hidden="true"
+            >
               →
             </span>
 
@@ -417,7 +431,10 @@ export default function AboutPage() {
               </strong>
             </div>
 
-            <span className="about-relationship__arrow">
+            <span
+              className="about-relationship__arrow"
+              aria-hidden="true"
+            >
               →
             </span>
 
@@ -491,9 +508,7 @@ export default function AboutPage() {
             >
               Xem sản phẩm mẫu
 
-              <span
-                aria-hidden="true"
-              >
+              <span aria-hidden="true">
                 {" "}
                 →
               </span>
@@ -628,11 +643,34 @@ export default function AboutPage() {
             </Link>
 
             <Link
-              href="/stories"
+              href="/gifts"
               className="about-explore__item"
             >
               <span>
                 04
+              </span>
+
+              <h3>
+                Quà tặng
+              </h3>
+
+              <p>
+                Chọn sản phẩm
+                theo người nhận,
+                mục đích và dịp tặng.
+              </p>
+
+              <strong>
+                Khám phá quà tặng →
+              </strong>
+            </Link>
+
+            <Link
+              href="/stories"
+              className="about-explore__item"
+            >
+              <span>
+                05
               </span>
 
               <h3>
