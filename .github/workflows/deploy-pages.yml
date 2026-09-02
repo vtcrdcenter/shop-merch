@@ -41,12 +41,57 @@ jobs:
 
       - name: Verify build output
         run: |
-          echo "Checking dist/client..."
+          echo "Checking generated pages..."
+
           test -d dist/client
+
           test -f dist/client/index.html
-          test -f dist/client/products/dau-an-thuong-trieu-nguyen/index.html
-          test -f dist/client/collections/dau-an-cung-dinh-nguyen/index.html
-          test -f dist/client/stories/mu-thuong-trieu-va-dau-an-thuong-trieu/index.html
+
+          test -f \
+            dist/client/products/index.html
+
+          test -f \
+            dist/client/products/dau-an-thuong-trieu-nguyen/index.html
+
+          test -f \
+            dist/client/heritage/mu-thuong-trieu/index.html
+
+          test -f \
+            dist/client/collections/dau-an-cung-dinh-nguyen/index.html
+
+          test -f \
+            dist/client/stories/mu-thuong-trieu-va-dau-an-thuong-trieu/index.html
+
+          echo "Checking Vinext static assets..."
+
+          test -d \
+            dist/client/_next/static
+
+          test -d \
+            dist/client/_next/static/css
+
+          test -d \
+            dist/client/_next/static/chunks
+
+          echo "Checking that basePath was not duplicated..."
+
+          test ! -d \
+            dist/client/shop-merch/_next
+
+          echo "Checking that legacy HTML does not shadow App routes..."
+
+          test ! -f \
+            dist/client/products.html
+
+          test ! -f \
+            dist/client/collections.html
+
+          test ! -f \
+            dist/client/story.html
+
+          test ! -f \
+            dist/client/about.html
+
           echo "Build output OK"
 
       - name: Disable Jekyll
