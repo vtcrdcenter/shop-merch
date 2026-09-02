@@ -2,6 +2,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
+
 import { siteAssetPath } from "../lib/site-path";
 
 import ProductGrid from "./components/ProductGrid";
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     "Gian hàng điện tử | Bảo tàng Lịch sử Quốc gia",
 
   description:
-    "Khám phá các sản phẩm văn hóa sáng tạo được phát triển từ hiện vật, tư liệu và câu chuyện lịch sử gắn với Bảo tàng Lịch sử Quốc gia.",
+    "Khám phá các sản phẩm văn hóa sáng tạo được phát triển từ hiện vật, tư liệu và câu chuyện lịch sử của Bảo tàng Lịch sử Quốc gia.",
 };
 
 /* =========================================================
@@ -69,8 +70,9 @@ export default function HomePage() {
     getFeaturedGiftGroups().slice(0, 3);
 
   /*
-   * Magnet là case trình diễn hoàn chỉnh nhất hiện tại:
-   * Sản phẩm → nguồn di sản → câu chuyện → truy xuất.
+   * Dấu Ấn Thượng Triều Nguyễn hiện là case
+   * có luồng dữ liệu đầy đủ nhất:
+   * sản phẩm → nguồn di sản → câu chuyện → truy xuất.
    */
   const traceProduct =
     getProductBySlug(
@@ -98,23 +100,23 @@ export default function HomePage() {
 
           <div className="home-hero__content">
             <p className="home-hero__eyebrow">
+              GIAN HÀNG ĐIỆN TỬ ·
               BẢO TÀNG LỊCH SỬ QUỐC GIA
             </p>
 
             <h1 className="home-hero__title">
-              Sản phẩm văn hóa
+              Mang câu chuyện lịch sử
               <br />
-              từ những câu chuyện
+              vào những vật phẩm
               <br />
-              của di sản
+              của hôm nay
             </h1>
 
             <p className="home-hero__description">
-              Khám phá các sản phẩm văn hóa
-              sáng tạo được phát triển từ hiện
-              vật, tư liệu và những câu chuyện
-              lịch sử gắn với Bảo tàng Lịch sử
-              Quốc gia.
+              Khám phá những sản phẩm được
+              phát triển từ hiện vật, hoa văn,
+              hình tượng và câu chuyện lịch sử
+              của Bảo tàng Lịch sử Quốc gia.
             </p>
 
             <div className="home-hero__actions">
@@ -122,7 +124,7 @@ export default function HomePage() {
                 href="/products"
                 className="home-hero__primary"
               >
-                Khám phá sản phẩm
+                Xem sản phẩm
 
                 <span aria-hidden="true">
                   →
@@ -133,7 +135,7 @@ export default function HomePage() {
                 href="/heritage"
                 className="home-hero__secondary"
               >
-                Bắt đầu từ Di sản
+                Khám phá nguồn cảm hứng
               </Link>
             </div>
 
@@ -144,7 +146,7 @@ export default function HomePage() {
                 </strong>
 
                 <span>
-                  thiết kế đang phát triển
+                  thiết kế đang giới thiệu
                 </span>
               </div>
 
@@ -176,7 +178,9 @@ export default function HomePage() {
             <div className="home-hero__product-image">
               {heroImage ? (
                 <img
-                  src={siteAssetPath(heroImage.src)}
+                  src={siteAssetPath(
+                    heroImage.src,
+                  )}
                   alt={heroImage.alt}
                 />
               ) : (
@@ -188,7 +192,7 @@ export default function HomePage() {
               {heroProduct?.traceability
                 .enabled && (
                 <span className="home-hero__trace-badge">
-                  Hỗ trợ truy xuất
+                  Có hồ sơ truy xuất
                 </span>
               )}
             </div>
@@ -212,7 +216,7 @@ export default function HomePage() {
                 <Link
                   href={`/products/${heroProduct.slug}`}
                 >
-                  Xem sản phẩm
+                  Xem chi tiết
                   <span aria-hidden="true">
                     {" "}
                     →
@@ -237,12 +241,13 @@ export default function HomePage() {
 
             <div>
               <strong>
-                Bắt đầu từ nguồn di sản
+                Có nguồn cảm hứng rõ ràng
               </strong>
 
               <p>
-                Hiện vật, tư liệu và câu chuyện
-                là cơ sở phát triển thiết kế.
+                Mỗi thiết kế được liên kết
+                với hiện vật, tư liệu hoặc
+                câu chuyện văn hóa cụ thể.
               </p>
             </div>
           </article>
@@ -254,12 +259,13 @@ export default function HomePage() {
 
             <div>
               <strong>
-                Thiết kế có câu chuyện
+                Di sản được chuyển hóa
               </strong>
 
               <p>
-                Người dùng có thể tìm hiểu cách
-                các yếu tố văn hóa được chuyển hóa.
+                Hình khối, họa tiết và màu sắc
+                được chọn lọc để phù hợp với
+                công năng của sản phẩm mới.
               </p>
             </div>
           </article>
@@ -271,12 +277,13 @@ export default function HomePage() {
 
             <div>
               <strong>
-                Kết nối hồ sơ dữ liệu
+                Có câu chuyện đi cùng
               </strong>
 
               <p>
-                Một số sản phẩm có thể tiếp tục
-                tới hồ sơ truy xuất tương ứng.
+                Người dùng có thể tiếp tục
+                tìm hiểu nguồn cảm hứng phía
+                sau từng thiết kế.
               </p>
             </div>
           </article>
@@ -288,12 +295,13 @@ export default function HomePage() {
 
             <div>
               <strong>
-                Trải nghiệm bảo tàng mở rộng
+                Kết nối dữ liệu truy xuất
               </strong>
 
               <p>
-                Câu chuyện di sản tiếp tục sau
-                khi người dùng rời không gian trưng bày.
+                Một số sản phẩm được liên kết
+                với hồ sơ dữ liệu chi tiết
+                trên hệ thống truy xuất.
               </p>
             </div>
           </article>
@@ -307,9 +315,9 @@ export default function HomePage() {
       <section className="home-products">
         <div className="site-container">
           <SectionHeading
-            eyebrow="SẢN PHẨM"
-            title="Thiết kế đang được giới thiệu"
-            description="Các phương án sản phẩm được phát triển từ những nguồn văn hóa khác nhau, từ cung đình Nguyễn đến văn hóa Óc Eo."
+            eyebrow="SẢN PHẨM NỔI BẬT"
+            title="Những thiết kế đang được giới thiệu"
+            description="Từ vật phẩm lưu niệm nhỏ đến phụ kiện cá nhân, mỗi sản phẩm mở ra một cách tiếp cận khác với di sản."
             actionLabel="Xem tất cả sản phẩm"
             actionHref="/products"
           />
@@ -330,10 +338,10 @@ export default function HomePage() {
       <section className="home-heritage">
         <div className="site-container">
           <SectionHeading
-            eyebrow="DI SẢN"
-            title="Bắt đầu từ nguồn"
-            description="Khám phá những hiện vật, hình tượng và nguồn tư liệu đang được sử dụng làm cơ sở phát triển các sản phẩm trong gian hàng."
-            actionLabel="Khám phá Di sản"
+            eyebrow="NGUỒN CẢM HỨNG"
+            title="Khám phá từ di sản"
+            description="Tìm hiểu những hiện vật, hình tượng và nguồn tư liệu đã trở thành điểm khởi đầu cho các thiết kế trong gian hàng."
+            actionLabel="Xem tất cả nguồn di sản"
             actionHref="/heritage"
           />
 
@@ -358,24 +366,22 @@ export default function HomePage() {
 
       <section className="home-process">
         <div className="site-container home-process__grid">
-          {/* TITLE */}
-
           <div className="home-process__intro">
             <p className="home-process__eyebrow">
               TỪ DI SẢN ĐẾN THIẾT KẾ
             </p>
 
             <h2 className="home-process__title">
-              Một nguồn văn hóa có thể được chuyển hóa
-              theo nhiều cách
+              Giữ tinh thần của nguồn,
+              tạo hình thức cho đời sống mới
             </h2>
 
             <p className="home-process__description">
-              Thiết kế không nhất thiết sao chép
-              nguyên trạng hiện vật. Hình khối,
-              họa tiết, màu sắc, bố cục hoặc câu
-              chuyện có thể được lựa chọn và tổ
-              chức lại để phù hợp với sản phẩm mới.
+              Một sản phẩm không nhất thiết
+              sao chép nguyên trạng hiện vật.
+              Những yếu tố phù hợp được lựa chọn,
+              giản lược và tổ chức lại để tạo nên
+              một vật phẩm có công năng riêng.
             </p>
 
             <Link
@@ -390,8 +396,6 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* PROCESS */}
-
           <div className="home-process__steps">
             <article className="home-process__step">
               <span>
@@ -400,16 +404,16 @@ export default function HomePage() {
 
               <div>
                 <small>
-                  NGUỒN
+                  KHỞI ĐẦU
                 </small>
 
                 <h3>
-                  Di sản
+                  Nguồn di sản
                 </h3>
 
                 <p>
-                  Xác định hiện vật, tư liệu
-                  hoặc nguồn văn hóa.
+                  Hiện vật, tư liệu,
+                  hình tượng hoặc câu chuyện.
                 </p>
               </div>
             </article>
@@ -425,12 +429,12 @@ export default function HomePage() {
                 </small>
 
                 <h3>
-                  Yếu tố khai thác
+                  Chi tiết nhận diện
                 </h3>
 
                 <p>
-                  Hình khối, họa tiết, màu sắc,
-                  bố cục hoặc câu chuyện.
+                  Hình khối, hoa văn,
+                  màu sắc và bố cục.
                 </p>
               </div>
             </article>
@@ -446,12 +450,12 @@ export default function HomePage() {
                 </small>
 
                 <h3>
-                  Thiết kế
+                  Ngôn ngữ thiết kế
                 </h3>
 
                 <p>
-                  Tổ chức lại các yếu tố phù hợp
-                  với công năng mới.
+                  Tổ chức lại các chi tiết
+                  cho phù hợp với sản phẩm.
                 </p>
               </div>
             </article>
@@ -463,16 +467,16 @@ export default function HomePage() {
 
               <div>
                 <small>
-                  ĐẦU RA
+                  THÀNH PHẨM
                 </small>
 
                 <h3>
-                  Sản phẩm
+                  Vật phẩm đương đại
                 </h3>
 
                 <p>
-                  Hình thành sản phẩm văn hóa
-                  sáng tạo phục vụ người dùng.
+                  Một cách mới để mang
+                  câu chuyện di sản vào đời sống.
                 </p>
               </div>
             </article>
@@ -488,8 +492,8 @@ export default function HomePage() {
         <div className="site-container">
           <SectionHeading
             eyebrow="BỘ SƯU TẬP"
-            title="Khám phá theo chủ đề"
-            description="Một bộ sưu tập có thể kết nối nhiều loại sản phẩm khác nhau thông qua cùng một câu chuyện hoặc nguồn cảm hứng."
+            title="Khám phá theo từng mạch câu chuyện"
+            description="Các sản phẩm có chung nguồn cảm hứng được đặt cạnh nhau để tạo nên những bộ sưu tập có bản sắc riêng."
             actionLabel="Xem tất cả bộ sưu tập"
             actionHref="/collections"
           />
@@ -521,13 +525,14 @@ export default function HomePage() {
               </p>
 
               <h2 className="home-gifts__title">
-                Chọn quà theo cách bạn muốn trao
+                Chọn một món quà
+                mang câu chuyện văn hóa
               </h2>
 
               <p className="home-gifts__description">
-                Từ quà lưu niệm nhỏ sau chuyến
-                tham quan đến quà tặng văn hóa
-                và sản phẩm dành cho đối tác.
+                Gợi ý sản phẩm theo mục đích sử dụng:
+                quà lưu niệm, quà tặng cá nhân,
+                quà văn hóa hoặc quà dành cho đối tác.
               </p>
             </div>
 
@@ -535,7 +540,7 @@ export default function HomePage() {
               href="/gifts"
               className="home-gifts__all"
             >
-              Khám phá Quà tặng
+              Xem gợi ý quà tặng
               <span aria-hidden="true">
                 {" "}
                 →
@@ -554,7 +559,9 @@ export default function HomePage() {
                   <div className="home-gift-card__image">
                     {gift.image ? (
                       <img
-                        src={siteAssetPath(gift.image)}
+                        src={siteAssetPath(
+                          gift.image,
+                        )}
                         alt={gift.name}
                         loading="lazy"
                       />
@@ -606,9 +613,9 @@ export default function HomePage() {
         <div className="site-container">
           <SectionHeading
             eyebrow="CÂU CHUYỆN"
-            title="Đọc phía sau thiết kế"
-            description="Tìm hiểu thêm về nguồn cảm hứng, bối cảnh văn hóa và quá trình chuyển hóa từ di sản thành sản phẩm."
-            actionLabel="Tất cả câu chuyện"
+            title="Đọc phía sau mỗi thiết kế"
+            description="Từ một chi tiết trên hiện vật đến cách nó được đưa vào sản phẩm – những câu chuyện này giúp người xem hiểu thiết kế sâu hơn."
+            actionLabel="Xem tất cả câu chuyện"
             actionHref="/stories"
           />
 
@@ -627,7 +634,7 @@ export default function HomePage() {
       </section>
 
       {/* =====================================================
-          09 — TRACEABILITY FEATURE
+          09 — TRACEABILITY
       ====================================================== */}
 
       {traceProduct &&
@@ -635,25 +642,22 @@ export default function HomePage() {
           .enabled && (
           <section className="home-trace">
             <div className="site-container home-trace__grid">
-              {/* LEFT */}
-
               <div className="home-trace__content">
                 <p className="home-trace__eyebrow">
                   TRUY XUẤT SẢN PHẨM
                 </p>
 
                 <h2 className="home-trace__title">
-                  Từ vật phẩm bạn cầm trên tay
-                  đến hồ sơ dữ liệu phía sau
+                  Từ vật phẩm trên tay
+                  đến hồ sơ phía sau thiết kế
                 </h2>
 
                 <p className="home-trace__description">
                   Với sản phẩm hỗ trợ truy xuất,
-                  người dùng có thể tiếp tục kiểm
-                  tra thông tin nhận diện, nguồn
-                  văn hóa, quá trình phát triển
-                  thiết kế và các dữ liệu được
-                  công bố cho sản phẩm.
+                  người dùng có thể tiếp tục kiểm tra
+                  mã nhận diện, nguồn cảm hứng,
+                  thông tin thiết kế và những dữ liệu
+                  được công bố trên hệ thống.
                 </p>
 
                 <div className="home-trace__actions">
@@ -661,7 +665,7 @@ export default function HomePage() {
                     href={`/products/${traceProduct.slug}`}
                     className="home-trace__primary"
                   >
-                    Xem sản phẩm trình diễn
+                    Xem sản phẩm mẫu
 
                     <span aria-hidden="true">
                       →
@@ -677,12 +681,10 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* RIGHT */}
-
               <div className="home-trace__card">
                 <div className="home-trace__card-top">
                   <span>
-                    HỒ SƠ MẪU
+                    HỒ SƠ TRÌNH DIỄN
                   </span>
 
                   <strong>
@@ -695,14 +697,10 @@ export default function HomePage() {
                     {traceProduct.images[0] ? (
                       <img
                         src={siteAssetPath(
-                          traceProduct
-                            .images[0]
-                            .src,
+                          traceProduct.images[0].src,
                         )}
                         alt={
-                          traceProduct
-                            .images[0]
-                            .alt
+                          traceProduct.images[0].alt
                         }
                       />
                     ) : (
@@ -718,9 +716,7 @@ export default function HomePage() {
                     </small>
 
                     <h3>
-                      {
-                        traceProduct.name
-                      }
+                      {traceProduct.name}
                     </h3>
 
                     <dl>
@@ -730,15 +726,13 @@ export default function HomePage() {
                         </dt>
 
                         <dd>
-                          {
-                            traceProduct.sku
-                          }
+                          {traceProduct.sku}
                         </dd>
                       </div>
 
                       <div>
                         <dt>
-                          Trạng thái
+                          Hồ sơ
                         </dt>
 
                         <dd>
@@ -770,7 +764,7 @@ export default function HomePage() {
                     </span>
 
                     <strong>
-                      Nguồn di sản
+                      Nguồn cảm hứng
                     </strong>
                   </div>
 
@@ -794,29 +788,29 @@ export default function HomePage() {
         )}
 
       {/* =====================================================
-          10 — ABOUT / FINAL CTA
+          10 — ABOUT
       ====================================================== */}
 
       <section className="home-about">
         <div className="site-container home-about__grid">
           <div>
             <p className="home-about__eyebrow">
-              GIAN HÀNG ĐIỆN TỬ
+              VỀ GIAN HÀNG
             </p>
 
             <h2 className="home-about__title">
-              Một điểm tiếp nối của trải nghiệm bảo tàng
+              Một điểm tiếp nối
+              của trải nghiệm bảo tàng
             </h2>
           </div>
 
           <div className="home-about__content">
             <p>
-              Gian hàng không chỉ là nơi giới
-              thiệu sản phẩm. Đây còn là không
-              gian giúp người dùng tiếp tục tìm
-              hiểu câu chuyện của hiện vật và
-              nguồn văn hóa thông qua những
-              sản phẩm được phát triển từ chúng.
+              Gian hàng điện tử giới thiệu
+              các sản phẩm văn hóa sáng tạo
+              gắn với hiện vật, tư liệu và
+              câu chuyện lịch sử của
+              Bảo tàng Lịch sử Quốc gia.
             </p>
 
             <Link
