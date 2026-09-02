@@ -72,13 +72,13 @@ export async function generateMetadata({
   if (!collection) {
     return {
       title:
-        "Không tìm thấy bộ sưu tập | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia",
+        "Không tìm thấy bộ sưu tập",
     };
   }
 
   return {
     title:
-      `${collection.name} | Bộ sưu tập | Gian hàng điện tử Bảo tàng Lịch sử Quốc gia`,
+      collection.name,
 
     description:
       collection.shortDescription,
@@ -110,7 +110,6 @@ export async function generateMetadata({
     },
   };
 }
-
 /* =========================================================
    PAGE
    ========================================================= */
