@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+import {
+  siteAssetPath,
+} from "../../lib/site-path";
+
 export default function ShopFooter() {
   return (
     <footer className="shop-footer">
@@ -13,23 +17,35 @@ export default function ShopFooter() {
         ==================================================== */}
 
         <div className="shop-footer__identity">
-          <p className="shop-footer__eyebrow">
-            BẢO TÀNG
-            LỊCH SỬ
-            QUỐC GIA
-          </p>
+          <Link
+            href="/"
+            className="shop-footer__brand"
+            aria-label="Trang chủ Gian hàng điện tử Bảo tàng Lịch sử Quốc gia"
+          >
+            <img
+              src={siteAssetPath(
+                "/museum-logo.png",
+              )}
+              alt=""
+              className="shop-footer__logo"
+            />
 
-          <h2>
-            Gian hàng điện tử
-          </h2>
+            <div>
+              <p className="shop-footer__eyebrow">
+                BẢO TÀNG LỊCH SỬ QUỐC GIA
+              </p>
 
-          <p>
+              <h2>
+                Gian hàng điện tử
+              </h2>
+            </div>
+          </Link>
+
+          <p className="shop-footer__intro">
             Không gian giới thiệu
-            các sản phẩm văn hóa
-            sáng tạo được phát triển
-            từ hiện vật, tư liệu
-            và những câu chuyện
-            lịch sử.
+            các sản phẩm văn hóa sáng tạo
+            được phát triển từ hiện vật,
+            tư liệu và những câu chuyện lịch sử.
           </p>
         </div>
 
@@ -91,11 +107,9 @@ export default function ShopFooter() {
           </h3>
 
           <p className="shop-footer__text">
-            Hướng dẫn mua hàng,
-            vận chuyển, đổi trả
-            và các chính sách
-            liên quan sẽ được
-            cập nhật khi gian hàng
+            Thông tin hướng dẫn mua hàng,
+            vận chuyển, đổi trả và các chính sách
+            sẽ được cập nhật khi gian hàng
             chính thức mở bán.
           </p>
         </div>
@@ -108,8 +122,7 @@ export default function ShopFooter() {
       <div className="shop-footer__bottom">
         <div className="site-container shop-footer__bottom-inner">
           <span>
-            © Bảo tàng
-            Lịch sử Quốc gia
+            © Bảo tàng Lịch sử Quốc gia
           </span>
 
           <span>
