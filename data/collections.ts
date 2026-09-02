@@ -79,9 +79,9 @@ export const collections: ShopCollection[] = [
       "sac-menh-kim-dau",
     ],
 
-    heroImage: "/collections/dau-an-cung-dinh-nguyen-hero.jpg",
+    heroImage: "/product-magnet-lifestyle.jpg",
 
-    cardImage: "/collections/dau-an-cung-dinh-nguyen.jpg",
+    cardImage: "/product-magnet-lifestyle.jpg",
 
     status: "active",
 
@@ -122,9 +122,9 @@ export const collections: ShopCollection[] = [
       "sac-menh-kim-dau",
     ],
 
-    heroImage: "/collections/sac-menh-hero.jpg",
+    heroImage: "/product-keycap-lifestyle.jpg",
 
-    cardImage: "/collections/sac-menh.jpg",
+    cardImage: "/product-keycap-lifestyle.jpg",
 
     status: "active",
 
@@ -163,9 +163,9 @@ export const collections: ShopCollection[] = [
       "phuong-sac-trieu-y",
     ],
 
-    heroImage: "/collections/phuong-sac-hero.jpg",
+    heroImage: "/product-lipstick.jpg",
 
-    cardImage: "/collections/phuong-sac.jpg",
+    cardImage: "/product-lipstick.jpg",
 
     status: "active",
 
@@ -203,9 +203,9 @@ export const collections: ShopCollection[] = [
       "charm-oc-eo",
     ],
 
-    heroImage: "/collections/oc-eo-hero.jpg",
+    heroImage: "/product-bracelet-fixed.jpg",
 
-    cardImage: "/collections/oc-eo.jpg",
+    cardImage: "/product-bracelet-fixed.jpg",
 
     status: "coming-soon",
 

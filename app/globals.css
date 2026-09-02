@@ -9960,18 +9960,68 @@ img {
 }
 
 .shop-footer__logo {
-  width: 66px;
-  height: 66px;
+  width: 76px;
+  height: 76px;
 
-  flex: 0 0 66px;
+  flex: 0 0 76px;
 
   object-fit: contain;
+  padding: 4px;
+  background: var(--paper);
+  border: 1px solid var(--gold-light);
+  border-radius: 3px;
+}
 
-  filter:
-    brightness(0)
-    invert(1);
+/* Clear visual distinction between consecutive content areas and cards. */
+.home-heritage { background: #ece0cb; }
+.home-collections { background: #fffdf8; }
+.home-gifts { background: #e6d6ba; }
+.home-stories { background: #f7efe3; }
 
-  opacity: 0.93;
+.heritage-card,
+.collection-card,
+.story-card,
+.home-gift-card {
+  border: 1px solid rgba(103, 29, 34, 0.18);
+  background: #fffdf8;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.heritage-card:hover,
+.collection-card:hover,
+.story-card:hover,
+.home-gift-card:hover {
+  transform: translateY(-5px);
+  background: #fff3da;
+  border-color: var(--wine);
+  box-shadow: 0 16px 30px rgba(74, 20, 24, 0.16);
+}
+
+.home-gift-card__body { padding: 18px 18px 22px; }
+
+/* Keep these feedback states last: the homepage has older card rules above. */
+.home-heritage { background: #ece0cb; }
+.home-collections { background: #fffdf8; }
+.home-gifts { background: #e6d6ba; }
+.home-stories { background: #f7efe3; }
+
+.home-heritage .heritage-card,
+.home-collections .collection-card,
+.home-stories .story-card,
+.home-gift-card {
+  border: 1px solid rgba(103, 29, 34, 0.2);
+  background: #fffdf8;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.home-heritage .heritage-card:hover,
+.home-collections .collection-card:hover,
+.home-stories .story-card:hover,
+.home-gift-card:hover {
+  transform: translateY(-5px);
+  background: #fff3da;
+  border-color: var(--wine);
+  box-shadow: 0 16px 30px rgba(74, 20, 24, 0.16);
 }
 
 .shop-footer__eyebrow {

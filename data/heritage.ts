@@ -104,7 +104,7 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/heritage/mu-thuong-trieu.jpg",
+        src: "/product-magnet-lifestyle.jpg",
         alt: "Mũ thượng triều thời Nguyễn",
       },
     ],
@@ -159,7 +159,7 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/heritage/sac-menh-chi-bao.jpg",
+        src: "/product-keycap-lifestyle.jpg",
         alt: "Ấn Sắc mệnh chi bảo",
       },
     ],
@@ -214,7 +214,7 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/heritage/phuong-bao.jpg",
+        src: "/product-lipstick.jpg",
         alt: "Phượng bào triều Nguyễn",
       },
     ],
@@ -269,7 +269,7 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/heritage/oc-eo.jpg",
+        src: "/product-bracelet-fixed.jpg",
         alt: "Trang sức và hình khối khảo cổ Óc Eo",
       },
     ],
@@ -322,7 +322,7 @@ export const heritageSources: HeritageSource[] = [
 
     images: [
       {
-        src: "/heritage/lo-ngoc-thoi-nguyen.jpg",
+        src: "/product-vase.jpg",
         alt: "Lọ ngọc thời Nguyễn",
       },
     ],
