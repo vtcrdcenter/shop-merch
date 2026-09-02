@@ -5,7 +5,6 @@ import Link from "next/link";
 import type {
   ShopProduct,
 } from "../../data/products";
-import AttestationBadge from "./AttestationBadge";
 
 type TraceabilityPanelProps = {
   product: ShopProduct;
@@ -51,15 +50,6 @@ export default function TraceabilityPanel({
       ====================================================== */}
 
       <div className="traceability-panel__content">
-        <AttestationBadge
-          attestation={{
-            status: traceability.demo ? "pending" : "verified",
-            organization: "Hệ thống truy xuất VTC",
-            code: product.sku,
-            label: traceability.demo ? "Hồ sơ mẫu · đang thẩm định" : "Hồ sơ đã bảo chứng",
-          }}
-        />
-
         <p className="traceability-panel__eyebrow">
           TRUY XUẤT SẢN PHẨM
         </p>
@@ -105,9 +95,7 @@ export default function TraceabilityPanel({
             target="_blank"
             rel="noreferrer"
           >
-            {traceability.demo
-              ? "Xem hồ sơ truy xuất mẫu"
-              : "Xem hồ sơ truy xuất"}
+            XEM HỒ SƠ TRUY XUẤT
 
             <span
               aria-hidden="true"

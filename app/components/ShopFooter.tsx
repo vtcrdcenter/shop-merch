@@ -58,6 +58,8 @@ export default function ShopFooter() {
             Khám phá
           </h3>
 
+          <Link href="/">Trang chủ</Link>
+
           <Link href="/products">
             Sản phẩm
           </Link>
@@ -92,9 +94,6 @@ export default function ShopFooter() {
             Giới thiệu
           </Link>
 
-          <Link href="/products/dau-an-thuong-trieu-nguyen">
-            Sản phẩm có truy xuất
-          </Link>
         </div>
 
         {/* ===================================================

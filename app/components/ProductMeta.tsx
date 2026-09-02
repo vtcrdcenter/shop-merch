@@ -132,12 +132,6 @@ export default function ProductMeta({
           )}
         </div>
 
-        {product.traceability
-          .enabled && (
-          <span className="product-meta__trace">
-            Có hồ sơ truy xuất
-          </span>
-        )}
       </div>
 
       {/* =====================================================

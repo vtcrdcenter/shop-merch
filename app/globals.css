@@ -10484,6 +10484,88 @@ img {
       auto;
   }
 }
+
+/* =========================================================
+   PRODUCT-LED STOREFRONT REFINEMENT
+   ========================================================= */
+
+.shop-header__utility-note { margin: 0; font-size: 11px; letter-spacing: .08em; }
+.shop-header__navigation-list { justify-content: flex-start; gap: clamp(20px, 3vw, 46px); }
+.shop-header__nav-link { position: relative; }
+.shop-header__nav-link--active::after { content: ""; position: absolute; inset: auto 0 -12px; height: 2px; background: var(--wine); }
+
+.home-values__grid { grid-template-columns: repeat(3, 1fr); }
+.home-products, .home-gifts, .home-stories { background: #fbf7ef; }
+.home-heritage, .home-collections { background: #f1e8d8; }
+.home-process { background: var(--wine); color: #fff8ed; }
+
+.product-card { height: 100%; background: #fffdf8; border: 1px solid rgba(91, 27, 40, .15); transition: transform .2s ease, box-shadow .2s ease; }
+.product-card:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(71, 37, 28, .1); }
+.product-card__image { background: #f4eee3; }
+.product-card__image img, .product-gallery__main img, .product-gallery__thumbnail img { object-fit: contain !important; padding: clamp(10px, 2vw, 24px); }
+.product-card__description { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+.products-hero { padding-top: 44px !important; padding-bottom: 54px !important; }
+.products-hero__title { max-width: 760px; }
+.products-hero__description { max-width: 620px; }
+.catalog-layout { display: grid; grid-template-columns: 245px minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.catalog-sidebar { position: sticky; top: 24px; border-top: 3px solid var(--wine); padding-top: 18px; }
+.catalog-sidebar__heading { display: flex; justify-content: space-between; align-items: center; padding-bottom: 18px; border-bottom: 1px solid rgba(91, 27, 40, .18); font-weight: 700; letter-spacing: .12em; }
+.catalog-sidebar__heading button { border: 0; background: transparent; color: var(--wine); cursor: pointer; text-decoration: underline; }
+.catalog-filter-group { margin: 0; padding: 24px 0; border: 0; border-bottom: 1px solid rgba(91, 27, 40, .16); }
+.catalog-filter-group legend { width: 100%; margin-bottom: 14px; color: var(--wine); font-family: var(--serif); font-size: 20px; font-weight: 700; }
+.catalog-filter-group button { width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 10px 8px; border: 0; background: transparent; color: inherit; cursor: pointer; text-align: left; }
+.catalog-filter-group button:hover, .catalog-filter-group button.is-active { color: var(--wine); background: #efe4d3; font-weight: 700; }
+.catalog-filter-group small { opacity: .65; }
+.catalog-price-filter input { width: 100%; accent-color: var(--wine); }
+.catalog-price-filter div { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; font-size: 12px; }
+.catalog-sidebar__note { margin: 18px 0 0; color: rgba(40, 33, 28, .62); font-size: 12px; line-height: 1.6; }
+.catalog-results { min-width: 0; }
+
+.product-detail-tabs-section { padding: clamp(56px, 7vw, 96px) 0; background: #f6efe4; }
+.product-tabs { border-top: 1px solid rgba(91, 27, 40, .2); }
+.product-tabs__list { display: flex; gap: clamp(24px, 5vw, 64px); overflow-x: auto; border-bottom: 1px solid rgba(91, 27, 40, .2); }
+.product-tabs__list button { flex: 0 0 auto; padding: 20px 0 16px; border: 0; border-bottom: 3px solid transparent; background: transparent; color: rgba(41, 31, 26, .58); font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; cursor: pointer; }
+.product-tabs__list button.is-active { color: var(--wine); border-bottom-color: var(--wine); }
+.product-tabs__panel { min-height: 300px; padding: clamp(32px, 5vw, 64px) 0 0; }
+.product-story-panel { display: grid; grid-template-columns: minmax(220px, .7fr) 1.3fr; gap: clamp(32px, 7vw, 100px); }
+.product-story-panel h2 { margin: 10px 0; color: var(--wine); font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); line-height: 1.08; }
+.product-story-panel h3 { margin: 28px 0 8px; color: var(--wine); font-family: var(--serif); font-size: 24px; }
+.product-story-panel p { line-height: 1.8; }
+.product-tabs__eyebrow { color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .16em; }
+.product-info-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; margin: 0; }
+.product-info-panel div { display: grid; grid-template-columns: 150px 1fr; gap: 18px; padding: 18px 0; border-bottom: 1px solid rgba(91, 27, 40, .16); }
+.product-info-panel dt { color: rgba(41, 31, 26, .62); }
+.product-info-panel dd { margin: 0; font-weight: 650; }
+.product-review-panel { max-width: 520px; margin: 20px auto; text-align: center; }
+.product-review-panel > span { color: var(--gold); font-size: 44px; }
+.product-review-panel h2 { color: var(--wine); font-family: var(--serif); }
+.product-context-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.product-context-links a { padding: 10px 14px; border: 1px solid rgba(91, 27, 40, .2); color: var(--wine); font-size: 12px; text-decoration: none; }
+.product-detail-traceability--final { background: #26171a; color: #fff8ed; }
+
+.collections-hero, .heritage-hero, .stories-hero, .gifts-hero { padding-top: 44px !important; padding-bottom: 54px !important; }
+.collections-hero__description--secondary, .heritage-hero__description--secondary, .stories-hero__description--secondary, .gifts-hero__description--secondary { display: none; }
+.about-hero { padding-top: 52px !important; padding-bottom: 64px !important; }
+
+@media (max-width: 900px) {
+  .catalog-layout { grid-template-columns: 1fr; }
+  .catalog-sidebar { position: static; }
+  .catalog-filter-group:first-of-type { display: flex; gap: 8px; overflow-x: auto; }
+  .catalog-filter-group:first-of-type legend { position: absolute; width: 1px; height: 1px; overflow: hidden; }
+  .catalog-filter-group:first-of-type button { width: auto; flex: 0 0 auto; border: 1px solid rgba(91, 27, 40, .18); }
+  .catalog-sidebar__note { display: none; }
+  .product-story-panel { grid-template-columns: 1fr; }
+  .product-info-panel { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 767px) {
+  .home-values__grid { grid-template-columns: 1fr; }
+  .shop-header__utility-note { display: none; }
+  .shop-header__nav-link--active::after { bottom: -5px; }
+  .products-list__header { align-items: flex-start; }
+  .product-info-panel div { grid-template-columns: 110px 1fr; }
+}
 /* =========================================================
    MUSEUM SHOP — SHARED CARD SYSTEM
    Product / Heritage / Collection / Story

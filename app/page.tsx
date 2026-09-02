@@ -282,13 +282,6 @@ export default function HomePage() {
                 </div>
               )}
 
-              {heroProduct
-                ?.traceability
-                .enabled && (
-                <span className="home-hero__trace-badge">
-                  Có hồ sơ truy xuất
-                </span>
-              )}
             </div>
 
             {heroProduct && (
@@ -331,7 +324,7 @@ export default function HomePage() {
           02 — SHOP VALUES
       ====================================================== */}
 
-      <section className="home-values">
+      <section className="home-values" aria-label="Cam kết của gian hàng">
         <div className="site-container home-values__grid">
           <article className="home-value">
             <span className="home-value__number">
@@ -387,23 +380,6 @@ export default function HomePage() {
             </div>
           </article>
 
-          <article className="home-value">
-            <span className="home-value__number">
-              04
-            </span>
-
-            <div>
-              <strong>
-                Có thể kết nối hồ sơ truy xuất
-              </strong>
-
-              <p>
-                Một số sản phẩm được liên kết
-                với hồ sơ dữ liệu chi tiết
-                trên hệ thống truy xuất.
-              </p>
-            </div>
-          </article>
         </div>
       </section>
 
@@ -771,176 +747,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* =====================================================
-          09 — TRACEABILITY
-      ====================================================== */}
-
-      {traceProduct &&
-        traceProduct
-          .traceability
-          .enabled && (
-          <section className="home-trace">
-            <div className="site-container home-trace__grid">
-              <div className="home-trace__content">
-                <p className="home-trace__eyebrow">
-                  TRUY XUẤT SẢN PHẨM
-                </p>
-
-                <h2 className="home-trace__title">
-                  Từ vật phẩm trên tay
-                  đến hồ sơ phía sau thiết kế
-                </h2>
-
-                <p className="home-trace__description">
-                  Với sản phẩm hỗ trợ truy xuất,
-                  người dùng có thể tiếp tục kiểm tra
-                  mã nhận diện, nguồn cảm hứng,
-                  thông tin thiết kế và những dữ liệu
-                  được công bố trên hệ thống.
-                </p>
-
-                <div className="home-trace__actions">
-                  <Link
-                    href={`/products/${traceProduct.slug}`}
-                    className="home-trace__primary"
-                  >
-                    Xem sản phẩm mẫu
-
-                    <span
-                      aria-hidden="true"
-                    >
-                      →
-                    </span>
-                  </Link>
-
-                  <Link
-                    href="/stories/tu-san-pham-den-ho-so-truy-xuat"
-                    className="home-trace__secondary"
-                  >
-                    Truy xuất hoạt động như thế nào?
-                  </Link>
-                </div>
-              </div>
-
-              <div className="home-trace__card">
-                <div className="home-trace__card-top">
-                  <span>
-                    HỒ SƠ TRÌNH DIỄN
-                  </span>
-
-                  <strong>
-                    ĐÃ KẾT NỐI
-                  </strong>
-                </div>
-
-                <div className="home-trace__product">
-                  <div className="home-trace__product-image">
-                    {traceProduct
-                      .images[0] ? (
-                      <img
-                        src={siteAssetPath(
-                          traceProduct
-                            .images[0]
-                            .src,
-                        )}
-                        alt={
-                          traceProduct
-                            .images[0]
-                            .alt
-                        }
-                      />
-                    ) : (
-                      <div className="home-trace__product-placeholder">
-                        STT-01
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="home-trace__product-info">
-                    <small>
-                      SẢN PHẨM
-                    </small>
-
-                    <h3>
-                      {
-                        traceProduct.name
-                      }
-                    </h3>
-
-                    <dl>
-                      <div>
-                        <dt>
-                          Mã
-                        </dt>
-
-                        <dd>
-                          {
-                            traceProduct.sku
-                          }
-                        </dd>
-                      </div>
-
-                      <div>
-                        <dt>
-                          Hồ sơ
-                        </dt>
-
-                        <dd>
-                          Hỗ trợ truy xuất
-                        </dd>
-                      </div>
-                    </dl>
-                  </div>
-                </div>
-
-                <div className="home-trace__flow">
-                  <div>
-                    <span>
-                      01
-                    </span>
-
-                    <strong>
-                      Sản phẩm
-                    </strong>
-                  </div>
-
-                  <i
-                    aria-hidden="true"
-                  >
-                    →
-                  </i>
-
-                  <div>
-                    <span>
-                      02
-                    </span>
-
-                    <strong>
-                      Nguồn cảm hứng
-                    </strong>
-                  </div>
-
-                  <i
-                    aria-hidden="true"
-                  >
-                    →
-                  </i>
-
-                  <div>
-                    <span>
-                      03
-                    </span>
-
-                    <strong>
-                      Hồ sơ dữ liệu
-                    </strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
 
       {/* =====================================================
           10 — ABOUT

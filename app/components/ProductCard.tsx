@@ -87,7 +87,6 @@ export default function ProductCard({
   product,
   featured = false,
   showCategory = true,
-  showTraceability = true,
   className = "",
 }: ProductCardProps) {
   const category =
@@ -156,16 +155,6 @@ export default function ProductCard({
               </span>
             </div>
           )}
-
-          {/* TRACEABILITY */}
-
-          {product.traceability
-            .enabled &&
-            showTraceability && (
-              <span className="product-card__trace-badge">
-                Có hồ sơ truy xuất
-              </span>
-            )}
 
           {/* FEATURED */}
 

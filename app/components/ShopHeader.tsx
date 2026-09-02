@@ -22,12 +22,12 @@ import { useCart } from "./CartProvider";
 
 const navigation = [
   {
-    label: "Sản phẩm",
-    href: "/products",
+    label: "Trang chủ",
+    href: "/",
   },
   {
-    label: "Di sản",
-    href: "/heritage",
+    label: "Sản phẩm",
+    href: "/products",
   },
   {
     label: "Bộ sưu tập",
@@ -36,6 +36,10 @@ const navigation = [
   {
     label: "Quà tặng",
     href: "/gifts",
+  },
+  {
+    label: "Di sản",
+    href: "/heritage",
   },
   {
     label: "Câu chuyện",
@@ -130,26 +134,9 @@ export default function ShopHeader() {
             của Bảo tàng Lịch sử Quốc gia
           </p>
 
-          <div className="shop-header__utility-links">
-            <Link
-              href="/products/dau-an-thuong-trieu-nguyen"
-              className="shop-header__utility-link"
-              onClick={closeMenu}
-            >
-              Sản phẩm có truy xuất
-            </Link>
-
-            <span
-              className="shop-header__utility-divider"
-              aria-hidden="true"
-            >
-              /
-            </span>
-
-            <span className="shop-header__language">
-              VI
-            </span>
-          </div>
+          <p className="shop-header__utility-note">
+            Quà tặng văn hóa · Giao hàng toàn quốc
+          </p>
         </div>
       </div>
 
