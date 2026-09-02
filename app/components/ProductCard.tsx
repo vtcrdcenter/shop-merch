@@ -1,61 +1,87 @@
-import Link from "next/link";
-import { siteAssetPath } from "../../lib/site-path";
+// app/components/ProductCard.tsx
 
-import type { ShopProduct } from "../../data/products";
-import { getCategoryById } from "../../data/categories";
+import Link from "next/link";
+
+import {
+  siteAssetPath,
+} from "../../lib/site-path";
+
+import type {
+  ShopProduct,
+} from "../../data/products";
+
+import {
+  getCategoryById,
+} from "../../data/categories";
 
 type ProductCardProps = {
   product: ShopProduct;
 
   /**
-   * true:
-   * dùng card lớn tại homepage / featured section.
+   * Card lớn tại homepage
+   * hoặc khu vực nổi bật.
    */
   featured?: boolean;
 
   /**
-   * Có hiển thị category phía trên tên sản phẩm hay không.
+   * Hiển thị nhóm sản phẩm.
    */
   showCategory?: boolean;
 
   /**
-   * Có hiển thị trạng thái truy xuất hay không.
+   * Hiển thị trạng thái truy xuất.
    */
   showTraceability?: boolean;
 
   className?: string;
 };
 
+/* =========================================================
+   PRICE
+   ========================================================= */
+
 function formatPrice(
   amount: number | null,
   currency: "VND",
 ) {
   if (amount === null) {
-    return "Sắp ra mắt";
+    return null;
   }
 
-  return new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(amount);
+  return new Intl.NumberFormat(
+    "vi-VN",
+    {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 0,
+    },
+  ).format(amount);
 }
 
+/* =========================================================
+   AVAILABILITY
+   ========================================================= */
+
 function getAvailabilityLabel(
-  availability: ShopProduct["availability"],
+  availability:
+    ShopProduct["availability"],
 ) {
   switch (availability) {
     case "available":
-      return "Có sẵn";
+      return "Đang bán";
 
     case "sold-out":
-      return "Tạm hết";
+      return "Tạm hết hàng";
 
     case "coming-soon":
     default:
       return "Sắp ra mắt";
   }
 }
+
+/* =========================================================
+   COMPONENT
+   ========================================================= */
 
 export default function ProductCard({
   product,
@@ -64,32 +90,60 @@ export default function ProductCard({
   showTraceability = true,
   className = "",
 }: ProductCardProps) {
-  const category = getCategoryById(product.categoryId);
+  const category =
+    getCategoryById(
+      product.categoryId,
+    );
 
-  const primaryImage = product.images[0];
+  const primaryImage =
+    product.images[0];
 
-  const href = `/products/${product.slug}`;
+  const href =
+    `/products/${product.slug}`;
+
+  const formattedPrice =
+    formatPrice(
+      product.price.amount,
+      product.price.currency,
+    );
+
+  const availabilityLabel =
+    getAvailabilityLabel(
+      product.availability,
+    );
 
   return (
     <article
       className={[
         "product-card",
-        featured ? "product-card--featured" : "",
+
+        featured
+          ? "product-card--featured"
+          : "",
+
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
+      {/* =====================================================
+          IMAGE
+      ====================================================== */}
+
       <Link
         href={href}
         className="product-card__image-link"
-        aria-label={`Xem sản phẩm ${product.name}`}
+        aria-label={`Xem ${product.name}`}
       >
         <div className="product-card__image">
           {primaryImage ? (
             <img
-              src={siteAssetPath(primaryImage.src)}
-              alt={primaryImage.alt}
+              src={siteAssetPath(
+                primaryImage.src,
+              )}
+              alt={
+                primaryImage.alt
+              }
               loading="lazy"
             />
           ) : (
@@ -97,16 +151,23 @@ export default function ProductCard({
               className="product-card__image-placeholder"
               aria-hidden="true"
             >
-              <span>VTC</span>
+              <span>
+                Bảo tàng
+              </span>
             </div>
           )}
 
-          {product.traceability.enabled &&
+          {/* TRACEABILITY */}
+
+          {product.traceability
+            .enabled &&
             showTraceability && (
               <span className="product-card__trace-badge">
-                Có truy xuất
+                Có hồ sơ truy xuất
               </span>
             )}
+
+          {/* FEATURED */}
 
           {product.featured && (
             <span className="product-card__featured-badge">
@@ -116,12 +177,19 @@ export default function ProductCard({
         </div>
       </Link>
 
+      {/* =====================================================
+          BODY
+      ====================================================== */}
+
       <div className="product-card__body">
-        {showCategory && category && (
-          <p className="product-card__category">
-            {category.shortName}
-          </p>
-        )}
+        {showCategory &&
+          category && (
+            <p className="product-card__category">
+              {
+                category.shortName
+              }
+            </p>
+          )}
 
         <h3 className="product-card__title">
           <Link href={href}>
@@ -131,26 +199,22 @@ export default function ProductCard({
 
         {product.shortDescription && (
           <p className="product-card__description">
-            {product.shortDescription}
+            {
+              product.shortDescription
+            }
           </p>
         )}
 
+        {/* ===================================================
+            FOOTER
+        ==================================================== */}
+
         <div className="product-card__footer">
           <div className="product-card__price">
-            {product.price.amount !== null ? (
-              <strong>
-                {formatPrice(
-                  product.price.amount,
-                  product.price.currency,
-                )}
-              </strong>
-            ) : (
-              <strong>
-                {getAvailabilityLabel(
-                  product.availability,
-                )}
-              </strong>
-            )}
+            <strong>
+              {formattedPrice ??
+                availabilityLabel}
+            </strong>
           </div>
 
           <Link
@@ -158,8 +222,14 @@ export default function ProductCard({
             className="product-card__link"
             aria-label={`Xem chi tiết ${product.name}`}
           >
-            Xem sản phẩm
-            <span aria-hidden="true"> →</span>
+            Xem chi tiết
+
+            <span
+              aria-hidden="true"
+            >
+              {" "}
+              →
+            </span>
           </Link>
         </div>
       </div>
