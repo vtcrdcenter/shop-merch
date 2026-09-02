@@ -1,6 +1,9 @@
 // app/heritage/[slug]/page.tsx
 
-import type { Metadata } from "next";
+import type {
+  Metadata,
+} from "next";
+
 import Link from "next/link";
 
 import {
@@ -12,6 +15,7 @@ import {
 } from "../../../lib/site-path";
 
 import Breadcrumb from "../../components/Breadcrumb";
+import HeritageImageSlider from "../../components/HeritageImageSlider";
 import ProductGrid from "../../components/ProductGrid";
 import SectionHeading from "../../components/SectionHeading";
 import StoryCard from "../../components/StoryCard";
@@ -35,22 +39,16 @@ type HeritageDetailPageProps = {
   }>;
 };
 
-/* =========================================================
-   TYPE LABELS
-   ========================================================= */
-
 const heritageTypeLabels = {
   artifact: "Hiện vật",
   costume: "Triều phục",
   archaeology: "Khảo cổ",
-  "decorative-art": "Mỹ thuật trang trí",
+  "decorative-art":
+    "Mỹ thuật trang trí",
   seal: "Bảo ấn",
-  "reference-object": "Hiện vật tham chiếu",
+  "reference-object":
+    "Hiện vật tham chiếu",
 } as const;
-
-/* =========================================================
-   STATIC PARAMS
-   ========================================================= */
 
 export async function generateStaticParams() {
   return getAllHeritageSources().map(
@@ -59,10 +57,6 @@ export async function generateStaticParams() {
     }),
   );
 }
-
-/* =========================================================
-   METADATA
-   ========================================================= */
 
 export async function generateMetadata({
   params,
@@ -110,7 +104,6 @@ export async function generateMetadata({
                   siteAssetPath(
                     primaryImage.src,
                   ),
-
                 alt:
                   primaryImage.alt,
               },
@@ -119,10 +112,6 @@ export async function generateMetadata({
     },
   };
 }
-
-/* =========================================================
-   PAGE
-   ========================================================= */
 
 export default async function HeritageDetailPage({
   params,
@@ -139,17 +128,10 @@ export default async function HeritageDetailPage({
     notFound();
   }
 
-  const primaryImage =
-    heritage.images[0];
-
   const typeLabel =
     heritageTypeLabels[
       heritage.type
     ];
-
-  /* ========================================================
-     PRODUCTS
-     ======================================================== */
 
   const products =
     heritage.productSlugs
@@ -169,10 +151,6 @@ export default async function HeritageDetailPage({
         > => Boolean(product),
       );
 
-  /* ========================================================
-     STORIES
-     ======================================================== */
-
   const relatedStories =
     getPublishedStories()
       .filter(
@@ -181,22 +159,21 @@ export default async function HeritageDetailPage({
             heritage.slug,
           ),
       )
-      .slice(0, 3);
+      .slice(
+        0,
+        3,
+      );
 
   return (
     <main className="heritage-detail-page">
-      {/* =====================================================
-          01 — BREADCRUMB
-      ====================================================== */}
-
       <div className="site-container heritage-detail-page__breadcrumb">
         <Breadcrumb
           items={[
             {
               label: "Di sản",
-              href: "/heritage",
+              href:
+                "/heritage",
             },
-
             {
               label:
                 heritage.shortName,
@@ -205,21 +182,17 @@ export default async function HeritageDetailPage({
         />
       </div>
 
-      {/* =====================================================
-          02 — HERO
-      ====================================================== */}
-
       <section className="heritage-detail-hero">
         <div className="site-container heritage-detail-hero__grid">
-          {/* CONTENT */}
-
           <div className="heritage-detail-hero__content">
             <p className="heritage-detail-hero__eyebrow">
               {typeLabel}
             </p>
 
             <h1 className="heritage-detail-hero__title">
-              {heritage.name}
+              {
+                heritage.name
+              }
             </h1>
 
             <p className="heritage-detail-hero__description">
@@ -268,34 +241,32 @@ export default async function HeritageDetailPage({
                   }
                 </dd>
               </div>
+
+              <div>
+                <dt>
+                  Tư liệu hình ảnh
+                </dt>
+
+                <dd>
+                  {
+                    heritage.images
+                      .length
+                  }
+                </dd>
+              </div>
             </dl>
           </div>
 
-          {/* IMAGE */}
-
           <div className="heritage-detail-hero__image">
-            {primaryImage ? (
-              <img
-                src={siteAssetPath(
-                  primaryImage.src,
-                )}
-                alt={
-                  primaryImage.alt
-                }
-              />
-            ) : (
-              <div className="heritage-detail-hero__placeholder">
-                Hình ảnh tư liệu
-                đang được cập nhật
-              </div>
-            )}
+            <HeritageImageSlider
+              images={
+                heritage.images
+              }
+              className="heritage-detail-hero__slider"
+            />
           </div>
         </div>
       </section>
-
-      {/* =====================================================
-          03 — ABOUT HERITAGE
-      ====================================================== */}
 
       <section className="heritage-detail-about">
         <div className="site-container heritage-detail-about__grid">
@@ -316,17 +287,18 @@ export default async function HeritageDetailPage({
                 heritage.description
               }
             </p>
+
             <div className="demo-note">
-              <strong>Ghi chú hồ sơ:</strong>{" "}
-              {heritage.documentationNote}
+              <strong>
+                Ghi chú hồ sơ:
+              </strong>{" "}
+              {
+                heritage.documentationNote
+              }
             </div>
           </div>
         </div>
       </section>
-
-      {/* =====================================================
-          04 — DESIGN ELEMENTS
-      ====================================================== */}
 
       {heritage.designElements.length >
         0 && (
@@ -335,7 +307,7 @@ export default async function HeritageDetailPage({
             <SectionHeading
               eyebrow="CHI TIẾT NHẬN DIỆN"
               title="Những yếu tố được đưa vào thiết kế"
-              description="Các chi tiết dưới đây được ghi nhận trong dữ liệu nguồn và được sử dụng ở những mức độ khác nhau tùy theo từng sản phẩm."
+              description="Các yếu tố nhận diện được lựa chọn từ nguồn di sản và chuyển hóa ở những mức độ khác nhau tùy theo từng phương án sản phẩm."
             />
 
             <div className="heritage-detail-elements__grid">
@@ -360,7 +332,9 @@ export default async function HeritageDetailPage({
                     </span>
 
                     <h3>
-                      {element}
+                      {
+                        element
+                      }
                     </h3>
                   </article>
                 ),
@@ -370,23 +344,22 @@ export default async function HeritageDetailPage({
         </section>
       )}
 
-      {/* =====================================================
-          05 — PRODUCTS
-      ====================================================== */}
-
-      {products.length > 0 && (
+      {products.length >
+        0 && (
         <section className="heritage-detail-products">
           <div className="site-container">
             <SectionHeading
               eyebrow="SẢN PHẨM LIÊN QUAN"
               title="Từ nguồn cảm hứng đến sản phẩm"
-              description="Khám phá những thiết kế hiện đang sử dụng nguồn di sản này làm điểm khởi đầu."
+              description="Những sản phẩm đang sử dụng nguồn di sản này làm điểm khởi đầu cho quá trình phát triển thiết kế."
               actionLabel="Xem tất cả sản phẩm"
               actionHref="/products"
             />
 
             <ProductGrid
-              products={products}
+              products={
+                products
+              }
               columns={3}
               showCategory
               showTraceability
@@ -395,17 +368,14 @@ export default async function HeritageDetailPage({
         </section>
       )}
 
-      {/* =====================================================
-          06 — STORIES
-      ====================================================== */}
-
-      {relatedStories.length > 0 && (
+      {relatedStories.length >
+        0 && (
         <section className="heritage-detail-stories">
           <div className="site-container">
             <SectionHeading
               eyebrow="CÂU CHUYỆN"
               title="Đọc thêm về nguồn cảm hứng này"
-              description="Những bài viết giúp làm rõ hơn mối liên hệ giữa nguồn di sản và các thiết kế liên quan."
+              description="Những nội dung giúp làm rõ hơn mối liên hệ giữa nguồn di sản và các thiết kế liên quan."
               actionLabel="Xem tất cả câu chuyện"
               actionHref="/stories"
             />
@@ -428,10 +398,6 @@ export default async function HeritageDetailPage({
           </div>
         </section>
       )}
-
-      {/* =====================================================
-          07 — MORE HERITAGE
-      ====================================================== */}
 
       <section className="heritage-detail-more">
         <div className="site-container heritage-detail-more__inner">
