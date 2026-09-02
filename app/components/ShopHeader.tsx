@@ -80,15 +80,7 @@ export default function ShopHeader() {
   ] = useState(false);
 
   /* ========================================================
-     CLOSE MENU WHEN ROUTE CHANGES
-     ======================================================== */
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  /* ========================================================
-     ESC TO CLOSE
+     ESC TO CLOSE MOBILE MENU
      ======================================================== */
 
   useEffect(() => {
@@ -115,6 +107,14 @@ export default function ShopHeader() {
     };
   }, []);
 
+  /* ========================================================
+     CLOSE MENU
+     ======================================================== */
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   return (
     <header className="shop-header">
       {/* =====================================================
@@ -132,6 +132,7 @@ export default function ShopHeader() {
             <Link
               href="/products/dau-an-thuong-trieu-nguyen"
               className="shop-header__utility-link"
+              onClick={closeMenu}
             >
               Sản phẩm có truy xuất
             </Link>
@@ -151,15 +152,20 @@ export default function ShopHeader() {
       </div>
 
       {/* =====================================================
-          02 — BRAND
+          02 — BRAND ROW
       ====================================================== */}
 
       <div className="shop-header__brand-row">
         <div className="site-container shop-header__brand-inner">
+          {/* =================================================
+              BRAND
+          ================================================== */}
+
           <Link
             href="/"
             className="shop-header__brand"
             aria-label="Trang chủ Gian hàng điện tử Bảo tàng Lịch sử Quốc gia"
+            onClick={closeMenu}
           >
             <div className="shop-header__logo-wrap">
               <img
@@ -190,8 +196,12 @@ export default function ShopHeader() {
             <Link
               href="/products"
               className="shop-header__search-link"
+              onClick={closeMenu}
             >
-              <span className="shop-header__search-icon">
+              <span
+                className="shop-header__search-icon"
+                aria-hidden="true"
+              >
                 ⌕
               </span>
 
@@ -290,6 +300,7 @@ export default function ShopHeader() {
                           ? "page"
                           : undefined
                       }
+                      onClick={closeMenu}
                     >
                       {
                         item.label
