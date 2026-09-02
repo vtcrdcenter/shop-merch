@@ -1,5 +1,10 @@
+// app/components/StoryCard.tsx
+
 import Link from "next/link";
-import { siteAssetPath } from "../../lib/site-path";
+
+import {
+  siteAssetPath,
+} from "../../lib/site-path";
 
 import type {
   ShopStory,
@@ -16,8 +21,13 @@ type StoryCardProps = {
   className?: string;
 };
 
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
 function getStoryCategoryLabel(
-  category: StoryCategory,
+  category:
+    StoryCategory,
 ) {
   switch (category) {
     case "heritage":
@@ -27,15 +37,19 @@ function getStoryCategoryLabel(
       return "Từ di sản đến thiết kế";
 
     case "craft":
-      return "Chế tác";
+      return "Quá trình thực hiện";
 
     case "traceability":
-      return "Bảo chứng & truy xuất";
+      return "Truy xuất & dữ liệu";
 
     default:
       return "Câu chuyện";
   }
 }
+
+/* =========================================================
+   COMPONENT
+   ========================================================= */
 
 export default function StoryCard({
   story,
@@ -43,32 +57,52 @@ export default function StoryCard({
   showCategory = true,
   className = "",
 }: StoryCardProps) {
-  const href = `/stories/${story.slug}`;
+  const href =
+    `/stories/${story.slug}`;
 
-  const primaryImage = story.images[0];
+  const primaryImage =
+    story.images[0];
+
+  const categoryLabel =
+    getStoryCategoryLabel(
+      story.category,
+    );
+
+  const productCount =
+    story.productSlugs.length;
 
   return (
     <article
       className={[
         "story-card",
+
         featured
           ? "story-card--featured"
           : "",
+
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
+      {/* =====================================================
+          IMAGE
+      ====================================================== */}
+
       <Link
         href={href}
         className="story-card__image-link"
-        aria-label={`Đọc câu chuyện ${story.title}`}
+        aria-label={`Đọc ${story.title}`}
       >
         <div className="story-card__image">
           {primaryImage ? (
             <img
-              src={siteAssetPath(primaryImage.src)}
-              alt={primaryImage.alt}
+              src={siteAssetPath(
+                primaryImage.src,
+              )}
+              alt={
+                primaryImage.alt
+              }
               loading="lazy"
             />
           ) : (
@@ -76,7 +110,9 @@ export default function StoryCard({
               className="story-card__placeholder"
               aria-hidden="true"
             >
-              <span>Câu chuyện</span>
+              <span>
+                Câu chuyện
+              </span>
             </div>
           )}
 
@@ -88,44 +124,67 @@ export default function StoryCard({
         </div>
       </Link>
 
+      {/* =====================================================
+          BODY
+      ====================================================== */}
+
       <div className="story-card__body">
         <div className="story-card__meta">
-          {showCategory && (
+          {showCategory ? (
             <span className="story-card__category">
-              {getStoryCategoryLabel(
-                story.category,
-              )}
+              {
+                categoryLabel
+              }
             </span>
+          ) : (
+            story.eyebrow && (
+              <span className="story-card__eyebrow">
+                {
+                  story.eyebrow
+                }
+              </span>
+            )
           )}
-
-          <span className="story-card__eyebrow">
-            {story.eyebrow}
-          </span>
         </div>
 
         <h3 className="story-card__title">
           <Link href={href}>
-            {story.title}
+            {
+              story.title
+            }
           </Link>
         </h3>
 
         <p className="story-card__excerpt">
-          {story.excerpt}
+          {
+            story.excerpt
+          }
         </p>
+
+        {/* ===================================================
+            FOOTER
+        ==================================================== */}
 
         <div className="story-card__footer">
           <span className="story-card__relations">
-            {story.productSlugs.length > 0
-              ? `${story.productSlugs.length} sản phẩm liên quan`
-              : "Nội dung chuyên đề"}
+            {productCount > 0
+              ? `${productCount} sản phẩm liên quan`
+              : "Bài viết chuyên đề"}
           </span>
 
           <Link
             href={href}
             className="story-card__link"
+            aria-label={`Đọc câu chuyện ${story.title}`}
           >
-            Đọc câu chuyện
-            <span aria-hidden="true"> →</span>
+            Đọc tiếp
+
+            <span
+              aria-hidden="true"
+            >
+              {" "}
+              →
+            </span>
           </Link>
         </div>
       </div>
