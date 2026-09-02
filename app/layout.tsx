@@ -6,6 +6,7 @@ import type {
 
 import ShopHeader from "./components/ShopHeader";
 import ShopFooter from "./components/ShopFooter";
+import { CartProvider } from "./components/CartProvider";
 
 import {
   siteAssetPath,
@@ -115,13 +116,15 @@ export default function RootLayout({
           Chuyển đến nội dung
         </a>
 
-        <ShopHeader />
+        <CartProvider>
+          <ShopHeader />
 
-        <div id="main-content">
-          {children}
-        </div>
+          <div id="main-content">
+            {children}
+          </div>
 
-        <ShopFooter />
+          <ShopFooter />
+        </CartProvider>
       </body>
     </html>
   );

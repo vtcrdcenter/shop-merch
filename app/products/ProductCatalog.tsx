@@ -194,6 +194,11 @@ export default function ProductCatalog({
       products,
     ]);
 
+  const visibleCategories = useMemo(
+    () => productCategories.filter((category) => (productCounts.get(category.id) ?? 0) > 0),
+    [productCounts],
+  );
+
   /* ========================================================
      FILTER PRODUCTS
      ======================================================== */
@@ -255,7 +260,7 @@ export default function ProductCatalog({
           />
 
           <div className="products-categories__grid">
-            {productCategories.map(
+            {visibleCategories.map(
               (
                 category,
               ) => (
@@ -364,7 +369,7 @@ export default function ProductCatalog({
               Tất cả
             </button>
 
-            {productCategories.map(
+            {visibleCategories.map(
               (
                 category,
               ) => {
