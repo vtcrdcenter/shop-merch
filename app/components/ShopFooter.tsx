@@ -3,10 +3,19 @@ import Link from "next/link";
 export default function ShopFooter() {
   return (
     <footer className="shop-footer">
+      {/* =====================================================
+          01 — MAIN FOOTER
+      ====================================================== */}
+
       <div className="site-container shop-footer__main">
+        {/* ===================================================
+            IDENTITY
+        ==================================================== */}
+
         <div className="shop-footer__identity">
           <p className="shop-footer__eyebrow">
-            BẢO TÀNG LỊCH SỬ
+            BẢO TÀNG
+            LỊCH SỬ
             QUỐC GIA
           </p>
 
@@ -18,10 +27,15 @@ export default function ShopFooter() {
             Không gian giới thiệu
             các sản phẩm văn hóa
             sáng tạo được phát triển
-            từ hiện vật, tư liệu và
-            những câu chuyện lịch sử.
+            từ hiện vật, tư liệu
+            và những câu chuyện
+            lịch sử.
           </p>
         </div>
+
+        {/* ===================================================
+            EXPLORE
+        ==================================================== */}
 
         <div className="shop-footer__column">
           <h3>
@@ -45,6 +59,10 @@ export default function ShopFooter() {
           </Link>
         </div>
 
+        {/* ===================================================
+            CONTENT
+        ==================================================== */}
+
         <div className="shop-footer__column">
           <h3>
             Nội dung
@@ -59,42 +77,43 @@ export default function ShopFooter() {
           </Link>
 
           <Link href="/products/dau-an-thuong-trieu-nguyen">
-            Truy xuất sản phẩm
+            Sản phẩm có truy xuất
           </Link>
         </div>
 
+        {/* ===================================================
+            INFORMATION
+        ==================================================== */}
+
         <div className="shop-footer__column">
           <h3>
-            Hỗ trợ
+            Thông tin
           </h3>
 
-          <span>
-            Hướng dẫn mua hàng
-          </span>
-
-          <span>
-            Vận chuyển & đổi trả
-          </span>
-
-          <span>
-            Chính sách bảo mật
-          </span>
-
-          <span>
-            Liên hệ
-          </span>
+          <p className="shop-footer__text">
+            Hướng dẫn mua hàng,
+            vận chuyển, đổi trả
+            và các chính sách
+            liên quan sẽ được
+            cập nhật khi gian hàng
+            chính thức mở bán.
+          </p>
         </div>
       </div>
+
+      {/* =====================================================
+          02 — BOTTOM
+      ====================================================== */}
 
       <div className="shop-footer__bottom">
         <div className="site-container shop-footer__bottom-inner">
           <span>
-            © Bảo tàng Lịch sử
-            Quốc gia
+            © Bảo tàng
+            Lịch sử Quốc gia
           </span>
 
           <span>
-            Hệ thống hỗ trợ:
+            Hạ tầng hỗ trợ:
             VTC Merchandise
           </span>
         </div>
