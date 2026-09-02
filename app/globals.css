@@ -16058,3 +16058,1159 @@ body {
       22px;
   }
 }
+/* =========================================================
+   MUSEUM SHOP — COLLECTIONS OVERRIDES
+   /collections + /collections/[slug]
+
+   Nguyên tắc chung:
+   - site-container chịu trách nhiệm khung 1140–1200px
+   - page dùng min-height, không ép section = 100vh
+   - cùng typography / spacing với Products + Heritage
+   ========================================================= */
+
+
+/* =========================================================
+   01. PAGE FRAME
+   ========================================================= */
+
+.collections-page,
+.collection-detail-page {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.collections-page__breadcrumb,
+.collection-detail-page__breadcrumb {
+  padding-top: 22px;
+  padding-bottom: 18px;
+}
+
+
+/* =========================================================
+   02. COLLECTIONS HERO
+   ========================================================= */
+
+.collections-hero {
+  padding:
+    clamp(
+      58px,
+      7vw,
+      92px
+    )
+    0;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--cream-soft) 0%,
+      var(--paper) 100%
+    );
+
+  border-top:
+    1px solid
+    var(--line);
+
+  border-bottom:
+    1px solid
+    var(--line);
+}
+
+.collections-hero__inner {
+  width: 100%;
+  max-width: 920px;
+
+  margin-inline: auto;
+
+  text-align: center;
+}
+
+.collections-hero__eyebrow {
+  margin:
+    0
+    0
+    15px;
+
+  color: var(--gold);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.collections-hero__title {
+  max-width: 820px;
+
+  margin:
+    0
+    auto;
+
+  color: var(--wine);
+
+  font-family: var(--serif);
+
+  font-size:
+    clamp(
+      42px,
+      5.5vw,
+      66px
+    );
+
+  line-height: 1.06;
+
+  font-weight: 500;
+
+  letter-spacing:
+    -0.016em;
+}
+
+.collections-hero__description {
+  max-width: 680px;
+
+  margin:
+    22px
+    auto
+    0;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.82;
+}
+
+.collections-hero__description--secondary {
+  margin-top: 9px;
+}
+
+.collections-hero__meta {
+  margin-top: 23px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  color: var(--wine);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   03. LIST PAGE — COMMON SECTION
+   ========================================================= */
+
+.collections-featured,
+.collections-all {
+  padding:
+    clamp(
+      66px,
+      7vw,
+      94px
+    )
+    0;
+}
+
+.collections-featured {
+  background: #fff;
+}
+
+.collections-all {
+  background: var(--cream-soft);
+}
+
+.collections-page
+.section-heading {
+  margin-bottom: 34px;
+}
+
+.collections-page
+.section-heading__title {
+  max-width: 780px;
+
+  font-size:
+    clamp(
+      33px,
+      3.8vw,
+      46px
+    );
+}
+
+.collections-page
+.section-heading__description {
+  max-width: 680px;
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   04. COLLECTION GRIDS
+   ========================================================= */
+
+/*
+  Trang hiện có đúng 2 collection tiêu biểu.
+*/
+.collections-featured__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 24px;
+}
+
+
+/*
+  Hai collection còn lại cũng dùng 2 cột.
+  Không tạo card thứ ba giả chỉ để lấp grid.
+*/
+.collections-all__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 24px;
+}
+
+.collections-featured
+.collection-card,
+.collections-all
+.collection-card {
+  height: 100%;
+}
+
+
+/* =========================================================
+   05. COLLECTION CARD
+   ========================================================= */
+
+.collections-page
+.collection-card__image {
+  aspect-ratio: 16 / 10;
+}
+
+.collections-page
+.collection-card__image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.collections-page
+.collection-card__title {
+  font-size:
+    clamp(
+      23px,
+      2.2vw,
+      29px
+    );
+}
+
+
+/* Coming Soon vẫn là content public,
+   nhưng không được làm card trông như lỗi. */
+
+.collections-page
+.collection-card__status {
+  padding: 7px 9px;
+
+  background: var(--wine);
+
+  color: var(--paper);
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   06. COLLECTION METHOD
+   ========================================================= */
+
+.collections-method {
+  padding:
+    clamp(
+      70px,
+      7vw,
+      100px
+    )
+    0;
+
+  background: var(--wine);
+
+  color: var(--paper);
+}
+
+.collections-method__grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(280px, 0.82fr)
+    minmax(0, 1.18fr);
+
+  gap:
+    clamp(
+      48px,
+      7vw,
+      96px
+    );
+}
+
+.collections-method__heading {
+  max-width: 510px;
+}
+
+.collections-method__eyebrow {
+  margin:
+    0
+    0
+    13px;
+
+  color: var(--gold-light);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.collections-method__title {
+  margin: 0;
+
+  font-family: var(--serif);
+
+  font-size:
+    clamp(
+      31px,
+      3.8vw,
+      45px
+    );
+
+  line-height: 1.14;
+
+  font-weight: 500;
+}
+
+.collections-method__content {
+  max-width: 650px;
+}
+
+.collections-method__content p {
+  margin: 0;
+
+  color:
+    rgba(
+      255,
+      250,
+      240,
+      0.76
+    );
+
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.collections-method__content p + p {
+  margin-top: 20px;
+}
+
+
+/* =========================================================
+   07. COLLECTION DETAIL HERO
+   ========================================================= */
+
+.collection-detail-hero {
+  padding:
+    24px
+    0
+    clamp(
+      66px,
+      7vw,
+      94px
+    );
+
+  background: var(--paper);
+}
+
+.collection-detail-hero__grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.9fr)
+    minmax(420px, 1.1fr);
+
+  gap:
+    clamp(
+      48px,
+      7vw,
+      92px
+    );
+
+  align-items: center;
+}
+
+.collection-detail-hero__content {
+  min-width: 0;
+  max-width: 600px;
+}
+
+.collection-detail-hero__eyebrow {
+  margin:
+    0
+    0
+    13px;
+
+  color: var(--gold);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.collection-detail-hero__title {
+  margin: 0;
+
+  color: var(--wine);
+
+  font-family: var(--serif);
+
+  font-size:
+    clamp(
+      40px,
+      5.2vw,
+      62px
+    );
+
+  line-height: 1.06;
+
+  font-weight: 500;
+
+  letter-spacing:
+    -0.016em;
+}
+
+.collection-detail-hero__description {
+  max-width: 570px;
+
+  margin:
+    21px
+    0
+    0;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+
+/* =========================================================
+   08. COLLECTION DETAIL META
+   ========================================================= */
+
+.collection-detail-hero__meta {
+  margin-top: 28px;
+
+  padding-top: 20px;
+
+  display: flex;
+
+  gap: 32px;
+
+  border-top:
+    1px solid
+    var(--line);
+}
+
+.collection-detail-hero__meta > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.collection-detail-hero__meta strong {
+  color: var(--wine);
+
+  font-family: var(--serif);
+
+  font-size: 27px;
+
+  line-height: 1.2;
+
+  font-weight: 500;
+}
+
+.collection-detail-hero__meta span {
+  color: var(--muted);
+
+  font-size: 9px;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   09. DETAIL HERO IMAGE
+   ========================================================= */
+
+.collection-detail-hero__image {
+  width: 100%;
+
+  aspect-ratio: 4 / 3;
+
+  overflow: hidden;
+
+  background: var(--cream-soft);
+
+  border:
+    1px solid
+    var(--line);
+}
+
+.collection-detail-hero__image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.collection-detail-hero__placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  color: var(--muted);
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   10. COLLECTION CONCEPT
+   ========================================================= */
+
+.collection-detail-concept {
+  padding:
+    clamp(
+      68px,
+      7vw,
+      96px
+    )
+    0;
+
+  background: var(--deep);
+
+  color: var(--paper);
+}
+
+.collection-detail-concept__grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 0.78fr)
+    minmax(0, 1.22fr);
+
+  gap:
+    clamp(
+      48px,
+      7vw,
+      100px
+    );
+}
+
+.collection-detail-concept__heading {
+  max-width: 500px;
+}
+
+.collection-detail-concept__eyebrow {
+  margin:
+    0
+    0
+    13px;
+
+  color: var(--gold-light);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.collection-detail-concept__title {
+  margin: 0;
+
+  font-family: var(--serif);
+
+  font-size:
+    clamp(
+      31px,
+      3.8vw,
+      45px
+    );
+
+  line-height: 1.14;
+
+  font-weight: 500;
+}
+
+.collection-detail-concept__content {
+  max-width: 650px;
+}
+
+.collection-detail-concept__content p {
+  margin: 0;
+
+  color:
+    rgba(
+      255,
+      250,
+      240,
+      0.76
+    );
+
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.collection-detail-concept__content p + p {
+  margin-top: 20px;
+}
+
+
+/* =========================================================
+   11. DETAIL COMMON SECTIONS
+   ========================================================= */
+
+.collection-detail-products,
+.collection-detail-heritage,
+.collection-detail-stories {
+  padding:
+    clamp(
+      68px,
+      7vw,
+      96px
+    )
+    0;
+}
+
+.collection-detail-page
+.section-heading {
+  margin-bottom: 34px;
+}
+
+.collection-detail-page
+.section-heading__title {
+  max-width: 790px;
+
+  font-size:
+    clamp(
+      33px,
+      3.8vw,
+      46px
+    );
+}
+
+.collection-detail-page
+.section-heading__description {
+  max-width: 700px;
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   12. PRODUCTS
+   ========================================================= */
+
+.collection-detail-products {
+  background: #fff;
+}
+
+
+/*
+  Quan trọng:
+  CSS cũ reset ProductCard thành
+  display:block / border:0 / transparent.
+  Phải đưa lại về Shared Card System.
+*/
+.collection-detail-products
+.product-grid {
+  gap:
+    30px
+    22px;
+}
+
+.collection-detail-products
+.product-card {
+  display: flex;
+
+  height: 100%;
+
+  flex-direction: column;
+
+  border:
+    1px solid
+    var(--line);
+
+  background: #fff;
+
+  overflow: hidden;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   13. HERITAGE SOURCES
+   ========================================================= */
+
+.collection-detail-heritage {
+  background: var(--cream-soft);
+}
+
+.collection-detail-heritage__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 24px;
+}
+
+.collection-detail-heritage
+.heritage-card {
+  height: 100%;
+}
+
+
+/* =========================================================
+   14. STORIES
+   ========================================================= */
+
+.collection-detail-stories {
+  background: #fff;
+}
+
+.collection-detail-stories__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 22px;
+}
+
+.collection-detail-stories
+.story-card {
+  height: 100%;
+}
+
+
+/* =========================================================
+   15. MORE COLLECTIONS
+   ========================================================= */
+
+.collection-detail-more {
+  padding:
+    clamp(
+      56px,
+      6vw,
+      78px
+    )
+    0;
+
+  background: var(--wine);
+
+  color: var(--paper);
+}
+
+.collection-detail-more__inner {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 40px;
+}
+
+.collection-detail-more__eyebrow {
+  margin:
+    0
+    0
+    10px;
+
+  color: var(--gold-light);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.collection-detail-more h2 {
+  max-width: 580px;
+
+  margin: 0;
+
+  font-family: var(--serif);
+
+  font-size:
+    clamp(
+      30px,
+      3.7vw,
+      42px
+    );
+
+  line-height: 1.15;
+
+  font-weight: 500;
+}
+
+.collection-detail-more__link {
+  flex:
+    0
+    0
+    auto;
+
+  padding-bottom: 5px;
+
+  border-bottom:
+    1px solid
+    var(--gold-light);
+
+  color: var(--paper);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   16. TABLET
+   ========================================================= */
+
+@media (
+  max-width: 1023px
+) {
+
+  .collections-featured__grid,
+  .collections-all__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+
+  .collections-method__grid {
+    grid-template-columns:
+      0.85fr
+      1.15fr;
+
+    gap: 48px;
+  }
+
+
+  .collection-detail-hero__grid {
+    grid-template-columns:
+      0.9fr
+      1.1fr;
+
+    gap: 44px;
+  }
+
+
+  .collection-detail-concept__grid {
+    grid-template-columns:
+      0.82fr
+      1.18fr;
+
+    gap: 46px;
+  }
+
+
+  .collection-detail-heritage__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+
+  .collection-detail-stories__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+}
+
+
+/* =========================================================
+   17. MOBILE
+   ========================================================= */
+
+@media (
+  max-width: 767px
+) {
+
+  .collections-page__breadcrumb,
+  .collection-detail-page__breadcrumb {
+    padding-top: 16px;
+    padding-bottom: 14px;
+  }
+
+
+  /* LIST HERO */
+
+  .collections-hero {
+    padding:
+      48px
+      0
+      54px;
+  }
+
+  .collections-hero__title {
+    font-size:
+      clamp(
+        36px,
+        10vw,
+        46px
+      );
+  }
+
+  .collections-hero__description {
+    margin-top: 18px;
+
+    font-size: 13px;
+  }
+
+  .collections-hero__description--secondary {
+    margin-top: 8px;
+  }
+
+  .collections-hero__meta {
+    flex-direction: column;
+
+    gap: 4px;
+  }
+
+  .collections-hero__meta
+  span:nth-child(2) {
+    display: none;
+  }
+
+
+  /* LIST GRID */
+
+  .collections-featured,
+  .collections-all {
+    padding:
+      56px
+      0;
+  }
+
+  .collections-featured__grid,
+  .collections-all__grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 22px;
+  }
+
+
+  /* METHOD */
+
+  .collections-method {
+    padding:
+      58px
+      0;
+  }
+
+  .collections-method__grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 30px;
+  }
+
+  .collections-method__title {
+    font-size:
+      clamp(
+        30px,
+        9vw,
+        39px
+      );
+  }
+
+
+  /* DETAIL HERO */
+
+  .collection-detail-hero {
+    padding:
+      12px
+      0
+      54px;
+  }
+
+  .collection-detail-hero__grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 34px;
+  }
+
+  .collection-detail-hero__title {
+    font-size:
+      clamp(
+        36px,
+        10vw,
+        46px
+      );
+  }
+
+  .collection-detail-hero__meta {
+    gap: 28px;
+  }
+
+
+  /* CONCEPT */
+
+  .collection-detail-concept {
+    padding:
+      58px
+      0;
+  }
+
+  .collection-detail-concept__grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 28px;
+  }
+
+  .collection-detail-concept__title {
+    font-size:
+      clamp(
+        30px,
+        9vw,
+        38px
+      );
+  }
+
+
+  /* COMMON SECTIONS */
+
+  .collection-detail-products,
+  .collection-detail-heritage,
+  .collection-detail-stories {
+    padding:
+      58px
+      0;
+  }
+
+
+  /* PRODUCTS */
+
+  .collection-detail-products
+  .product-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  /* HERITAGE */
+
+  .collection-detail-heritage__grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  /* STORIES */
+
+  .collection-detail-stories__grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  /* MORE */
+
+  .collection-detail-more {
+    padding:
+      54px
+      0;
+  }
+
+  .collection-detail-more__inner {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+    gap: 24px;
+  }
+}
+
+
+/* =========================================================
+   18. SMALL MOBILE
+   ========================================================= */
+
+@media (
+  max-width: 420px
+) {
+
+  .collection-detail-hero__meta {
+    flex-direction:
+      column;
+
+    gap: 14px;
+  }
+
+  .collection-detail-hero__meta > div {
+    padding-bottom: 10px;
+
+    border-bottom:
+      1px solid
+      var(--line);
+  }
+}
