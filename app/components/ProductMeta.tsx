@@ -1,11 +1,22 @@
-import type { ShopProduct } from "../../data/products";
-import { getCategoryById } from "../../data/categories";
+// app/components/ProductMeta.tsx
+
+import type {
+  ShopProduct,
+} from "../../data/products";
+
+import {
+  getCategoryById,
+} from "../../data/categories";
 
 type ProductMetaProps = {
   product: ShopProduct;
 
   className?: string;
 };
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
 
 function formatPrice(
   amount: number | null,
@@ -15,22 +26,26 @@ function formatPrice(
     return null;
   }
 
-  return new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(amount);
+  return new Intl.NumberFormat(
+    "vi-VN",
+    {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 0,
+    },
+  ).format(amount);
 }
 
 function getAvailabilityLabel(
-  availability: ShopProduct["availability"],
+  availability:
+    ShopProduct["availability"],
 ) {
   switch (availability) {
     case "available":
-      return "Có sẵn";
+      return "Đang bán";
 
     case "sold-out":
-      return "Tạm hết";
+      return "Tạm hết hàng";
 
     case "coming-soon":
     default:
@@ -38,16 +53,29 @@ function getAvailabilityLabel(
   }
 }
 
+/* =========================================================
+   COMPONENT
+   ========================================================= */
+
 export default function ProductMeta({
   product,
   className = "",
 }: ProductMetaProps) {
-  const category = getCategoryById(product.categoryId);
+  const category =
+    getCategoryById(
+      product.categoryId,
+    );
 
-  const formattedPrice = formatPrice(
-    product.price.amount,
-    product.price.currency,
-  );
+  const formattedPrice =
+    formatPrice(
+      product.price.amount,
+      product.price.currency,
+    );
+
+  const availabilityLabel =
+    getAvailabilityLabel(
+      product.availability,
+    );
 
   return (
     <div
@@ -58,76 +86,138 @@ export default function ProductMeta({
         .filter(Boolean)
         .join(" ")}
     >
+      {/* =====================================================
+          PRODUCT HEADING
+      ====================================================== */}
+
       <div className="product-meta__heading">
         {category && (
           <p className="product-meta__category">
-            {category.shortName}
+            {
+              category.shortName
+            }
           </p>
         )}
 
-        <h1 className="product-meta__title">
+        <h1
+          id="product-title"
+          className="product-meta__title"
+        >
           {product.name}
         </h1>
 
         <p className="product-meta__type">
-          {product.productType}
+          {
+            product.productType
+          }
         </p>
       </div>
+
+      {/* =====================================================
+          PRICE / AVAILABILITY
+      ====================================================== */}
 
       <div className="product-meta__status-row">
         <div className="product-meta__price">
           {formattedPrice ? (
-            <strong>{formattedPrice}</strong>
+            <strong>
+              {formattedPrice}
+            </strong>
           ) : (
             <strong>
-              {getAvailabilityLabel(product.availability)}
+              {
+                availabilityLabel
+              }
             </strong>
           )}
         </div>
 
-        {product.traceability.enabled && (
+        {product.traceability
+          .enabled && (
           <span className="product-meta__trace">
-            Có truy xuất
+            Có hồ sơ truy xuất
           </span>
         )}
       </div>
 
+      {/* =====================================================
+          SHORT DESCRIPTION
+      ====================================================== */}
+
       <p className="product-meta__description">
-        {product.shortDescription}
+        {
+          product.shortDescription
+        }
       </p>
+
+      {/* =====================================================
+          QUICK INFORMATION
+      ====================================================== */}
 
       <dl className="product-meta__details">
         <div className="product-meta__detail">
-          <dt>Mã sản phẩm</dt>
-          <dd>{product.sku}</dd>
-        </div>
-
-        <div className="product-meta__detail">
-          <dt>Kích thước</dt>
-          <dd>{product.dimensions}</dd>
-        </div>
-
-        <div className="product-meta__detail">
-          <dt>Chất liệu dự kiến</dt>
+          <dt>
+            Mã sản phẩm
+          </dt>
 
           <dd>
-            {product.materials.length > 0
-              ? product.materials.join(", ")
+            {product.sku}
+          </dd>
+        </div>
+
+        <div className="product-meta__detail">
+          <dt>
+            Kích thước
+          </dt>
+
+          <dd>
+            {
+              product.dimensions
+            }
+          </dd>
+        </div>
+
+        <div className="product-meta__detail">
+          <dt>
+            Chất liệu
+          </dt>
+
+          <dd>
+            {product.materials
+              .length > 0
+              ? product.materials.join(
+                  ", ",
+                )
               : "Đang cập nhật"}
           </dd>
         </div>
 
         <div className="product-meta__detail">
-          <dt>Công năng</dt>
-          <dd>{product.function}</dd>
+          <dt>
+            Công năng
+          </dt>
+
+          <dd>
+            {
+              product.function
+            }
+          </dd>
         </div>
       </dl>
 
+      {/* =====================================================
+          AVAILABILITY
+      ====================================================== */}
+
       <div className="product-meta__project-status">
-        <span>Trạng thái</span>
+        <span>
+          Tình trạng
+        </span>
 
         <strong>
-          {product.projectStatus}
+          {
+            availabilityLabel
+          }
         </strong>
       </div>
     </div>
