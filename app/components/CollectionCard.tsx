@@ -1,7 +1,14 @@
-import Link from "next/link";
-import { siteAssetPath } from "../../lib/site-path";
+// app/components/CollectionCard.tsx
 
-import type { ShopCollection } from "../../data/collections";
+import Link from "next/link";
+
+import {
+  siteAssetPath,
+} from "../../lib/site-path";
+
+import type {
+  ShopCollection,
+} from "../../data/collections";
 
 type CollectionCardProps = {
   collection: ShopCollection;
@@ -11,8 +18,13 @@ type CollectionCardProps = {
   className?: string;
 };
 
+/* =========================================================
+   STATUS
+   ========================================================= */
+
 function getStatusLabel(
-  status: ShopCollection["status"],
+  status:
+    ShopCollection["status"],
 ) {
   switch (status) {
     case "active":
@@ -23,20 +35,29 @@ function getStatusLabel(
 
     case "draft":
     default:
-      return "Đang hoàn thiện";
+      return "Sắp giới thiệu";
   }
 }
+
+/* =========================================================
+   COMPONENT
+   ========================================================= */
 
 export default function CollectionCard({
   collection,
   showProductCount = true,
   className = "",
 }: CollectionCardProps) {
-  const href = `/collections/${collection.slug}`;
+  const href =
+    `/collections/${collection.slug}`;
 
-  const statusLabel = getStatusLabel(
-    collection.status,
-  );
+  const statusLabel =
+    getStatusLabel(
+      collection.status,
+    );
+
+  const productCount =
+    collection.productSlugs.length;
 
   return (
     <article
@@ -47,6 +68,10 @@ export default function CollectionCard({
         .filter(Boolean)
         .join(" ")}
     >
+      {/* =====================================================
+          IMAGE
+      ====================================================== */}
+
       <Link
         href={href}
         className="collection-card__image-link"
@@ -55,7 +80,9 @@ export default function CollectionCard({
         <div className="collection-card__image">
           {collection.cardImage ? (
             <img
-              src={siteAssetPath(collection.cardImage)}
+              src={siteAssetPath(
+                collection.cardImage,
+              )}
               alt={`Bộ sưu tập ${collection.name}`}
               loading="lazy"
             />
@@ -64,9 +91,13 @@ export default function CollectionCard({
               className="collection-card__placeholder"
               aria-hidden="true"
             >
-              <span>Bộ sưu tập</span>
+              <span>
+                Bộ sưu tập
+              </span>
             </div>
           )}
+
+          {/* FEATURED */}
 
           {collection.featured && (
             <span className="collection-card__featured">
@@ -74,42 +105,68 @@ export default function CollectionCard({
             </span>
           )}
 
+          {/* STATUS */}
+
           {statusLabel && (
             <span className="collection-card__status">
-              {statusLabel}
+              {
+                statusLabel
+              }
             </span>
           )}
         </div>
       </Link>
 
+      {/* =====================================================
+          BODY
+      ====================================================== */}
+
       <div className="collection-card__body">
         <p className="collection-card__eyebrow">
-          {collection.eyebrow}
+          {
+            collection.eyebrow
+          }
         </p>
 
         <h3 className="collection-card__title">
           <Link href={href}>
-            {collection.name}
+            {
+              collection.name
+            }
           </Link>
         </h3>
 
         <p className="collection-card__description">
-          {collection.shortDescription}
+          {
+            collection.shortDescription
+          }
         </p>
+
+        {/* ===================================================
+            FOOTER
+        ==================================================== */}
 
         <div className="collection-card__footer">
           {showProductCount && (
             <span className="collection-card__count">
-              {collection.productSlugs.length} sản phẩm
+              {productCount}{" "}
+              sản phẩm
             </span>
           )}
 
           <Link
             href={href}
             className="collection-card__link"
+            aria-label={`Khám phá bộ sưu tập ${collection.name}`}
           >
-            Xem bộ sưu tập
-            <span aria-hidden="true"> →</span>
+            Khám phá
+
+            <span
+              aria-hidden="true"
+            >
+              {" "}
+              →
+            </span>
           </Link>
         </div>
       </div>
