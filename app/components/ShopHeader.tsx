@@ -7,8 +7,13 @@ import {
 } from "next/navigation";
 
 import {
+  useEffect,
   useState,
 } from "react";
+
+import {
+  siteAssetPath,
+} from "../../lib/site-path";
 
 /* =========================================================
    NAVIGATION
@@ -16,51 +21,28 @@ import {
 
 const navigation = [
   {
-    label:
-      "Sản phẩm",
-
-    href:
-      "/products",
+    label: "Sản phẩm",
+    href: "/products",
   },
-
   {
-    label:
-      "Di sản",
-
-    href:
-      "/heritage",
+    label: "Di sản",
+    href: "/heritage",
   },
-
   {
-    label:
-      "Bộ sưu tập",
-
-    href:
-      "/collections",
+    label: "Bộ sưu tập",
+    href: "/collections",
   },
-
   {
-    label:
-      "Quà tặng",
-
-    href:
-      "/gifts",
+    label: "Quà tặng",
+    href: "/gifts",
   },
-
   {
-    label:
-      "Câu chuyện",
-
-    href:
-      "/stories",
+    label: "Câu chuyện",
+    href: "/stories",
   },
-
   {
-    label:
-      "Giới thiệu",
-
-    href:
-      "/about",
+    label: "Giới thiệu",
+    href: "/about",
   },
 ];
 
@@ -72,12 +54,8 @@ function isActiveRoute(
   pathname: string,
   href: string,
 ) {
-  if (
-    href === "/"
-  ) {
-    return (
-      pathname === "/"
-    );
+  if (href === "/") {
+    return pathname === "/";
   }
 
   return (
@@ -94,15 +72,48 @@ function isActiveRoute(
 
 export default function ShopHeader() {
   const pathname =
-    usePathname() ??
-    "/";
+    usePathname() ?? "/";
 
   const [
     menuOpen,
     setMenuOpen,
-  ] = useState(
-    false,
-  );
+  ] = useState(false);
+
+  /* ========================================================
+     CLOSE MENU WHEN ROUTE CHANGES
+     ======================================================== */
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  /* ========================================================
+     ESC TO CLOSE
+     ======================================================== */
+
+  useEffect(() => {
+    function handleKeyDown(
+      event: KeyboardEvent,
+    ) {
+      if (
+        event.key === "Escape"
+      ) {
+        setMenuOpen(false);
+      }
+    }
+
+    window.addEventListener(
+      "keydown",
+      handleKeyDown,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown,
+      );
+    };
+  }, []);
 
   return (
     <header className="shop-header">
@@ -114,8 +125,7 @@ export default function ShopHeader() {
         <div className="site-container shop-header__utility-inner">
           <p className="shop-header__utility-title">
             Gian hàng điện tử
-            của Bảo tàng
-            Lịch sử Quốc gia
+            của Bảo tàng Lịch sử Quốc gia
           </p>
 
           <div className="shop-header__utility-links">
@@ -150,29 +160,24 @@ export default function ShopHeader() {
             href="/"
             className="shop-header__brand"
             aria-label="Trang chủ Gian hàng điện tử Bảo tàng Lịch sử Quốc gia"
-            onClick={() =>
-              setMenuOpen(
-                false,
-              )
-            }
           >
-            <div
-              className="shop-header__brand-mark"
-              aria-hidden="true"
-            >
-              BTL
+            <div className="shop-header__logo-wrap">
+              <img
+                src={siteAssetPath(
+                  "/museum-logo.png",
+                )}
+                alt="Bảo tàng Lịch sử Quốc gia"
+                className="shop-header__logo"
+              />
             </div>
 
             <div className="shop-header__brand-copy">
               <strong>
-                BẢO TÀNG
-                LỊCH SỬ
-                QUỐC GIA
+                BẢO TÀNG LỊCH SỬ QUỐC GIA
               </strong>
 
               <span>
-                GIAN HÀNG
-                ĐIỆN TỬ
+                GIAN HÀNG ĐIỆN TỬ
               </span>
             </div>
           </Link>
@@ -186,7 +191,13 @@ export default function ShopHeader() {
               href="/products"
               className="shop-header__search-link"
             >
-              Tìm sản phẩm
+              <span className="shop-header__search-icon">
+                ⌕
+              </span>
+
+              <span>
+                Tìm sản phẩm
+              </span>
             </Link>
 
             <button
@@ -203,14 +214,21 @@ export default function ShopHeader() {
               }
               onClick={() =>
                 setMenuOpen(
-                  (
-                    current,
-                  ) =>
+                  (current) =>
                     !current,
                 )
               }
             >
-              <span>
+              <span
+                className="shop-header__menu-icon"
+                aria-hidden="true"
+              >
+                <i />
+                <i />
+                <i />
+              </span>
+
+              <span className="shop-header__menu-label">
                 {menuOpen
                   ? "Đóng"
                   : "Menu"}
@@ -233,20 +251,14 @@ export default function ShopHeader() {
             ? "shop-header__navigation--open"
             : "",
         ]
-          .filter(
-            Boolean,
-          )
-          .join(
-            " ",
-          )}
+          .filter(Boolean)
+          .join(" ")}
         aria-label="Điều hướng chính"
       >
         <div className="site-container">
           <ul className="shop-header__navigation-list">
             {navigation.map(
-              (
-                item,
-              ) => {
+              (item) => {
                 const active =
                   isActiveRoute(
                     pathname,
@@ -271,21 +283,12 @@ export default function ShopHeader() {
                           ? "shop-header__nav-link--active"
                           : "",
                       ]
-                        .filter(
-                          Boolean,
-                        )
-                        .join(
-                          " ",
-                        )}
+                        .filter(Boolean)
+                        .join(" ")}
                       aria-current={
                         active
                           ? "page"
                           : undefined
-                      }
-                      onClick={() =>
-                        setMenuOpen(
-                          false,
-                        )
                       }
                     >
                       {
