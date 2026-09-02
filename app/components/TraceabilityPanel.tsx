@@ -1,6 +1,10 @@
+// app/components/TraceabilityPanel.tsx
+
 import Link from "next/link";
 
-import type { ShopProduct } from "../../data/products";
+import type {
+  ShopProduct,
+} from "../../data/products";
 
 type TraceabilityPanelProps = {
   product: ShopProduct;
@@ -12,7 +16,8 @@ export default function TraceabilityPanel({
   product,
   className = "",
 }: TraceabilityPanelProps) {
-  const traceability = product.traceability;
+  const traceability =
+    product.traceability;
 
   if (!traceability.enabled) {
     return null;
@@ -28,11 +33,21 @@ export default function TraceabilityPanel({
         .join(" ")}
       aria-labelledby={`traceability-${product.id}`}
     >
+      {/* =====================================================
+          MARK
+      ====================================================== */}
+
       <div className="traceability-panel__icon">
-        <span aria-hidden="true">
+        <span
+          aria-hidden="true"
+        >
           ✓
         </span>
       </div>
+
+      {/* =====================================================
+          CONTENT
+      ====================================================== */}
 
       <div className="traceability-panel__content">
         <p className="traceability-panel__eyebrow">
@@ -43,26 +58,39 @@ export default function TraceabilityPanel({
           id={`traceability-${product.id}`}
           className="traceability-panel__title"
         >
-          Sản phẩm hỗ trợ truy xuất nguồn gốc
+          Xem hồ sơ phía sau sản phẩm
         </h2>
 
         <p className="traceability-panel__description">
-          Hồ sơ truy xuất giúp kết nối sản phẩm với
-          thông tin nguồn di sản, quá trình phát triển
-          thiết kế, bảo chứng và các dữ liệu liên quan
-          được công bố trên hệ thống.
+          Sản phẩm này được liên kết
+          với hồ sơ truy xuất. Tại đó,
+          bạn có thể tiếp tục tìm hiểu
+          nguồn cảm hứng, thông tin
+          thiết kế và những dữ liệu
+          liên quan được công bố.
         </p>
+
+        {/* ===================================================
+            DEMO NOTICE
+        ==================================================== */}
 
         {traceability.demo && (
           <p className="traceability-panel__note">
-            Hồ sơ hiện tại được sử dụng cho mục đích
-            trình diễn hệ thống.
+            Hồ sơ hiện được sử dụng
+            để minh họa luồng truy xuất
+            của gian hàng.
           </p>
         )}
 
+        {/* ===================================================
+            CTA
+        ==================================================== */}
+
         {traceability.url && (
           <Link
-            href={traceability.url}
+            href={
+              traceability.url
+            }
             className="traceability-panel__link"
             target="_blank"
             rel="noreferrer"
@@ -71,7 +99,9 @@ export default function TraceabilityPanel({
               ? "Xem hồ sơ truy xuất mẫu"
               : "Xem hồ sơ truy xuất"}
 
-            <span aria-hidden="true">
+            <span
+              aria-hidden="true"
+            >
               {" "}
               →
             </span>
